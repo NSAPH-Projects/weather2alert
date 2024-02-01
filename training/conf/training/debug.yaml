@@ -1,0 +1,2 @@
+epochs: 1
+jit: false

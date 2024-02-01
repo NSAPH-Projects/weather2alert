@@ -1,0 +1,41 @@
+defaults:
+  - _self_
+  - model: nn
+  - training: fast
+
+model:
+  num_hidden_layers: ???
+  hidden_dim: ???
+  profile: ${hydra:runtime.choices.model}
+
+training:
+  batch_size:   # leave empty it will be chose according to S and N
+  epochs: ???
+  gradient_clip_val: 1.0
+  lr: 0.001
+  num_workers: 0
+  num_particles: 1
+  max_steps: -1  # no max steps
+  jit: true
+  profile: ${hydra:runtime.choices.
+
+datadir: data/processed 
+sample_Y: false
+constrain: all
+
+model:
+  num_hidden_layers: 1
+  hidden_dim: 32
+  name: FF_C-M_wide-EB-prior
+training:
+  batch_size: null
+  epochs: 80
+  gradient_clip_val: 1.0
+  lr: 0.001
+  num_workers: 0
+  num_particles: 1
+  max_steps: -1
+  jit: true
+datadir: data/processed
+sample_Y: false
+constrain: mixed
