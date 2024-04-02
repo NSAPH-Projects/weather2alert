@@ -1,0 +1,85 @@
+import os
+import pandas as pd
+import hydra
+
+
+configfile: "conf/snakemake.yaml"  # Path: conf/config.yaml
+
+
+conda: "requirements.yaml"  # Path: envs/conda.yaml
+
+
+# read hydra config from initialize API
+with hydra.initialize(config_path="conf", version_base=None):
+    processing_cfg = hydra.compose(config_name="config", overrides=[])
+
+
+# make sure data locations exist / user can set them to
+# symlinks separately if preferred
+os.makedirs(f"{processing_cfg.data_dir}/raw", exist_ok=True)
+os.makedirs(f"{processing_cfg.data_dir}/processed", exist_ok=True)
+
+
+rule all:
+    input:
+        processing_cfg.data_dir + "/processed/endongeous_states_actions.parquet",
+        processing_cfg.data_dir + "/processed/exogenous_states.parquet",
+        processing_cfg.data_dir + "/processed/budget.parquet",
+        processing_cfg.data_dir + "/processed/hospitalizations.parquet",
+
+
+rule hospitalizations:
+    input:
+        expand(
+            processing_cfg.data_dir + "/processed/alerts/{state}.parquet",
+            state=config["states"],
+        ),
+    output:
+        processing_cfg.data_dir + "/processed/hospitalizations.parquet",
+    log:
+        "logs/hospitalizations.log",
+    shell:
+        "python hospitalizations.py &> {log}"
+
+
+rule merge:
+    input:
+        expand(
+            processing_cfg.data_dir + "/processed/alerts/{state}.parquet",
+            state=config["states"],
+        ),
+    output:
+        processing_cfg.data_dir + "/processed/exogenous_states.parquet",
+        processing_cfg.data_dir + "/processed/endongeous_states_actions.parquet",
+        processing_cfg.data_dir + "/processed/budget.parquet",
+    log:
+        "logs/merge.log",
+    shell:
+        "python merge.py &> {log}"
+
+
+rule confounders:
+    output:
+        processing_cfg.data_dir + "/processed/confounders.parquet",
+    log:
+        "logs/confounders.log",
+    shell:
+        "python confounders.py &> {log}"
+
+
+rule heatmetrics:
+    output:
+        processing_cfg.data_dir + "/processed/heatmetrics.parquet",
+    log:
+        "logs/heatmetrics.log",
+    shell:
+        "python heatmetrics.py &> {log}"
+
+
+rule alerts:
+    output:
+        processing_cfg.data_dir + "/processed/alerts/{state}.parquet",
+    log:
+        "logs/alerts_{state}.log",
+    shell:
+        "python heatalerts.py alerts.state={wildcards.state} &> {log}"

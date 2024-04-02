@@ -1,0 +1,38 @@
+name: weather2alert-training
+channels:
+  - conda-forge
+  - pytorch
+  # - nvidia  # uncomment if GPU/linux
+dependencies:
+  - python=3.10
+  # - pytorch-cuda=12.1   # uncomment if GPU/linux
+  - pytorch
+  - cpuonly  # comment if GPU/linux
+  - structlog=20.2.0
+  - colorama=0.4.4
+  - scipy
+  - scikit-learn
+  - pip
+  - Cython
+  - h5py
+  - typing-extensions
+  - click
+  - tensorboardX
+  - ipykernel
+  - tqdm
+  - graphviz
+  - pyarrow
+  - wget
+  # - tensordict
+  - pip:
+    - pytorch-lightning
+    - torch-tb-profiler
+    - gym==0.17.2
+    - patsy
+    - pyro-ppl
+    - seaborn
+    - statsmodels
+    - wget
+    - hydra-core==1.3
+    - snakemake==7.32.4
+    - pulp==2.7

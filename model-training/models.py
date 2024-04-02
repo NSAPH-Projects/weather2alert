@@ -5,13 +5,22 @@ import pytorch_lightning as pl
 import torch
 import torch.nn as nn
 from matplotlib import pyplot as plt
-from pyro.distributions import LogNormal, Normal, Poisson, Uniform, constraints
+from pyro.distributions import (
+    LogNormal,
+    Normal,
+    Poisson,
+    Uniform,
+    constraints,
+    HalfCauchy,
+)
 from pyro.distributions.torch_distribution import TorchDistribution
 from pyro.infer.trace_elbo import JitTrace_ELBO, Trace_ELBO
 from torch.distributions.utils import broadcast_all
 
 
-class NegativeLogNormal(TorchDistribution): # helps us define constraints on certain coefficients to be only positive or negative
+class NegativeLogNormal(
+    TorchDistribution
+):  # helps us define constraints on certain coefficients to be only positive or negative
     arg_constraints = {"loc": constraints.real, "scale": constraints.positive}
     support = constraints.less_than(0.0)
 
@@ -46,7 +55,7 @@ class NegativeLogNormal(TorchDistribution): # helps us define constraints on cer
         return self._base_dist.log_prob(-value)
 
 
-class MLP(nn.Module): # for learning a prior informed by the spatial variables
+class MLP(nn.Module):  # for learning a prior informed by the spatial variables
     """Simple MLP with the given dimensions and activation function"""
 
     def __init__(
@@ -65,7 +74,9 @@ class MLP(nn.Module): # for learning a prior informed by the spatial variables
         return self.net(x)
 
 
-class HeatAlertModel(nn.Module): # main model definition, uses Pytorch syntax / mechanics under the hood of Pyro
+class HeatAlertModel(
+    nn.Module
+):  # main model definition, uses Pytorch syntax / mechanics under the hood of Pyro
     def __init__(
         self,
         spatial_features: torch.Tensor | None = None,
@@ -112,7 +123,7 @@ class HeatAlertModel(nn.Module): # main model definition, uses Pytorch syntax / 
         # rebuild tensor from inputs
         hosps = inputs[0]
         loc_ind = inputs[1].long()
-        county_summer_mean = inputs[2]
+        offset = inputs[2]
         alert = inputs[3]
         baseline_features = inputs[4]
         eff_features = inputs[5]
@@ -133,25 +144,33 @@ class HeatAlertModel(nn.Module): # main model definition, uses Pytorch syntax / 
         eff_loc = self.loc_effectiveness_coefs(spatial_features)
 
         for i, name in enumerate(self.baseline_feature_names):
-            dist = self.get_dist(name, self.baseline_constraints, baseline_loc[:, i])
+            scale = pyro.sample(f"baseline_scale_{name}", HalfCauchy(1))
+            dist = self.get_dist(
+                name, self.baseline_constraints, baseline_loc[:, i], scale
+            )
             baseline_samples[name] = pyro.sample("baseline_" + name, dist)
 
         for i, name in enumerate(self.effectiveness_feature_names):
-            dist = self.get_dist(name, self.effectiveness_constraints, eff_loc[:, i])
+            scale = pyro.sample(f"effectiveness_scale_{name}", HalfCauchy(1))
+            dist = self.get_dist(
+                name, self.effectiveness_constraints, eff_loc[:, i], scale
+            )
             effectiveness_samples[name] = pyro.sample("effectiveness_" + name, dist)
 
         # we need to match the time varying features in x with the correct coefficient sample
         baseline_contribs = []
         for i, name in enumerate(self.baseline_feature_names):
             coef = baseline_samples[name][loc_ind]
+            if sum(torch.isnan(baseline_features[:, i])):
+                pass
             baseline_contribs.append(coef * baseline_features[:, i])
 
         # compute baseline hospitalizations
         baseline_bias = pyro.sample(
             "baseline_bias", Uniform(-0.5, 0.5).expand([self.S]).to_event(1)
         )
-        baseline = torch.exp(sum(baseline_contribs) + baseline_bias[loc_ind])
-        baseline = baseline.clamp(max=1e6)
+        baseline = sum(baseline_contribs) + baseline_bias[loc_ind]
+        baseline = torch.exp(baseline.clamp(max=10))
 
         effectiveness_contribs = []
         for i, name in enumerate(self.effectiveness_feature_names):
@@ -160,13 +179,14 @@ class HeatAlertModel(nn.Module): # main model definition, uses Pytorch syntax / 
 
         eff_bias = pyro.sample(
             # "effectiveness_bias", Uniform(-8, -5).expand([self.S]).to_event(1)
-            "effectiveness_bias", Uniform(-10, 2).expand([self.S]).to_event(1)
+            "effectiveness_bias",
+            Uniform(-10, 2).expand([self.S]).to_event(1),
         )
         effectiveness = torch.sigmoid(sum(effectiveness_contribs) + eff_bias[loc_ind])
         effectiveness = effectiveness.clamp(1e-6, 1 - 1e-6)
 
         # sample the outcome
-        outcome_mean = county_summer_mean * baseline * (1 - alert * effectiveness)
+        outcome_mean = offset * baseline * (1 - alert * effectiveness)
 
         y = hosps if condition else None
         with pyro.plate("data", self.N, subsample=index):
@@ -178,18 +198,20 @@ class HeatAlertModel(nn.Module): # main model definition, uses Pytorch syntax / 
             return torch.stack([effectiveness, baseline, outcome_mean], dim=1)
 
     @staticmethod
-    def get_dist(name, constraints, loc):
+    def get_dist(name, constraints, loc, scale):
         if name not in constraints:
             return Normal(loc, 1).to_event(1)
         elif constraints[name] == "positive":
-            return LogNormal(loc, 1).to_event(1)
+            return LogNormal(loc, scale).to_event(1)
         elif constraints[name] == "negative":
-            return NegativeLogNormal(loc, 1).to_event(1)
+            return NegativeLogNormal(loc, scale).to_event(1)
         else:
             raise ValueError(f"unknown constraint {constraints[name]}")
 
 
-class HeatAlertDataModule(pl.LightningDataModule): # used both by the bayesian model and later by the RL models
+class HeatAlertDataModule(
+    pl.LightningDataModule
+):  # used both by the bayesian model and later by the RL models
     """Reads the preprocess data and prepares it for training using tensordicts"""
 
     def __init__(
@@ -197,8 +219,8 @@ class HeatAlertDataModule(pl.LightningDataModule): # used both by the bayesian m
         dir: str,
         batch_size: int | None = None,
         num_workers: int = 8,
-        load_outcome: bool = True,
-        sampled_Y: bool = False,
+        # load_outcome: bool = True,
+        # sampled_Y: bool = False,
         constrain: str = "all",
         for_gym: bool = False,
     ):
@@ -207,84 +229,105 @@ class HeatAlertDataModule(pl.LightningDataModule): # used both by the bayesian m
         self.workers = num_workers
         dir = self.dir
 
-        # read all raw data and transform into tensors
-        X = pd.read_parquet(f"{dir}/states.parquet").drop(columns="intercept")
-        A = pd.read_parquet(f"{dir}/actions.parquet")
-        if load_outcome:
-            offset = pd.read_parquet(f"{dir}/offset.parquet")
-            if not sampled_Y:
-                Y = pd.read_parquet(f"{dir}/outcomes.parquet")
-            else:
-                Y = pd.read_parquet(f"{dir}/sampled_outcomes.parquet") # when validating the model using sampled coefficients as "truth"
-        else:
-            Y = pd.DataFrame({"outcome": np.full(A.shape[0], np.nan)}, index=A.index)
-            offset = pd.DataFrame({"offset": np.full(A.shape[0], 1)}, index=A.index)
-        W = pd.read_parquet(f"{dir}/spatial_feats.parquet")
-        sind = pd.read_parquet(f"{dir}/location_indicator.parquet")
-        dos = pd.read_parquet(f"{dir}/Btdos.parquet")
-        year = pd.read_parquet(f"{dir}/year.parquet")
-        budget = pd.read_parquet(f"{dir}/budget.parquet")
-        state = pd.read_parquet(f"{dir}/state.parquet")
+        # read all raw data
+        exo = pd.read_parquet(f"{dir}/processed/exogenous_states.parquet")
+        endo = pd.read_parquet(f"{dir}/processed/endogenous_states_actions.parquet")
+        merged = pd.merge(exo, endo, on=["fips", "date"], how="inner")
+        hosps = pd.read_parquet(f"{dir}/processed/hospitalizations.parquet")
+
+        confounders = pd.read_parquet(f"{dir}/processed/confounders.parquet")
+
+        # location indicator
+        fips_list = confounders.fips.values
+        fips2ix = {f: i for i, f in enumerate(fips_list)}
+        sind = merged.fips.map(fips2ix).values
+        year = merged.date.str.slice(0, 4).astype(int).values
+        offset = hosps.eligible_pop.values
+        Y = hosps.hospitalizations.values
+        alert = merged.alert.values
+
+        # sind = pd.read_parquet(f"{dir}/location_indicator.parquet")
+        # dos = pd.read_parquet(f"{dir}/Btdos.parquet")
+        # year = pd.read_parquet(f"{dir}/year.parquet")
+        # budget = pd.read_parquet(f"{dir}/budget.parquet")
+        # state = pd.read_parquet(f"{dir}/state.parquet")
 
         if batch_size is None:
-            self.batch_size = X.shape[0] // W.shape[0]  # ~ as batches as locations
+            n = merged.shape[0]
+            m = confounders.shape[0]
+            self.batch_size = n // m  # ~ as batches as locations
 
         # spatial metadata
-        self.spatial_features = torch.FloatTensor(W.values)
-        self.spatial_features_names = W.columns
-        self.spatial_features_idx = W.index
-
-        # save day of summer splines as tensor
-        self.dos_spline_basis = torch.FloatTensor(dos.values)
+        self.spatial_features_names = [
+            "broadband_usage",
+            "log_med_hh_income",
+            "democrat",
+            "log_pop_density",
+            "iecc_climate_zone",
+            # "pm25"
+        ]
+        W = confounders[self.spatial_features_names].values
+        self.spatial_features = torch.FloatTensor(W)
+        self.spatial_features_idx = fips_list
 
         # save outcome, action and location features, metadata
-        location_indicator = torch.FloatTensor(sind.values[:, 0])
-        county_summer_mean = torch.FloatTensor(offset.values[:, 0])
-        hospitalizations = torch.FloatTensor(Y.values[:, 0])
-        alert = torch.FloatTensor(A.values[:, 0])
-        year = torch.LongTensor(year.values[:, 0])
-        budget = torch.LongTensor(budget.values[:, 0])
-        hi_mean = torch.FloatTensor(X.HI_mean.values)  # for RL
+        location_indicator = torch.LongTensor(sind)
+        offset = torch.FloatTensor(offset)
+        hospitalizations = torch.FloatTensor(Y)
+        alert = torch.FloatTensor(alert)
+        year = torch.LongTensor(year)
+        # budget = torch.LongTensor(budget.budget.values)
+        # hi_mean = torch.FloatTensor(X.HI_mean.values)  # for RL
+
+        # compute budget as the total sum per summer-year
+        merged["year"] = year
+        budget = merged.groupby(["fips", "year"])["alert"].sum().reset_index()
+        budget = budget.rename(columns={"alert": "budget"})
+        budget = merged.merge(budget, on=["fips", "year"], how="left")
+        budget = torch.LongTensor(budget.budget.values)
 
         # prepare covariates
-        heat_qi = torch.FloatTensor(X.quant_HI_county.values)
-        heat_qi_3d = torch.FloatTensor(X.quant_HI_3d_county.values)
-        excess_heat = (heat_qi - heat_qi_3d).clamp(min=0)
-        alert_lag1 = torch.LongTensor(X.alert_lag1.values)
-        prev_a = X.alerts_2wks.values
-        self.prev_alert_mean = prev_a.mean()
-        self.prev_alert_std = prev_a.std()
-        previous_alerts = (prev_a - self.prev_alert_mean) / (2 * self.prev_alert_std)
-        previous_alerts = torch.FloatTensor(previous_alerts)
-        weekend = torch.LongTensor(X.weekend.values)
-        n_dos_basis = self.dos_spline_basis.shape[1]
-        dos = [torch.FloatTensor(X[f"dos_{i}"].values) for i in range(n_dos_basis)]
+        heat_qi = torch.FloatTensor(merged.heat_qi.values)
+        heat_qi_above_25 = torch.FloatTensor(merged.heat_qi_above_25.values)
+        heat_qi_above_75 = torch.FloatTensor(merged.heat_qi_above_75.values)
+        excess_heat = torch.FloatTensor(merged.excess_heat.values)
+        alert_lag1 = torch.FloatTensor(merged.alert_lag1.values)
+        alerts_2wks = torch.FloatTensor(merged.alerts_2wks.values)
+        weekend = torch.FloatTensor(merged.weekend.values)
+
+        # get all cols that start with bsplines_dos in one tensor
+        bsplines_dos = torch.FloatTensor(
+            merged.filter(regex="bsplines_dos", axis=1).values
+        )
+        n_basis = bsplines_dos.shape[1]
+
+        # save dos spline basis for plots
+        # # save day of summer splines as tensor
+        bspline_basis = pd.read_parquet(f"{dir}/processed/bspline_basis.parquet")
+        self.bspline_basis = torch.FloatTensor(bspline_basis.values)
 
         # alert effectiveness features
         effectiveness_features = {
             "heat_qi": heat_qi,
             "excess_heat": excess_heat,
             "alert_lag1": alert_lag1,
-            "previous_alerts": previous_alerts,
+            "alerts_2wks": alerts_2wks,
             "weekend": weekend,
-            **{f"dos_{i}": v for i, v in enumerate(dos)},
+            **{f"bsplines_dos_{i}": bsplines_dos[i] for i in range(n_basis)},
         }
         self.effectiveness_feature_names = list(effectiveness_features.keys())
 
         # baseline rate features
         # for now just use a simple 3-step piecewise linear function
-        heat_qi_base = heat_qi
-        heat_qi1_above_25 = (heat_qi - 0.25) * (heat_qi > 0.25)
-        heat_qi2_above_75 = (heat_qi - 0.75) * (heat_qi > 0.75)
         baseline_features = {
-            "heat_qi_base": heat_qi_base,
-            "heat_qi1_above_25": heat_qi1_above_25,
-            "heat_qi2_above_75": heat_qi2_above_75,
+            "heat_qi_base": heat_qi,
+            "heat_qi_above_25": heat_qi_above_25,
+            "heat_qi_above_75": heat_qi_above_75,
             "excess_heat": excess_heat,
             "alert_lag1": alert_lag1,
-            "previous_alerts": previous_alerts,
+            "alerts_2wks": alerts_2wks,
             "weekend": weekend,
-            **{f"dos_{i}": v for i, v in enumerate(dos)},
+            **{f"bsplines_dos_{i}": bsplines_dos[i] for i in range(n_basis)},
         }
         self.baseline_feature_names = list(baseline_features.keys())
 
@@ -294,14 +337,14 @@ class HeatAlertDataModule(pl.LightningDataModule): # used both by the bayesian m
                 heat_qi="positive",  # more heat more effective
                 excess_heat="positive",  # more excess here more effective
                 alert_lag1="negative",  # alert yesterday less effective
-                previous_alerts="negative",  # more alerts less effective
+                alerts_2wks="negative",  # more alerts less effective
             )
             self.baseline_constraints = dict(
-                heat_qi1_above_25="positive",  # heat could have any slope at first
-                heat_qi2_above_75="positive",  #    but should be increasingly worse
+                heat_qi_above_25="positive",  # heat could have any slope at first
+                heat_qi_above_75="positive",  #    but should be increasingly worse
                 excess_heat="positive",  # more excess heat more hospitalizations
                 alert_lag1="negative",  # alert yesterday less hospitalizations
-                previous_alerts="negative",  # more trailing alerts less hospitalizations
+                alerts_2wks="negative",  # more trailing alerts less hospitalizations
             )
         elif constrain == "none":
             self.effectiveness_constraints = dict()
@@ -319,20 +362,20 @@ class HeatAlertDataModule(pl.LightningDataModule): # used both by the bayesian m
         elif constrain == "alerts":
             self.effectiveness_constraints = dict(
                 alert_lag1="negative",  # alert yesterday less effective
-                previous_alerts="negative",  # more alerts less effective
+                alerts_2wks="negative",  # more alerts less effective
             )
             self.baseline_constraints = dict(
                 alert_lag1="negative",  # alert yesterday less hospitalizations
-                previous_alerts="negative",  # more trailing alerts less hospitalizations
+                alerts_2wks="negative",  # more trailing alerts less hospitalizations
             )
-        elif constrain == "mixed": # model used in the main analysis of the paper!
+        elif constrain == "mixed":  # model used in the main analysis of the paper!
             self.effectiveness_constraints = dict(
                 heat_qi="positive",  # more heat more effective
                 excess_heat="positive",  # more excess here more effective
             )
             self.baseline_constraints = dict(
                 alert_lag1="negative",  # alert yesterday less hospitalizations
-                previous_alerts="negative",  # more trailing alerts less hospitalizations
+                alerts_2wks="negative",  # more trailing alerts less hospitalizations
             )
 
         baseline_features_tensor = torch.stack(
@@ -341,35 +384,37 @@ class HeatAlertDataModule(pl.LightningDataModule): # used both by the bayesian m
         effectiveness_features_tensor = torch.stack(
             [effectiveness_features[k] for k in self.effectiveness_feature_names], dim=1
         )
-        
+
         self.dataset = torch.utils.data.TensorDataset(
-                hospitalizations,
-                location_indicator,
-                county_summer_mean,
-                alert,
-                baseline_features_tensor,
-                effectiveness_features_tensor,
-                torch.arange(X.shape[0]),
-                year,
-                budget,
-            )
+            hospitalizations,
+            location_indicator,
+            offset,
+            alert,
+            baseline_features_tensor,
+            effectiveness_features_tensor,
+            torch.arange(n),
+            year,
+            budget,
+        )
+
         if for_gym:
-            self.gym_dataset = [
-                hospitalizations,
-                location_indicator,
-                county_summer_mean,
-                alert,
-                baseline_features_tensor,
-                effectiveness_features_tensor,
-                torch.arange(X.shape[0]),
-                year,
-                budget,
-                state,
-                hi_mean,  # for RL
-            ]
+            raise NotImplementedError
+            # self.gym_dataset = [
+            #     hospitalizations,
+            #     location_indicator,
+            #     county_summer_mean,
+            #     alert,
+            #     baseline_features_tensor,
+            #     effectiveness_features_tensor,
+            #     torch.arange(X.shape[0]),
+            #     year,
+            #     budget,
+            #     state,
+            #     hi_mean,  # for RL
+            # ]
 
         # get dimensions
-        self.data_size = X.shape[0]
+        self.data_size = n
         self.d_baseline = len(self.baseline_feature_names)
         self.d_effectiveness = len(self.effectiveness_feature_names)
 
@@ -384,12 +429,13 @@ class HeatAlertDataModule(pl.LightningDataModule): # used both by the bayesian m
         )
 
 
-class HeatAlertLightning(pl.LightningModule): # Pytorch Lightning helps to efficiently train Pytorch models 
+class HeatAlertLightning(pl.LightningModule):
+    """Pytorch Lightning helps to efficiently train Pytorch models"""
     def __init__(
         self,
         model: nn.Module,
         guide: nn.Module,
-        dos_spline_basis: torch.Tensor | None = None,
+        bspline_basis: torch.Tensor | None = None,
         jit: bool = False,
         num_particles: int = 1,
         lr: float = 1e-3,
@@ -403,13 +449,15 @@ class HeatAlertLightning(pl.LightningModule): # Pytorch Lightning helps to effic
         self.lr = lr
 
         # spline basis for day of summer, used for plots
-        if dos_spline_basis is not None:
-            self.register_buffer("dos_spline_basis", dos_spline_basis)
+        if bspline_basis is not None:
+            self.register_buffer("dos_spline_basis", bspline_basis)
 
     def training_step(self, batch, batch_idx):
         loss = self.loss_fn(self.model, self.guide, *batch)
 
-        if batch_idx == 0:  # do some plots at the beginning of each epoch -- see these plots using tensorboard
+        if (
+            batch_idx == 0
+        ):  # do some plots at the beginning of each epoch -- see these plots using tensorboard
             with torch.no_grad():
                 # one sample from the posterior
                 predictive = pyro.infer.Predictive(
@@ -484,8 +532,13 @@ class HeatAlertLightning(pl.LightningModule): # Pytorch Lightning helps to effic
                 # now a plot of the effect of day of summer
                 n_basis = self.dos_spline_basis.shape[1]
                 basis = self.dos_spline_basis
-                eff_coefs = [sample[f"effectiveness_dos_{i}"] for i in range(n_basis)]
-                baseline_coefs = [sample[f"baseline_dos_{i}"] for i in range(n_basis)]
+                eff_coefs = [
+                    sample[f"effectiveness_bsplines_dos_{i}"]
+                    for i in range(n_basis)
+                ]
+                baseline_coefs = [
+                    sample[f"baseline_bsplines_dos_{i}"] for i in range(n_basis)
+                ]
                 eff_contribs = [
                     basis[:, i] * eff_coefs[i][:, None] for i in range(n_basis)
                 ]  # list of len(n_basis) each of size (S, T)

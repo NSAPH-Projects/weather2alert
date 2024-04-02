@@ -8,7 +8,7 @@ import pytorch_lightning as pl
 import torch
 from omegaconf import DictConfig, OmegaConf
 
-from heat_alerts.bayesian_model import (
+from models import (
     HeatAlertDataModule,
     HeatAlertLightning,
     HeatAlertModel,
@@ -21,16 +21,16 @@ from heat_alerts.bayesian_model import (
 # cfg.training.num_particles = 1 # for full_fast
 # cfg.training.batch_size = None
 
-@hydra.main(config_path="conf/bayesian_model", config_name="config", version_base=None)
+@hydra.main(config_path="conf", config_name="config", version_base=None)
 def main(cfg: DictConfig):
     # Load data
     logging.info("Loading data")
     dm = HeatAlertDataModule(
-        dir=cfg.datadir,
+        dir=cfg.data_dir,
         batch_size=cfg.training.batch_size,
         num_workers=cfg.training.num_workers,
-        sampled_Y=cfg.sample_Y,
-        constrain=cfg.constrain,
+        # sampled_Y=cfg.sample_Y,
+        # constrain=cfg.constrain,
     )
 
     # Load model
@@ -59,22 +59,23 @@ def main(cfg: DictConfig):
         num_particles=cfg.training.num_particles,
         lr=cfg.training.lr,
         jit=cfg.training.jit,
-        dos_spline_basis=dm.dos_spline_basis,
+        bspline_basis=dm.bspline_basis,
     )
 
     # Train model
     logger = pl.loggers.TensorBoardLogger(
-        "logs/", name=cfg.model.name
+        "logs/", name=cfg.name
     )  # to see output, from terminal run "tensorboard --logdir logs/[cfg.model.name]"
     trainer = pl.Trainer(
         max_epochs=cfg.training.epochs,
-        accelerator="auto",
+        accelerator=cfg.training.accelerator,
         enable_checkpointing=False,
         logger=logger,
         gradient_clip_val=cfg.training.gradient_clip_val,
         max_steps=cfg.training.max_steps,
     )
     logging.info("Training model")
+    pyro.clear_param_store()
     trainer.fit(module, dm)
 
     # test saving the model using pytorch lightning

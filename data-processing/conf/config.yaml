@@ -1,0 +1,70 @@
+census_api_key: ${oc.env:CENSUS_API_KEY}
+
+# raw_dir: ../data/raw
+# processed_dir: ../data/processed
+data_dir: ../data
+
+heatmetrics:
+  min_month: 5
+  max_month: 9
+  min_year: 2006
+  max_year: 2019
+  cols: ["HImin_C", "HImax_C", "HImean_C"]
+  url: "https://ndownloader.figstatic.com/files/35070550"
+
+confounders:
+  county_shapefile: "https://www2.census.gov/geo/tiger/GENZ2013/cb_2013_us_county_500k.zip"
+
+alerts:
+  overwrite: false
+  state: TX  # any state code
+  significances: [A, W, Y]  # watch=A, warning=W, advisory=Y
+  events: [EH, HT]  # , see https://www.weather.gov/media/vtec/VTEC_explanation2-23.pdf
+  years: [2006, 2019]  # [ymin, ymax]
+  download_wait: 60  # seconds 
+  download_check_interval: 2  # seconds
+  download_retries: 3
+  headless: true  # otherwise use UI browser for scraping
+  tz_map:
+    C: "US/Central"
+    CE: "US/Central"
+    E: "US/Eastern"
+    m: "MST"
+    P: "US/Pacific"
+    M: "US/Mountain"
+    MP: "US/Mountain"
+    CM: "US/Central"
+    e: "EST"
+    MC: "US/Mountain"
+  sim_coefs: [0.5, 0.5]  # [temp, heat_index]
+
+hospitalizations:
+  # if none are provided, then data is fully simulated
+  synthetic_path: 
+  data_path:
+  # rules for simulated data
+  # these rules are not to be considered as realistic
+  sim_coefs:
+    # these are the key predictors equal for all locations
+    features:
+      effectiveness:
+        alerts_2wks: -0.1
+        intercept: -5.0
+      baseline:
+        excess_heat: 0.1
+        weekend: 0.02
+        intercept: -3.5
+
+    # these is the effect on top of the feature
+    confounders:
+      effectiveness:
+        intercept:
+          log_med_hh_income: 0.05
+          broadband_usage: 0.5        
+      baseline:
+        intercept:
+          log_med_hh_income: -0.1
+          log_pop_density: -0.1
+        heat_qi:
+          log_pop_density: 0.01
+

@@ -1,0 +1,27 @@
+name: weather2alert-preprocessing
+channels:
+  - conda-forge
+dependencies:
+  - python=3.10
+  - geopandas
+  - census
+  - pip
+  - click
+  - ipykernel
+  - tqdm
+  - pyarrow
+  - wget
+  - selenium
+  - r-essentials=4.2
+  - r-arrow
+  - pip:
+    - chromedriver-binary
+    - patsy
+    - lxml
+    - seaborn
+    - wget
+    - us
+    - holidays==0.46
+    - hydra-core==1.3
+    - snakemake==7.32.4
+    - pulp==2.7
