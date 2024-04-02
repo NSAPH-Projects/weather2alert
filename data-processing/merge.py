@@ -155,7 +155,7 @@ def main(cfg):
     df["remaining_budget"] = df["budget"] - df["alerts_2wks"]
 
     # dos splines
-    M = df.dos.max()
+    M = max(df.dos)
     bspline_dos = patsy.dmatrix(
         f"bs(dos, df=3, degree=3, lower_bound=0, upper_bound={M + 1}) - 1",
         {"dos": df.dos.values / M},
@@ -171,7 +171,6 @@ def main(cfg):
         return_type="dataframe",
     )
     bspline_basis.columns = [f"bspline_dos_{i}" for i in range(bspline_basis.shape[1])]
-    bspline_basis["dos"] = np.arange(0, M + 1)
     bspline_basis.to_parquet(f"{cfg.data_dir}/processed/bspline_basis.parquet")
 
     # -------------------

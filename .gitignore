@@ -3,6 +3,5 @@
 **/__pycache__
 **/*.snakemake
 **/.DS_Store
-data
 **/logs
 **/outputs

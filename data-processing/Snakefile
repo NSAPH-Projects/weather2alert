@@ -22,7 +22,7 @@ os.makedirs(f"{processing_cfg.data_dir}/processed", exist_ok=True)
 
 rule all:
     input:
-        processing_cfg.data_dir + "/processed/endongeous_states_actions.parquet",
+        processing_cfg.data_dir + "/processed/endogenous_states_actions.parquet",
         processing_cfg.data_dir + "/processed/exogenous_states.parquet",
         processing_cfg.data_dir + "/processed/budget.parquet",
         processing_cfg.data_dir + "/processed/hospitalizations.parquet",
@@ -30,10 +30,9 @@ rule all:
 
 rule hospitalizations:
     input:
-        expand(
-            processing_cfg.data_dir + "/processed/alerts/{state}.parquet",
-            state=config["states"],
-        ),
+        processing_cfg.data_dir + "/processed/exogenous_states.parquet",
+        processing_cfg.data_dir + "/processed/budget.parquet",
+        processing_cfg.data_dir + "/processed/endogenous_states_actions.parquet"
     output:
         processing_cfg.data_dir + "/processed/hospitalizations.parquet",
     log:
@@ -50,7 +49,7 @@ rule merge:
         ),
     output:
         processing_cfg.data_dir + "/processed/exogenous_states.parquet",
-        processing_cfg.data_dir + "/processed/endongeous_states_actions.parquet",
+        processing_cfg.data_dir + "/processed/endogenous_states_actions.parquet",
         processing_cfg.data_dir + "/processed/budget.parquet",
     log:
         "logs/merge.log",

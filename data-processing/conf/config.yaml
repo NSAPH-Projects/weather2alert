@@ -53,7 +53,7 @@ hospitalizations:
       baseline:
         excess_heat: 0.1
         weekend: 0.02
-        intercept: -3.5
+        intercept: -5.0
 
     # these is the effect on top of the feature
     confounders:

@@ -16,6 +16,7 @@ from pyro.distributions import (
 from pyro.distributions.torch_distribution import TorchDistribution
 from pyro.infer.trace_elbo import JitTrace_ELBO, Trace_ELBO
 from torch.distributions.utils import broadcast_all
+from sklearn.preprocessing import OneHotEncoder, StandardScaler
 
 
 class NegativeLogNormal(
@@ -146,14 +147,14 @@ class HeatAlertModel(
         for i, name in enumerate(self.baseline_feature_names):
             scale = pyro.sample(f"baseline_scale_{name}", HalfCauchy(1))
             dist = self.get_dist(
-                name, self.baseline_constraints, baseline_loc[:, i], scale
+                name, self.baseline_constraints, baseline_loc[:, i], scale + 1e-3
             )
             baseline_samples[name] = pyro.sample("baseline_" + name, dist)
 
         for i, name in enumerate(self.effectiveness_feature_names):
             scale = pyro.sample(f"effectiveness_scale_{name}", HalfCauchy(1))
             dist = self.get_dist(
-                name, self.effectiveness_constraints, eff_loc[:, i], scale
+                name, self.effectiveness_constraints, eff_loc[:, i], scale + 1e-3
             )
             effectiveness_samples[name] = pyro.sample("effectiveness_" + name, dist)
 
@@ -161,16 +162,16 @@ class HeatAlertModel(
         baseline_contribs = []
         for i, name in enumerate(self.baseline_feature_names):
             coef = baseline_samples[name][loc_ind]
-            if sum(torch.isnan(baseline_features[:, i])):
-                pass
             baseline_contribs.append(coef * baseline_features[:, i])
 
         # compute baseline hospitalizations
         baseline_bias = pyro.sample(
-            "baseline_bias", Uniform(-0.5, 0.5).expand([self.S]).to_event(1)
+            "baseline_bias", Uniform(-10, 10).expand([self.S]).to_event(1)
         )
         baseline = sum(baseline_contribs) + baseline_bias[loc_ind]
-        baseline = torch.exp(baseline.clamp(max=10))
+        baseline = torch.exp(baseline.clamp(-10, 10))
+        # replace nans with 0.0
+        baseline = torch.where(torch.isnan(baseline), torch.zeros_like(baseline), baseline)
 
         effectiveness_contribs = []
         for i, name in enumerate(self.effectiveness_feature_names):
@@ -180,13 +181,16 @@ class HeatAlertModel(
         eff_bias = pyro.sample(
             # "effectiveness_bias", Uniform(-8, -5).expand([self.S]).to_event(1)
             "effectiveness_bias",
-            Uniform(-10, 2).expand([self.S]).to_event(1),
+            Uniform(-10, 10).expand([self.S]).to_event(1),
         )
         effectiveness = torch.sigmoid(sum(effectiveness_contribs) + eff_bias[loc_ind])
         effectiveness = effectiveness.clamp(1e-6, 1 - 1e-6)
+        # replcae nans with 0
+        effectiveness = torch.where(torch.isnan(effectiveness), torch.zeros_like(effectiveness), effectiveness)
 
         # sample the outcome
         outcome_mean = offset * baseline * (1 - alert * effectiveness)
+        outcome_mean = outcome_mean.clamp(1e-3, 1e3)
 
         y = hosps if condition else None
         with pyro.plate("data", self.N, subsample=index):
@@ -234,8 +238,17 @@ class HeatAlertDataModule(
         endo = pd.read_parquet(f"{dir}/processed/endogenous_states_actions.parquet")
         merged = pd.merge(exo, endo, on=["fips", "date"], how="inner")
         hosps = pd.read_parquet(f"{dir}/processed/hospitalizations.parquet")
-
         confounders = pd.read_parquet(f"{dir}/processed/confounders.parquet")
+        confounders["intercept"] = 1.0
+
+        # TODO: clean data during preprocessing, since there is one dirty fips
+        nans = merged[merged.heat_qi.isnull()]
+        bad_fips = nans.fips.unique()
+
+        # remove bad fips from everywhere
+        merged = merged[~merged.fips.isin(bad_fips)]
+        hosps = hosps[~hosps.fips.isin(bad_fips)]
+        confounders = confounders[~confounders.index.isin(bad_fips)]
 
         # location indicator
         fips_list = confounders.fips.values
@@ -265,9 +278,15 @@ class HeatAlertDataModule(
             "log_pop_density",
             "iecc_climate_zone",
             # "pm25"
+            "intercept"
         ]
-        W = confounders[self.spatial_features_names].values
-        self.spatial_features = torch.FloatTensor(W)
+        W = confounders[self.spatial_features_names]
+
+        wscaler = StandardScaler()
+        wscaler_cols = self.spatial_features_names[:-1]  # don't scale the intercept
+        W[wscaler_cols] = wscaler.fit_transform(W[wscaler_cols])
+
+        self.spatial_features = torch.FloatTensor(W.values)
         self.spatial_features_idx = fips_list
 
         # save outcome, action and location features, metadata
@@ -297,7 +316,7 @@ class HeatAlertDataModule(
 
         # get all cols that start with bsplines_dos in one tensor
         bsplines_dos = torch.FloatTensor(
-            merged.filter(regex="bsplines_dos", axis=1).values
+            merged.filter(regex="bspline_dos", axis=1).values
         )
         n_basis = bsplines_dos.shape[1]
 
@@ -313,7 +332,7 @@ class HeatAlertDataModule(
             "alert_lag1": alert_lag1,
             "alerts_2wks": alerts_2wks,
             "weekend": weekend,
-            **{f"bsplines_dos_{i}": bsplines_dos[i] for i in range(n_basis)},
+            **{f"bsplines_dos_{i}": bsplines_dos[:, i] for i in range(n_basis)},
         }
         self.effectiveness_feature_names = list(effectiveness_features.keys())
 
@@ -327,7 +346,7 @@ class HeatAlertDataModule(
             "alert_lag1": alert_lag1,
             "alerts_2wks": alerts_2wks,
             "weekend": weekend,
-            **{f"bsplines_dos_{i}": bsplines_dos[i] for i in range(n_basis)},
+            **{f"bsplines_dos_{i}": bsplines_dos[:, i] for i in range(n_basis)},
         }
         self.baseline_feature_names = list(baseline_features.keys())
 
@@ -396,22 +415,6 @@ class HeatAlertDataModule(
             year,
             budget,
         )
-
-        if for_gym:
-            raise NotImplementedError
-            # self.gym_dataset = [
-            #     hospitalizations,
-            #     location_indicator,
-            #     county_summer_mean,
-            #     alert,
-            #     baseline_features_tensor,
-            #     effectiveness_features_tensor,
-            #     torch.arange(X.shape[0]),
-            #     year,
-            #     budget,
-            #     state,
-            #     hi_mean,  # for RL
-            # ]
 
         # get dimensions
         self.data_size = n
@@ -530,7 +533,7 @@ class HeatAlertLightning(pl.LightningModule):
                 )
 
                 # now a plot of the effect of day of summer
-                n_basis = self.dos_spline_basis.shape[1]
+                n_basis = self.dos_spline_basis.shape[1] - 1 
                 basis = self.dos_spline_basis
                 eff_coefs = [
                     sample[f"effectiveness_bsplines_dos_{i}"]
