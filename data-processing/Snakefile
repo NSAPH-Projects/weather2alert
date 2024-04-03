@@ -25,20 +25,6 @@ rule all:
         processing_cfg.data_dir + "/processed/endogenous_states_actions.parquet",
         processing_cfg.data_dir + "/processed/exogenous_states.parquet",
         processing_cfg.data_dir + "/processed/budget.parquet",
-        processing_cfg.data_dir + "/processed/hospitalizations.parquet",
-
-
-rule hospitalizations:
-    input:
-        processing_cfg.data_dir + "/processed/exogenous_states.parquet",
-        processing_cfg.data_dir + "/processed/budget.parquet",
-        processing_cfg.data_dir + "/processed/endogenous_states_actions.parquet"
-    output:
-        processing_cfg.data_dir + "/processed/hospitalizations.parquet",
-    log:
-        "logs/hospitalizations.log",
-    shell:
-        "python hospitalizations.py &> {log}"
 
 
 rule merge:

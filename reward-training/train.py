@@ -1,11 +1,11 @@
 import logging
 import os
-import numpy as np
-
+import pandas as pd
 import hydra
 import pyro
 import pytorch_lightning as pl
 import torch
+import tensordict
 from omegaconf import DictConfig, OmegaConf
 
 from models import (
@@ -14,27 +14,57 @@ from models import (
     HeatAlertModel,
 )
 
-# hydra.initialize(config_path="conf/bayesian_model", version_base=None)
-# cfg = hydra.compose(config_name="config")
-# cfg.model.name = "FullFast_8-16"
-# cfg.model.name = "FF_sample"
-# cfg.training.num_particles = 1 # for full_fast
-# cfg.training.batch_size = None
+
+LOGGER = logging.getLogger(__name__)
+
+
+def load_data(dir):
+    # Load data
+    LOGGER.info("Loading prepro")
+    path = f"{dir}/processed/exogenous_states.parquet"
+    exogenous_states = pd.read_parquet(path)
+
+    path = f"{dir}/processed/endogenous_states_actions.parquet"
+    endogenous_states_actions = pd.read_parquet(path)
+
+    path = f"{dir}/processed/confounders.parquet"
+    confounders = pd.read_parquet(path)
+
+    path = f"{dir}/processed/bspline_basis.parquet"
+    bspline_basis = pd.read_parquet(path)
+
+    return exogenous_states, endogenous_states_actions, confounders, bspline_basis
+
 
 @hydra.main(config_path="conf", config_name="config", version_base=None)
 def main(cfg: DictConfig):
     # Load data
-    logging.info("Loading data")
+    LOGGER.info("Loading preprocessed data")
+    exo, endo, confounders, bspline_basis = load_data(cfg.data_dir)
+
+    # Load hospitalizations, it uses real, sim, or syntethic data
+    LOGGER.info("Loading hospitalizations")
+    hosps = hydra.utils.instantiate(
+        cfg.hospitalizations,
+        confounders=confounders,
+        exogenous_states=exo,
+        endogenous_states_actions=endo,
+    )
+
+    # Create data module
+    LOGGER.info("Creating data module")
     dm = HeatAlertDataModule(
-        dir=cfg.data_dir,
+        confounders=confounders,
+        exogenous_states=exo,
+        endogenous_states_actions=endo,
+        hosps=hosps,
+        bspline_basis=bspline_basis,
         batch_size=cfg.training.batch_size,
         num_workers=cfg.training.num_workers,
-        # sampled_Y=cfg.sample_Y,
-        # constrain=cfg.constrain,
     )
 
     # Load model
-    logging.info("Creating model")
+    LOGGER.info("Loading model")
     model = HeatAlertModel(
         spatial_features=dm.spatial_features,
         data_size=dm.data_size,
@@ -75,35 +105,27 @@ def main(cfg: DictConfig):
         max_steps=cfg.training.max_steps,
     )
     logging.info("Training model")
-    pyro.clear_param_store()
     trainer.fit(module, dm)
 
-    # test saving the model using pytorch lightning
-    logging.info("Saving ckpts")
-    ckpt_lightning = f"ckpts/{cfg.model.name}_lightning.ckpt"
-    ckpt_guide = f"ckpts/{cfg.model.name}_guide.pt"
-    ckpt_model = f"ckpts/{cfg.model.name}_model.pt"
+    # save posterior coefficients by using the predictive
+    predictive = pyro.infer.Predictive(model, guide=guide, num_samples=cfg.num_samples)
+    preds = predictive(*dm.dataset.tensors)
 
-    trainer.save_checkpoint(ckpt_lightning)
-    torch.save(model.state_dict(), ckpt_model)
-    torch.save(guide.state_dict(), ckpt_guide)
+    # save posterior samples
+    td = dict()
+    for b in dm.baseline_feature_names + ["baseline_bias"]:
+        td[b] = preds[f"baseline_{b}"]
+    for e in dm.effectiveness_feature_names + ["eff_bias"]:
+        td[e] = preds[f"effectiveness_{e}"]
+    preds = tensordict.TensorDict(td, batch_size=cfg.num_samples)
+    savedir = f"../weights/{cfg.name}"
+    os.makedirs(savedir, exist_ok=True)
+    torch.save(preds, f"{savedir}/posterior_samples.pt")
 
-    # save config for easy reproducibility
-    with open(f"ckpts/{cfg.model.name}_cfg.yaml", "w") as f:
-        OmegaConf.save(cfg, f)
-
-    ## save average predictions for comparison to Y:
-    # model.load_state_dict(torch.load(ckpt_model, map_location=torch.device("cpu")))
-    # guide.load_state_dict(torch.load(ckpt_guide, map_location=torch.device("cpu")))
-    sample = guide(*dm.dataset.tensors)
-    sites = list(sample.keys()) + ["_RETURN"]
-    predictive = pyro.infer.Predictive(
-        model, guide=guide, num_samples=1000, return_sites=sites
-    )
-    preds = predictive(*dm.dataset.tensors, return_outcomes=True)["_RETURN"]
-    Preds = torch.mean(preds, dim=0).numpy()
-    os.makedirs("heat_alerts/bayesian_model/results", exist_ok=True)
-    np.savetxt(f"heat_alerts/bayesian_model/results/Bayesian_{cfg.model.name}.csv", Preds, delimiter=",")
+    # save the config in the folder for completeness
+    # make sure to resolve the config with hydra/omegaconf
+    with open(f"{savedir}/config.yaml", "w") as f:
+        f.write(OmegaConf.to_yaml(cfg, resolve=True))
 
 
 if __name__ == "__main__":

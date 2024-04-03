@@ -37,34 +37,3 @@ alerts:
     e: "EST"
     MC: "US/Mountain"
   sim_coefs: [0.5, 0.5]  # [temp, heat_index]
-
-hospitalizations:
-  # if none are provided, then data is fully simulated
-  synthetic_path: 
-  data_path:
-  # rules for simulated data
-  # these rules are not to be considered as realistic
-  sim_coefs:
-    # these are the key predictors equal for all locations
-    features:
-      effectiveness:
-        alerts_2wks: -0.1
-        intercept: -5.0
-      baseline:
-        excess_heat: 0.1
-        weekend: 0.02
-        intercept: -5.0
-
-    # these is the effect on top of the feature
-    confounders:
-      effectiveness:
-        intercept:
-          log_med_hh_income: 0.05
-          broadband_usage: 0.5        
-      baseline:
-        intercept:
-          log_med_hh_income: -0.1
-          log_pop_density: -0.1
-        heat_qi:
-          log_pop_density: 0.01
-

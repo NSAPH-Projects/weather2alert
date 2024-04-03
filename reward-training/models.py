@@ -171,7 +171,9 @@ class HeatAlertModel(
         baseline = sum(baseline_contribs) + baseline_bias[loc_ind]
         baseline = torch.exp(baseline.clamp(-10, 10))
         # replace nans with 0.0
-        baseline = torch.where(torch.isnan(baseline), torch.zeros_like(baseline), baseline)
+        baseline = torch.where(
+            torch.isnan(baseline), torch.zeros_like(baseline), baseline
+        )
 
         effectiveness_contribs = []
         for i, name in enumerate(self.effectiveness_feature_names):
@@ -186,7 +188,9 @@ class HeatAlertModel(
         effectiveness = torch.sigmoid(sum(effectiveness_contribs) + eff_bias[loc_ind])
         effectiveness = effectiveness.clamp(1e-6, 1 - 1e-6)
         # replcae nans with 0
-        effectiveness = torch.where(torch.isnan(effectiveness), torch.zeros_like(effectiveness), effectiveness)
+        effectiveness = torch.where(
+            torch.isnan(effectiveness), torch.zeros_like(effectiveness), effectiveness
+        )
 
         # sample the outcome
         outcome_mean = offset * baseline * (1 - alert * effectiveness)
@@ -213,32 +217,31 @@ class HeatAlertModel(
             raise ValueError(f"unknown constraint {constraints[name]}")
 
 
-class HeatAlertDataModule(
-    pl.LightningDataModule
-):  # used both by the bayesian model and later by the RL models
+class HeatAlertDataModule(pl.LightningDataModule):
     """Reads the preprocess data and prepares it for training using tensordicts"""
 
     def __init__(
         self,
-        dir: str,
+        exogenous_states: pd.DataFrame | None = None,
+        endogenous_states_actions: pd.DataFrame | None = None,
+        confounders: pd.DataFrame | None = None,
+        hosps: pd.DataFrame | None = None,
+        bspline_basis: pd.DataFrame | None = None,
         batch_size: int | None = None,
         num_workers: int = 8,
-        # load_outcome: bool = True,
-        # sampled_Y: bool = False,
         constrain: str = "all",
-        for_gym: bool = False,
     ):
         super().__init__()
-        self.dir = dir
         self.workers = num_workers
-        dir = self.dir
 
         # read all raw data
-        exo = pd.read_parquet(f"{dir}/processed/exogenous_states.parquet")
-        endo = pd.read_parquet(f"{dir}/processed/endogenous_states_actions.parquet")
-        merged = pd.merge(exo, endo, on=["fips", "date"], how="inner")
-        hosps = pd.read_parquet(f"{dir}/processed/hospitalizations.parquet")
-        confounders = pd.read_parquet(f"{dir}/processed/confounders.parquet")
+        merged = pd.merge(
+            exogenous_states,
+            endogenous_states_actions,
+            on=["fips", "date"],
+            how="inner",
+        )
+        confounders = confounders.copy()
         confounders["intercept"] = 1.0
 
         # TODO: clean data during preprocessing, since there is one dirty fips
@@ -259,12 +262,6 @@ class HeatAlertDataModule(
         Y = hosps.hospitalizations.values
         alert = merged.alert.values
 
-        # sind = pd.read_parquet(f"{dir}/location_indicator.parquet")
-        # dos = pd.read_parquet(f"{dir}/Btdos.parquet")
-        # year = pd.read_parquet(f"{dir}/year.parquet")
-        # budget = pd.read_parquet(f"{dir}/budget.parquet")
-        # state = pd.read_parquet(f"{dir}/state.parquet")
-
         if batch_size is None:
             n = merged.shape[0]
             m = confounders.shape[0]
@@ -278,7 +275,7 @@ class HeatAlertDataModule(
             "log_pop_density",
             "iecc_climate_zone",
             # "pm25"
-            "intercept"
+            "intercept",
         ]
         W = confounders[self.spatial_features_names]
 
@@ -322,7 +319,6 @@ class HeatAlertDataModule(
 
         # save dos spline basis for plots
         # # save day of summer splines as tensor
-        bspline_basis = pd.read_parquet(f"{dir}/processed/bspline_basis.parquet")
         self.bspline_basis = torch.FloatTensor(bspline_basis.values)
 
         # alert effectiveness features
@@ -434,6 +430,7 @@ class HeatAlertDataModule(
 
 class HeatAlertLightning(pl.LightningModule):
     """Pytorch Lightning helps to efficiently train Pytorch models"""
+
     def __init__(
         self,
         model: nn.Module,
@@ -533,11 +530,10 @@ class HeatAlertLightning(pl.LightningModule):
                 )
 
                 # now a plot of the effect of day of summer
-                n_basis = self.dos_spline_basis.shape[1] - 1 
+                n_basis = self.dos_spline_basis.shape[1] - 1
                 basis = self.dos_spline_basis
                 eff_coefs = [
-                    sample[f"effectiveness_bsplines_dos_{i}"]
-                    for i in range(n_basis)
+                    sample[f"effectiveness_bsplines_dos_{i}"] for i in range(n_basis)
                 ]
                 baseline_coefs = [
                     sample[f"baseline_bsplines_dos_{i}"] for i in range(n_basis)

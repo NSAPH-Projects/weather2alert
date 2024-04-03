@@ -23,7 +23,7 @@ dependencies:
   - graphviz
   - pyarrow
   - wget
-  # - tensordict
+  - tensordict
   - pip:
     - pytorch-lightning
     - torch-tb-profiler
