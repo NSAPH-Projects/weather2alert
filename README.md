@@ -40,11 +40,9 @@ The `location` parameter is a string that represents the FIPS code of the county
 
 However, keep in mind that the data-generating mechanism is different for each location.
 
-To use the environment, train as usual in Gymnasium environment. For example:
+Use the environment with the standard Gymnasium API. For example:
 
 ```python
-import gymnasium as gym
-
 obs, info = env.reset()
 done = False
 while not done:
