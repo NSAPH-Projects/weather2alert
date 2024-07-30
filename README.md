@@ -8,18 +8,6 @@ This package provides a Gymnasium environment (formerly OpenAI Gym) for training
 
 The environment was calibrated from a comprehensive data set between 2006--2016 of heat index values, hospitalizations, and alerts from various sources, including the National Weather Service, the Centers for Disease Control and Prevention, the Census Bureau, Centers for Medicare and Medicaid Services, and the National Oceanic and Atmospheric Administration.
 
-The mathematical model and a detailed description of the data sources and modeling approach is available in the following publication:
-
-
-```bibtex
-@article{considine2023optimizing,
-  title={Optimizing Heat Alert Issuance for Public Health in the United States with Reinforcement Learning},
-  author={Considine, Ellen M and Nethery, Rachel C and Wellenius, Gregory A and Dominici, Francesca and Tec, Mauricio},
-  journal={arXiv preprint arXiv:2312.14196},
-  year={2023}
-}
-```
-
 
 ### Getting Started
 
