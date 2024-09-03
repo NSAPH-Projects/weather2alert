@@ -169,11 +169,14 @@ class HeatAlertModel(
             "baseline_bias", Uniform(-10, 10).expand([self.S]).to_event(1)
         )
         baseline = sum(baseline_contribs) + baseline_bias[loc_ind]
+        
+        # -----------------------------------------------------------------#
+        # clamp & replace nans for stability, after training shouldnot be active
         baseline = torch.exp(baseline.clamp(-10, 10))
-        # replace nans with 0.0
         baseline = torch.where(
             torch.isnan(baseline), torch.zeros_like(baseline), baseline
         )
+        # =-----------------------------------------------------------------=
 
         effectiveness_contribs = []
         for i, name in enumerate(self.effectiveness_feature_names):
@@ -186,18 +189,31 @@ class HeatAlertModel(
             Uniform(-10, 10).expand([self.S]).to_event(1),
         )
         effectiveness = torch.sigmoid(sum(effectiveness_contribs) + eff_bias[loc_ind])
+
+        # -----------------------------------------------------------------#
+        # clamp & replace nans for stability, after training shouldnot be active
         effectiveness = effectiveness.clamp(1e-6, 1 - 1e-6)
-        # replcae nans with 0
         effectiveness = torch.where(
             torch.isnan(effectiveness), torch.zeros_like(effectiveness), effectiveness
         )
+        # =-----------------------------------------------------------------=   
 
         # sample the outcome
         outcome_mean = offset * baseline * (1 - alert * effectiveness)
         outcome_mean = outcome_mean.clamp(1e-3, 1e3)
-
         y = hosps if condition else None
-        with pyro.plate("data", self.N, subsample=index):
+        # subsample = index
+
+        # # TODO: this is a temp bug fix, there are nans during data loading
+        # nans = torch.isnan(offset)
+        # y = y[~nans] if condition else None
+        # outcome_mean = outcome_mean[~nans]
+        # index = index[~nans]
+        # effectiveness = effectiveness[~nans]
+        # baseline = baseline[~nans]
+        # # -----
+
+        with pyro.plate("data", self.N, subsample=index):            
             obs = pyro.sample("hospitalizations", Poisson(outcome_mean + 1e-3), obs=y)
 
         if not return_outcomes:
@@ -229,7 +245,6 @@ class HeatAlertDataModule(pl.LightningDataModule):
         bspline_basis: pd.DataFrame | None = None,
         batch_size: int | None = None,
         num_workers: int = 8,
-        constrain: str = "all",
     ):
         super().__init__()
         self.workers = num_workers
@@ -244,16 +259,31 @@ class HeatAlertDataModule(pl.LightningDataModule):
         confounders = confounders.copy()
         confounders["intercept"] = 1.0
 
-        # TODO: clean data during preprocessing, since there is one dirty fips
-        nans = merged[merged.heat_qi.isnull()]
-        bad_fips = nans.fips.unique()
+        # TODO: clean data during preprocessing
+        comb = pd.merge(merged, hosps, on=["fips", "date"], how="left")
+        rows_with_nans = comb.isnull().any(axis=1)
+        fipsdates = comb.fips + comb.date
+        valid_fipsdates = fipsdates[~rows_with_nans].unique()
+        valid_fips = set(comb[~rows_with_nans].fips.unique())
+        # -----
+
+        # nans = merged[merged.heat_qi.isnull()]
+        # nans2 = hosps[hosps.hospitalizations.isnull() | hosps.eligible_pop.isnull()]
+        # bad_fips = set(nans.fips.unique()) | set(nans2.fips.unique())
+        # hosps_fips = set(hosps.fips.unique())
+        # confounders_fips = set(confounders.fips.unique())
+        # valid_fips = (valid_fips & confounders_fips)
 
         # remove bad fips from everywhere
-        merged = merged[~merged.fips.isin(bad_fips)]
-        hosps = hosps[~hosps.fips.isin(bad_fips)]
-        confounders = confounders[~confounders.index.isin(bad_fips)]
+        # merged = merged[merged.fips.isin(valid_fips)]
+        merged = merged[(merged.fips + merged.date).isin(valid_fipsdates)]
+        confounders = confounders[confounders.fips.isin(valid_fips)]
 
-        # location indicator
+        # match the index os hosps with merged
+        hosps = pd.merge(merged, hosps, on=["fips", "date"], how="left")
+        hosps = hosps[["fips", "date", "hospitalizations", "eligible_pop"]]
+
+        # create location indicator integer id
         fips_list = confounders.fips.values
         fips2ix = {f: i for i, f in enumerate(fips_list)}
         sind = merged.fips.map(fips2ix).values
@@ -346,53 +376,6 @@ class HeatAlertDataModule(pl.LightningDataModule):
         }
         self.baseline_feature_names = list(baseline_features.keys())
 
-        ## note: constraints are passed to the heat alert model
-        if constrain == "all":
-            self.effectiveness_constraints = dict(
-                heat_qi="positive",  # more heat more effective
-                excess_heat="positive",  # more excess here more effective
-                alert_lag1="negative",  # alert yesterday less effective
-                alerts_2wks="negative",  # more alerts less effective
-            )
-            self.baseline_constraints = dict(
-                heat_qi_above_25="positive",  # heat could have any slope at first
-                heat_qi_above_75="positive",  #    but should be increasingly worse
-                excess_heat="positive",  # more excess heat more hospitalizations
-                alert_lag1="negative",  # alert yesterday less hospitalizations
-                alerts_2wks="negative",  # more trailing alerts less hospitalizations
-            )
-        elif constrain == "none":
-            self.effectiveness_constraints = dict()
-            self.baseline_constraints = dict()
-        elif constrain == "HI":
-            self.effectiveness_constraints = dict(
-                heat_qi="positive",  # more heat more effective
-                excess_heat="positive",  # more excess here more effective
-            )
-            self.baseline_constraints = dict(
-                heat_qi1_above_25="positive",  # heat could have any slope at first
-                heat_qi2_above_75="positive",  #    but should be increasingly worst
-                excess_heat="positive",  # more excess heat more hospitalizations
-            )
-        elif constrain == "alerts":
-            self.effectiveness_constraints = dict(
-                alert_lag1="negative",  # alert yesterday less effective
-                alerts_2wks="negative",  # more alerts less effective
-            )
-            self.baseline_constraints = dict(
-                alert_lag1="negative",  # alert yesterday less hospitalizations
-                alerts_2wks="negative",  # more trailing alerts less hospitalizations
-            )
-        elif constrain == "mixed":  # model used in the main analysis of the paper!
-            self.effectiveness_constraints = dict(
-                heat_qi="positive",  # more heat more effective
-                excess_heat="positive",  # more excess here more effective
-            )
-            self.baseline_constraints = dict(
-                alert_lag1="negative",  # alert yesterday less hospitalizations
-                alerts_2wks="negative",  # more trailing alerts less hospitalizations
-            )
-
         baseline_features_tensor = torch.stack(
             [baseline_features[k] for k in self.baseline_feature_names], dim=1
         )
@@ -454,6 +437,14 @@ class HeatAlertLightning(pl.LightningModule):
 
     def training_step(self, batch, batch_idx):
         loss = self.loss_fn(self.model, self.guide, *batch)
+
+        # regularization, evaluate the model
+        output = self.model(*batch, return_outcomes=True)
+        eff, baseline, outcome_mean = output[:, 0], output[:, 1], output[:, 2]
+
+        # # add a penalizations to prevent overfitting, or shrink when lack of data
+        # loss += 0.001 * 0.5 * (outcome_mean ** 2).mean()
+        # loss += 0.001 * 0.5 * (eff ** 2).mean()
 
         if (
             batch_idx == 0
@@ -530,7 +521,7 @@ class HeatAlertLightning(pl.LightningModule):
                 )
 
                 # now a plot of the effect of day of summer
-                n_basis = self.dos_spline_basis.shape[1] - 1
+                n_basis = self.dos_spline_basis.shape[1]
                 basis = self.dos_spline_basis
                 eff_coefs = [
                     sample[f"effectiveness_bsplines_dos_{i}"] for i in range(n_basis)

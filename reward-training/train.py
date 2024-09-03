@@ -8,7 +8,7 @@ import torch
 import tensordict
 from omegaconf import DictConfig, OmegaConf
 
-from models import (
+from modules import (
     HeatAlertDataModule,
     HeatAlertLightning,
     HeatAlertModel,
@@ -52,10 +52,6 @@ def main(cfg: DictConfig):
 
     # Perform a last filter to remove nans from exo, endo if hosps has nans
     LOGGER.info("Filtering nans")
-    isna = hosps.isna().any(axis=1)
-    exo = exo[~isna]
-    endo = endo[~isna]
-    hosps = hosps[~isna]
 
     # Create data module
     LOGGER.info("Creating data module")
@@ -76,12 +72,12 @@ def main(cfg: DictConfig):
         data_size=dm.data_size,
         d_baseline=dm.d_baseline,
         d_effectiveness=dm.d_effectiveness,
-        baseline_constraints=dm.baseline_constraints,
+        baseline_constraints=cfg.constraints.baseline,
         baseline_feature_names=dm.baseline_feature_names,
-        effectiveness_constraints=dm.effectiveness_constraints,
+        effectiveness_constraints=cfg.constraints.effectiveness,
         effectiveness_feature_names=dm.effectiveness_feature_names,
-        hidden_dim=cfg.model.hidden_dim,
-        num_hidden_layers=cfg.model.num_hidden_layers,
+        hidden_dim=cfg.arch.hidden_dim,
+        num_hidden_layers=cfg.arch.num_hidden_layers,
     )
 
     # use low-rank normal guide and initialize by calling it once
@@ -101,7 +97,7 @@ def main(cfg: DictConfig):
     # Train model
     logger = pl.loggers.TensorBoardLogger(
         "logs/", name=cfg.name
-    )  # to see output, from terminal run "tensorboard --logdir logs/[cfg.model.name]"
+    )  # to see output, from terminal run "tensorboard --logdir logs/[cfg.arch.name]"
     trainer = pl.Trainer(
         max_epochs=cfg.training.epochs,
         accelerator=cfg.training.accelerator,

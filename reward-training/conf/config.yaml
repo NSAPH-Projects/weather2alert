@@ -1,8 +1,9 @@
 defaults:
   - _self_
-  - model: nn
+  - arch: nn
   - training: fast
   - hospitalizations: sim
+  - constraints: mixed
 
 data_dir: ../data
 
