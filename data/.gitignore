@@ -1,2 +1,4 @@
-raw/*
+raw/nws-forecast-zones
+raw/heatmetrics.parquet
+shapefile
 !processed

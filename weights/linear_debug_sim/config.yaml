@@ -1,0 +1,38 @@
+data_dir: ../data
+model:
+  num_hidden_layers: 0
+  hidden_dim: 0
+name: linear_debug_sim
+training:
+  batch_size: null
+  epochs: 1
+  gradient_clip_val: 1.0
+  lr: 0.0003
+  num_workers: 0
+  num_particles: 1
+  max_steps: -1
+  jit: false
+  accelerator: cpu
+num_samples: 100
+hospitalizations:
+  _target_: hospitalizations.sim_hosps
+  sim_coefs:
+    features:
+      effectiveness:
+        alerts_2wks: -0.1
+        intercept: -5.0
+      baseline:
+        excess_heat: 0.1
+        weekend: 0.02
+        intercept: -5.0
+    confounders:
+      effectiveness:
+        intercept:
+          log_med_hh_income: 0.05
+          broadband_usage: 0.5
+      baseline:
+        intercept:
+          log_med_hh_income: -0.1
+          log_pop_density: -0.1
+        heat_qi:
+          log_pop_density: 0.01
