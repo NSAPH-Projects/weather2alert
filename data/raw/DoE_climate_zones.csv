@@ -1,0 +1,3236 @@
+State,State FIPS,County FIPS,IECC Climate Zone,IECC Moisture Regime,BA Climate Zone,County Name
+AK,02,013,7,N/A,Very Cold,Aleutians East
+AK,02,016,7,N/A,Very Cold,Aleutians West
+AK,02,020,7,N/A,Very Cold,Anchorage
+AK,02,050,8,N/A,Subarctic,Bethel
+AK,02,060,7,N/A,Very Cold,Bristol Bay
+AK,02,068,7,N/A,Very Cold,Denali
+AK,02,070,8,N/A,Subarctic,Dillingham
+AK,02,090,8,N/A,Subarctic,Fairbanks North Star
+AK,02,100,7,N/A,Very Cold,Haines
+AK,02,105,7,N/A,Very Cold,Hoonah-Angoon
+AK,02,110,7,N/A,Very Cold,Juneau
+AK,02,122,7,N/A,Very Cold,Kenai Peninsula
+AK,02,130,7,N/A,Very Cold,Ketchikan Gateway
+AK,02,150,7,N/A,Very Cold,Kodiak Island
+AK,02,158,8,N/A,Subarctic,Kusilvak
+AK,02,164,7,N/A,Very Cold,Lake and Peninsula
+AK,02,170,7,N/A,Very Cold,Matanuska-Susitna
+AK,02,180,8,N/A,Subarctic,Nome
+AK,02,185,8,N/A,Subarctic,North Slope
+AK,02,188,8,N/A,Subarctic,Northwest Arctic
+AK,02,195,7,N/A,Very Cold,Petersburg
+AK,02,198,7,N/A,Very Cold,Prince of Wales-Hyder
+AK,02,220,7,N/A,Very Cold,Sitka
+AK,02,230,7,N/A,Very Cold,Skagway
+AK,02,240,8,N/A,Subarctic,Southeast Fairbanks
+AK,02,261,7,N/A,Very Cold,Valdez-Cordova
+AK,02,275,7,N/A,Very Cold,Wrangell
+AK,02,282,7,N/A,Very Cold,Yakutat
+AK,02,290,8,N/A,Subarctic,Yukon-Koyukuk
+AL,01,001,3,A,Hot-Humid,Autauga
+AL,01,003,2,A,Hot-Humid,Baldwin
+AL,01,005,3,A,Hot-Humid,Barbour
+AL,01,007,3,A,Mixed-Humid,Bibb
+AL,01,009,3,A,Mixed-Humid,Blount
+AL,01,011,3,A,Hot-Humid,Bullock
+AL,01,013,3,A,Hot-Humid,Butler
+AL,01,015,3,A,Mixed-Humid,Calhoun
+AL,01,017,3,A,Mixed-Humid,Chambers
+AL,01,019,3,A,Mixed-Humid,Cherokee
+AL,01,021,3,A,Mixed-Humid,Chilton
+AL,01,023,3,A,Hot-Humid,Choctaw
+AL,01,025,3,A,Hot-Humid,Clarke
+AL,01,027,3,A,Mixed-Humid,Clay
+AL,01,029,3,A,Mixed-Humid,Cleburne
+AL,01,031,3,A,Hot-Humid,Coffee
+AL,01,033,3,A,Mixed-Humid,Colbert
+AL,01,035,3,A,Hot-Humid,Conecuh
+AL,01,037,3,A,Mixed-Humid,Coosa
+AL,01,039,3,A,Hot-Humid,Covington
+AL,01,041,3,A,Hot-Humid,Crenshaw
+AL,01,043,3,A,Mixed-Humid,Cullman
+AL,01,045,3,A,Hot-Humid,Dale
+AL,01,047,3,A,Hot-Humid,Dallas
+AL,01,049,3,A,Mixed-Humid,DeKalb
+AL,01,051,3,A,Hot-Humid,Elmore
+AL,01,053,3,A,Hot-Humid,Escambia
+AL,01,055,3,A,Mixed-Humid,Etowah
+AL,01,057,3,A,Mixed-Humid,Fayette
+AL,01,059,3,A,Mixed-Humid,Franklin
+AL,01,061,3,A,Hot-Humid,Geneva
+AL,01,063,3,A,Mixed-Humid,Greene
+AL,01,065,3,A,Mixed-Humid,Hale
+AL,01,067,3,A,Hot-Humid,Henry
+AL,01,069,3,A,Hot-Humid,Houston
+AL,01,071,3,A,Mixed-Humid,Jackson
+AL,01,073,3,A,Mixed-Humid,Jefferson
+AL,01,075,3,A,Mixed-Humid,Lamar
+AL,01,077,3,A,Mixed-Humid,Lauderdale
+AL,01,079,3,A,Mixed-Humid,Lawrence
+AL,01,081,3,A,Mixed-Humid,Lee
+AL,01,083,3,A,Mixed-Humid,Limestone
+AL,01,085,3,A,Hot-Humid,Lowndes
+AL,01,087,3,A,Hot-Humid,Macon
+AL,01,089,3,A,Mixed-Humid,Madison
+AL,01,091,3,A,Hot-Humid,Marengo
+AL,01,093,3,A,Mixed-Humid,Marion
+AL,01,095,3,A,Mixed-Humid,Marshall
+AL,01,097,2,A,Hot-Humid,Mobile
+AL,01,099,3,A,Hot-Humid,Monroe
+AL,01,101,3,A,Hot-Humid,Montgomery
+AL,01,103,3,A,Mixed-Humid,Morgan
+AL,01,105,3,A,Hot-Humid,Perry
+AL,01,107,3,A,Mixed-Humid,Pickens
+AL,01,109,3,A,Hot-Humid,Pike
+AL,01,111,3,A,Mixed-Humid,Randolph
+AL,01,113,3,A,Hot-Humid,Russell
+AL,01,117,3,A,Mixed-Humid,Shelby
+AL,01,115,3,A,Mixed-Humid,St. Clair
+AL,01,119,3,A,Mixed-Humid,Sumter
+AL,01,121,3,A,Mixed-Humid,Talladega
+AL,01,123,3,A,Mixed-Humid,Tallapoosa
+AL,01,125,3,A,Mixed-Humid,Tuscaloosa
+AL,01,127,3,A,Mixed-Humid,Walker
+AL,01,129,3,A,Hot-Humid,Washington
+AL,01,131,3,A,Hot-Humid,Wilcox
+AL,01,133,3,A,Mixed-Humid,Winston
+AR,05,001,3,A,Mixed-Humid,Arkansas
+AR,05,003,3,A,Mixed-Humid,Ashley
+AR,05,005,4,A,Mixed-Humid,Baxter
+AR,05,007,4,A,Mixed-Humid,Benton
+AR,05,009,4,A,Mixed-Humid,Boone
+AR,05,011,3,A,Mixed-Humid,Bradley
+AR,05,013,3,A,Mixed-Humid,Calhoun
+AR,05,015,4,A,Mixed-Humid,Carroll
+AR,05,017,3,A,Mixed-Humid,Chicot
+AR,05,019,3,A,Mixed-Humid,Clark
+AR,05,021,3,A,Mixed-Humid,Clay
+AR,05,023,3,A,Mixed-Humid,Cleburne
+AR,05,025,3,A,Mixed-Humid,Cleveland
+AR,05,027,3,A,Hot-Humid,Columbia
+AR,05,029,3,A,Mixed-Humid,Conway
+AR,05,031,3,A,Mixed-Humid,Craighead
+AR,05,033,3,A,Mixed-Humid,Crawford
+AR,05,035,3,A,Mixed-Humid,Crittenden
+AR,05,037,3,A,Mixed-Humid,Cross
+AR,05,039,3,A,Mixed-Humid,Dallas
+AR,05,041,3,A,Mixed-Humid,Desha
+AR,05,043,3,A,Mixed-Humid,Drew
+AR,05,045,3,A,Mixed-Humid,Faulkner
+AR,05,047,3,A,Mixed-Humid,Franklin
+AR,05,049,4,A,Mixed-Humid,Fulton
+AR,05,051,3,A,Mixed-Humid,Garland
+AR,05,053,3,A,Mixed-Humid,Grant
+AR,05,055,3,A,Mixed-Humid,Greene
+AR,05,057,3,A,Mixed-Humid,Hempstead
+AR,05,059,3,A,Mixed-Humid,Hot Spring
+AR,05,061,3,A,Mixed-Humid,Howard
+AR,05,063,3,A,Mixed-Humid,Independence
+AR,05,065,4,A,Mixed-Humid,Izard
+AR,05,067,3,A,Mixed-Humid,Jackson
+AR,05,069,3,A,Mixed-Humid,Jefferson
+AR,05,071,3,A,Mixed-Humid,Johnson
+AR,05,073,3,A,Hot-Humid,Lafayette
+AR,05,075,3,A,Mixed-Humid,Lawrence
+AR,05,077,3,A,Mixed-Humid,Lee
+AR,05,079,3,A,Mixed-Humid,Lincoln
+AR,05,081,3,A,Hot-Humid,Little River
+AR,05,083,3,A,Mixed-Humid,Logan
+AR,05,085,3,A,Mixed-Humid,Lonoke
+AR,05,087,4,A,Mixed-Humid,Madison
+AR,05,089,4,A,Mixed-Humid,Marion
+AR,05,091,3,A,Hot-Humid,Miller
+AR,05,093,3,A,Mixed-Humid,Mississippi
+AR,05,095,3,A,Mixed-Humid,Monroe
+AR,05,097,3,A,Mixed-Humid,Montgomery
+AR,05,099,3,A,Mixed-Humid,Nevada
+AR,05,101,4,A,Mixed-Humid,Newton
+AR,05,103,3,A,Mixed-Humid,Ouachita
+AR,05,105,3,A,Mixed-Humid,Perry
+AR,05,107,3,A,Mixed-Humid,Phillips
+AR,05,109,3,A,Mixed-Humid,Pike
+AR,05,111,3,A,Mixed-Humid,Poinsett
+AR,05,113,3,A,Mixed-Humid,Polk
+AR,05,115,3,A,Mixed-Humid,Pope
+AR,05,117,3,A,Mixed-Humid,Prairie
+AR,05,119,3,A,Mixed-Humid,Pulaski
+AR,05,121,3,A,Mixed-Humid,Randolph
+AR,05,125,3,A,Mixed-Humid,Saline
+AR,05,127,3,A,Mixed-Humid,Scott
+AR,05,129,4,A,Mixed-Humid,Searcy
+AR,05,131,3,A,Mixed-Humid,Sebastian
+AR,05,133,3,A,Mixed-Humid,Sevier
+AR,05,135,3,A,Mixed-Humid,Sharp
+AR,05,123,3,A,Mixed-Humid,St. Francis
+AR,05,137,4,A,Mixed-Humid,Stone
+AR,05,139,3,A,Hot-Humid,Union
+AR,05,141,3,A,Mixed-Humid,Van Buren
+AR,05,143,4,A,Mixed-Humid,Washington
+AR,05,145,3,A,Mixed-Humid,White
+AR,05,147,3,A,Mixed-Humid,Woodruff
+AR,05,149,3,A,Mixed-Humid,Yell
+AS,60,010,1,A,Hot-Humid,Eastern District
+AS,60,020,1,A,Hot-Humid,Manu'a District
+AS,60,030,1,A,Hot-Humid,Rose Island
+AS,60,040,1,A,Hot-Humid,Swains Island
+AS,60,050,1,A,Hot-Humid,Western District
+AZ,04,001,5,B,Cold,Apache
+AZ,04,003,3,B,Hot-Dry,Cochise
+AZ,04,005,5,B,Cold,Coconino
+AZ,04,007,4,B,Mixed-Dry,Gila
+AZ,04,009,3,B,Hot-Dry,Graham
+AZ,04,011,3,B,Hot-Dry,Greenlee
+AZ,04,012,2,B,Hot-Dry,La Paz
+AZ,04,013,2,B,Hot-Dry,Maricopa
+AZ,04,015,3,B,Hot-Dry,Mohave
+AZ,04,017,5,B,Cold,Navajo
+AZ,04,019,2,B,Hot-Dry,Pima
+AZ,04,021,2,B,Hot-Dry,Pinal
+AZ,04,023,3,B,Hot-Dry,Santa Cruz
+AZ,04,025,4,B,Mixed-Dry,Yavapai
+AZ,04,027,2,B,Hot-Dry,Yuma
+CA,06,001,3,C,Marine,Alameda
+CA,06,003,6,B,Cold,Alpine
+CA,06,005,4,B,Mixed-Dry,Amador
+CA,06,007,3,B,Hot-Dry,Butte
+CA,06,009,4,B,Mixed-Dry,Calaveras
+CA,06,011,3,B,Hot-Dry,Colusa
+CA,06,013,3,B,Hot-Dry,Contra Costa
+CA,06,015,4,C,Marine,Del Norte
+CA,06,017,4,B,Mixed-Dry,El Dorado
+CA,06,019,3,B,Hot-Dry,Fresno
+CA,06,021,3,B,Hot-Dry,Glenn
+CA,06,023,4,C,Marine,Humboldt
+CA,06,025,2,B,Hot-Dry,Imperial
+CA,06,027,4,B,Mixed-Dry,Inyo
+CA,06,029,3,B,Hot-Dry,Kern
+CA,06,031,3,B,Hot-Dry,Kings
+CA,06,033,4,B,Mixed-Dry,Lake
+CA,06,035,5,B,Cold,Lassen
+CA,06,037,3,B,Hot-Dry,Los Angeles
+CA,06,039,3,B,Hot-Dry,Madera
+CA,06,041,3,C,Marine,Marin
+CA,06,043,4,B,Mixed-Dry,Mariposa
+CA,06,045,3,C,Marine,Mendocino
+CA,06,047,3,B,Hot-Dry,Merced
+CA,06,049,5,B,Cold,Modoc
+CA,06,051,6,B,Cold,Mono
+CA,06,053,3,C,Marine,Monterey
+CA,06,055,3,C,Marine,Napa
+CA,06,057,5,B,Cold,Nevada
+CA,06,059,3,B,Hot-Dry,Orange
+CA,06,061,3,B,Hot-Dry,Placer
+CA,06,063,5,B,Cold,Plumas
+CA,06,065,3,B,Hot-Dry,Riverside
+CA,06,067,3,B,Hot-Dry,Sacramento
+CA,06,069,3,C,Marine,San Benito
+CA,06,071,3,B,Hot-Dry,San Bernardino
+CA,06,073,3,B,Hot-Dry,San Diego
+CA,06,075,3,C,Marine,San Francisco
+CA,06,077,3,B,Hot-Dry,San Joaquin
+CA,06,079,3,C,Marine,San Luis Obispo
+CA,06,081,3,C,Marine,San Mateo
+CA,06,083,3,C,Marine,Santa Barbara
+CA,06,085,3,C,Marine,Santa Clara
+CA,06,087,3,C,Marine,Santa Cruz
+CA,06,089,3,B,Hot-Dry,Shasta
+CA,06,091,5,B,Cold,Sierra
+CA,06,093,5,B,Cold,Siskiyou
+CA,06,095,3,B,Hot-Dry,Solano
+CA,06,097,3,C,Marine,Sonoma
+CA,06,099,3,B,Hot-Dry,Stanislaus
+CA,06,101,3,B,Hot-Dry,Sutter
+CA,06,103,3,B,Hot-Dry,Tehama
+CA,06,105,4,B,Mixed-Dry,Trinity
+CA,06,107,3,B,Hot-Dry,Tulare
+CA,06,109,4,B,Mixed-Dry,Tuolumne
+CA,06,111,3,C,Marine,Ventura
+CA,06,113,3,B,Hot-Dry,Yolo
+CA,06,115,3,B,Hot-Dry,Yuba
+CO,08,001,5,B,Cold,Adams
+CO,08,003,6,B,Cold,Alamosa
+CO,08,005,5,B,Cold,Arapahoe
+CO,08,007,6,B,Cold,Archuleta
+CO,08,009,4,B,Mixed-Dry,Baca
+CO,08,011,5,B,Cold,Bent
+CO,08,013,5,B,Cold,Boulder
+CO,08,014,5,B,Cold,Broomfield
+CO,08,015,6,B,Cold,Chaffee
+CO,08,017,5,B,Cold,Cheyenne
+CO,08,019,7,N/A,Very Cold,Clear Creek
+CO,08,021,6,B,Cold,Conejos
+CO,08,023,6,B,Cold,Costilla
+CO,08,025,5,B,Cold,Crowley
+CO,08,027,6,B,Cold,Custer
+CO,08,029,5,B,Cold,Delta
+CO,08,031,5,B,Cold,Denver
+CO,08,033,6,B,Cold,Dolores
+CO,08,035,5,B,Cold,Douglas
+CO,08,037,6,B,Cold,Eagle
+CO,08,041,5,B,Cold,El Paso
+CO,08,039,5,B,Cold,Elbert
+CO,08,043,5,B,Cold,Fremont
+CO,08,045,5,B,Cold,Garfield
+CO,08,047,5,B,Cold,Gilpin
+CO,08,049,7,N/A,Very Cold,Grand
+CO,08,051,7,N/A,Very Cold,Gunnison
+CO,08,053,7,N/A,Very Cold,Hinsdale
+CO,08,055,5,B,Cold,Huerfano
+CO,08,057,7,N/A,Very Cold,Jackson
+CO,08,059,5,B,Cold,Jefferson
+CO,08,061,5,B,Cold,Kiowa
+CO,08,063,5,B,Cold,Kit Carson
+CO,08,067,5,B,Cold,La Plata
+CO,08,065,7,N/A,Very Cold,Lake
+CO,08,069,5,B,Cold,Larimer
+CO,08,071,4,B,Mixed-Dry,Las Animas
+CO,08,073,5,B,Cold,Lincoln
+CO,08,075,5,B,Cold,Logan
+CO,08,077,5,B,Cold,Mesa
+CO,08,079,7,N/A,Very Cold,Mineral
+CO,08,081,6,B,Cold,Moffat
+CO,08,083,5,B,Cold,Montezuma
+CO,08,085,5,B,Cold,Montrose
+CO,08,087,5,B,Cold,Morgan
+CO,08,089,4,B,Mixed-Dry,Otero
+CO,08,091,6,B,Cold,Ouray
+CO,08,093,7,N/A,Very Cold,Park
+CO,08,095,5,B,Cold,Phillips
+CO,08,097,7,N/A,Very Cold,Pitkin
+CO,08,099,5,B,Cold,Prowers
+CO,08,101,5,B,Cold,Pueblo
+CO,08,103,6,B,Cold,Rio Blanco
+CO,08,105,7,N/A,Very Cold,Rio Grande
+CO,08,107,7,N/A,Very Cold,Routt
+CO,08,109,6,B,Cold,Saguache
+CO,08,111,7,N/A,Very Cold,San Juan
+CO,08,113,6,B,Cold,San Miguel
+CO,08,115,5,B,Cold,Sedgwick
+CO,08,117,7,N/A,Very Cold,Summit
+CO,08,119,5,B,Cold,Teller
+CO,08,121,5,B,Cold,Washington
+CO,08,123,5,B,Cold,Weld
+CO,08,125,5,B,Cold,Yuma
+CT,09,001,5,A,Cold,Fairfield
+CT,09,003,5,A,Cold,Hartford
+CT,09,005,5,A,Cold,Litchfield
+CT,09,007,5,A,Cold,Middlesex
+CT,09,009,5,A,Cold,New Haven
+CT,09,011,5,A,Cold,New London
+CT,09,013,5,A,Cold,Tolland
+CT,09,015,5,A,Cold,Windham
+DC,11,001,4,A,Mixed-Humid,District of Columbia
+DE,10,001,4,A,Mixed-Humid,Kent
+DE,10,003,4,A,Mixed-Humid,New Castle
+DE,10,005,4,A,Mixed-Humid,Sussex
+FL,12,001,2,A,Hot-Humid,Alachua
+FL,12,003,2,A,Hot-Humid,Baker
+FL,12,005,2,A,Hot-Humid,Bay
+FL,12,007,2,A,Hot-Humid,Bradford
+FL,12,009,2,A,Hot-Humid,Brevard
+FL,12,011,1,A,Hot-Humid,Broward
+FL,12,013,2,A,Hot-Humid,Calhoun
+FL,12,015,2,A,Hot-Humid,Charlotte
+FL,12,017,2,A,Hot-Humid,Citrus
+FL,12,019,2,A,Hot-Humid,Clay
+FL,12,021,2,A,Hot-Humid,Collier
+FL,12,023,2,A,Hot-Humid,Columbia
+FL,12,027,2,A,Hot-Humid,DeSoto
+FL,12,029,2,A,Hot-Humid,Dixie
+FL,12,031,2,A,Hot-Humid,Duval
+FL,12,033,2,A,Hot-Humid,Escambia
+FL,12,035,2,A,Hot-Humid,Flagler
+FL,12,037,2,A,Hot-Humid,Franklin
+FL,12,039,2,A,Hot-Humid,Gadsden
+FL,12,041,2,A,Hot-Humid,Gilchrist
+FL,12,043,2,A,Hot-Humid,Glades
+FL,12,045,2,A,Hot-Humid,Gulf
+FL,12,047,2,A,Hot-Humid,Hamilton
+FL,12,049,2,A,Hot-Humid,Hardee
+FL,12,051,2,A,Hot-Humid,Hendry
+FL,12,053,2,A,Hot-Humid,Hernando
+FL,12,055,2,A,Hot-Humid,Highlands
+FL,12,057,2,A,Hot-Humid,Hillsborough
+FL,12,059,2,A,Hot-Humid,Holmes
+FL,12,061,2,A,Hot-Humid,Indian River
+FL,12,063,2,A,Hot-Humid,Jackson
+FL,12,065,2,A,Hot-Humid,Jefferson
+FL,12,067,2,A,Hot-Humid,Lafayette
+FL,12,069,2,A,Hot-Humid,Lake
+FL,12,071,2,A,Hot-Humid,Lee
+FL,12,073,2,A,Hot-Humid,Leon
+FL,12,075,2,A,Hot-Humid,Levy
+FL,12,077,2,A,Hot-Humid,Liberty
+FL,12,079,2,A,Hot-Humid,Madison
+FL,12,081,2,A,Hot-Humid,Manatee
+FL,12,083,2,A,Hot-Humid,Marion
+FL,12,085,2,A,Hot-Humid,Martin
+FL,12,086,1,A,Hot-Humid,Miami-Dade
+FL,12,087,1,A,Hot-Humid,Monroe
+FL,12,089,2,A,Hot-Humid,Nassau
+FL,12,091,2,A,Hot-Humid,Okaloosa
+FL,12,093,2,A,Hot-Humid,Okeechobee
+FL,12,095,2,A,Hot-Humid,Orange
+FL,12,097,2,A,Hot-Humid,Osceola
+FL,12,099,2,A,Hot-Humid,Palm Beach
+FL,12,101,2,A,Hot-Humid,Pasco
+FL,12,103,2,A,Hot-Humid,Pinellas
+FL,12,105,2,A,Hot-Humid,Polk
+FL,12,107,2,A,Hot-Humid,Putnam
+FL,12,113,2,A,Hot-Humid,Santa Rosa
+FL,12,115,2,A,Hot-Humid,Sarasota
+FL,12,117,2,A,Hot-Humid,Seminole
+FL,12,109,2,A,Hot-Humid,St. Johns
+FL,12,111,2,A,Hot-Humid,St. Lucie
+FL,12,119,2,A,Hot-Humid,Sumter
+FL,12,121,2,A,Hot-Humid,Suwannee
+FL,12,123,2,A,Hot-Humid,Taylor
+FL,12,125,2,A,Hot-Humid,Union
+FL,12,127,2,A,Hot-Humid,Volusia
+FL,12,129,2,A,Hot-Humid,Wakulla
+FL,12,131,2,A,Hot-Humid,Walton
+FL,12,133,2,A,Hot-Humid,Washington
+GA,13,001,2,A,Hot-Humid,Appling
+GA,13,003,2,A,Hot-Humid,Atkinson
+GA,13,005,2,A,Hot-Humid,Bacon
+GA,13,007,2,A,Hot-Humid,Baker
+GA,13,009,3,A,Mixed-Humid,Baldwin
+GA,13,011,4,A,Mixed-Humid,Banks
+GA,13,013,3,A,Mixed-Humid,Barrow
+GA,13,015,3,A,Mixed-Humid,Bartow
+GA,13,017,3,A,Hot-Humid,Ben Hill
+GA,13,019,2,A,Hot-Humid,Berrien
+GA,13,021,3,A,Mixed-Humid,Bibb
+GA,13,023,3,A,Hot-Humid,Bleckley
+GA,13,025,2,A,Hot-Humid,Brantley
+GA,13,027,2,A,Hot-Humid,Brooks
+GA,13,029,2,A,Hot-Humid,Bryan
+GA,13,031,3,A,Hot-Humid,Bulloch
+GA,13,033,3,A,Mixed-Humid,Burke
+GA,13,035,3,A,Mixed-Humid,Butts
+GA,13,037,3,A,Hot-Humid,Calhoun
+GA,13,039,2,A,Hot-Humid,Camden
+GA,13,043,3,A,Hot-Humid,Candler
+GA,13,045,3,A,Mixed-Humid,Carroll
+GA,13,047,4,A,Mixed-Humid,Catoosa
+GA,13,049,2,A,Hot-Humid,Charlton
+GA,13,051,2,A,Hot-Humid,Chatham
+GA,13,053,3,A,Hot-Humid,Chattahoochee
+GA,13,055,4,A,Mixed-Humid,Chattooga
+GA,13,057,3,A,Mixed-Humid,Cherokee
+GA,13,059,3,A,Mixed-Humid,Clarke
+GA,13,061,3,A,Hot-Humid,Clay
+GA,13,063,3,A,Mixed-Humid,Clayton
+GA,13,065,2,A,Hot-Humid,Clinch
+GA,13,067,3,A,Mixed-Humid,Cobb
+GA,13,069,3,A,Hot-Humid,Coffee
+GA,13,071,2,A,Hot-Humid,Colquitt
+GA,13,073,3,A,Mixed-Humid,Columbia
+GA,13,075,2,A,Hot-Humid,Cook
+GA,13,077,3,A,Mixed-Humid,Coweta
+GA,13,079,3,A,Mixed-Humid,Crawford
+GA,13,081,3,A,Hot-Humid,Crisp
+GA,13,083,4,A,Mixed-Humid,Dade
+GA,13,085,4,A,Mixed-Humid,Dawson
+GA,13,087,2,A,Hot-Humid,Decatur
+GA,13,089,3,A,Mixed-Humid,DeKalb
+GA,13,091,3,A,Hot-Humid,Dodge
+GA,13,093,3,A,Hot-Humid,Dooly
+GA,13,095,3,A,Hot-Humid,Dougherty
+GA,13,097,3,A,Mixed-Humid,Douglas
+GA,13,099,3,A,Hot-Humid,Early
+GA,13,101,2,A,Hot-Humid,Echols
+GA,13,103,2,A,Hot-Humid,Effingham
+GA,13,105,3,A,Mixed-Humid,Elbert
+GA,13,107,3,A,Hot-Humid,Emanuel
+GA,13,109,2,A,Hot-Humid,Evans
+GA,13,111,4,A,Mixed-Humid,Fannin
+GA,13,113,3,A,Mixed-Humid,Fayette
+GA,13,115,4,A,Mixed-Humid,Floyd
+GA,13,117,3,A,Mixed-Humid,Forsyth
+GA,13,119,4,A,Mixed-Humid,Franklin
+GA,13,121,3,A,Mixed-Humid,Fulton
+GA,13,123,4,A,Mixed-Humid,Gilmer
+GA,13,125,3,A,Mixed-Humid,Glascock
+GA,13,127,2,A,Hot-Humid,Glynn
+GA,13,129,4,A,Mixed-Humid,Gordon
+GA,13,131,2,A,Hot-Humid,Grady
+GA,13,133,3,A,Mixed-Humid,Greene
+GA,13,135,3,A,Mixed-Humid,Gwinnett
+GA,13,137,4,A,Mixed-Humid,Habersham
+GA,13,139,4,A,Mixed-Humid,Hall
+GA,13,141,3,A,Mixed-Humid,Hancock
+GA,13,143,3,A,Mixed-Humid,Haralson
+GA,13,145,3,A,Mixed-Humid,Harris
+GA,13,147,3,A,Mixed-Humid,Hart
+GA,13,149,3,A,Mixed-Humid,Heard
+GA,13,151,3,A,Mixed-Humid,Henry
+GA,13,153,3,A,Hot-Humid,Houston
+GA,13,155,3,A,Hot-Humid,Irwin
+GA,13,157,3,A,Mixed-Humid,Jackson
+GA,13,159,3,A,Mixed-Humid,Jasper
+GA,13,161,2,A,Hot-Humid,Jeff Davis
+GA,13,163,3,A,Mixed-Humid,Jefferson
+GA,13,165,3,A,Hot-Humid,Jenkins
+GA,13,167,3,A,Hot-Humid,Johnson
+GA,13,169,3,A,Mixed-Humid,Jones
+GA,13,171,3,A,Mixed-Humid,Lamar
+GA,13,173,2,A,Hot-Humid,Lanier
+GA,13,175,3,A,Hot-Humid,Laurens
+GA,13,177,3,A,Hot-Humid,Lee
+GA,13,179,2,A,Hot-Humid,Liberty
+GA,13,181,3,A,Mixed-Humid,Lincoln
+GA,13,183,2,A,Hot-Humid,Long
+GA,13,185,2,A,Hot-Humid,Lowndes
+GA,13,187,4,A,Mixed-Humid,Lumpkin
+GA,13,193,3,A,Hot-Humid,Macon
+GA,13,195,3,A,Mixed-Humid,Madison
+GA,13,197,3,A,Hot-Humid,Marion
+GA,13,189,3,A,Mixed-Humid,McDuffie
+GA,13,191,2,A,Hot-Humid,McIntosh
+GA,13,199,3,A,Mixed-Humid,Meriwether
+GA,13,201,2,A,Hot-Humid,Miller
+GA,13,205,2,A,Hot-Humid,Mitchell
+GA,13,207,3,A,Mixed-Humid,Monroe
+GA,13,209,3,A,Hot-Humid,Montgomery
+GA,13,211,3,A,Mixed-Humid,Morgan
+GA,13,213,4,A,Mixed-Humid,Murray
+GA,13,215,3,A,Mixed-Humid,Muscogee
+GA,13,217,3,A,Mixed-Humid,Newton
+GA,13,219,3,A,Mixed-Humid,Oconee
+GA,13,221,3,A,Mixed-Humid,Oglethorpe
+GA,13,223,3,A,Mixed-Humid,Paulding
+GA,13,225,3,A,Hot-Humid,Peach
+GA,13,227,4,A,Mixed-Humid,Pickens
+GA,13,229,2,A,Hot-Humid,Pierce
+GA,13,231,3,A,Mixed-Humid,Pike
+GA,13,233,3,A,Mixed-Humid,Polk
+GA,13,235,3,A,Hot-Humid,Pulaski
+GA,13,237,3,A,Mixed-Humid,Putnam
+GA,13,239,3,A,Hot-Humid,Quitman
+GA,13,241,4,A,Mixed-Humid,Rabun
+GA,13,243,3,A,Hot-Humid,Randolph
+GA,13,245,3,A,Mixed-Humid,Richmond
+GA,13,247,3,A,Mixed-Humid,Rockdale
+GA,13,249,3,A,Hot-Humid,Schley
+GA,13,251,3,A,Hot-Humid,Screven
+GA,13,253,2,A,Hot-Humid,Seminole
+GA,13,255,3,A,Mixed-Humid,Spalding
+GA,13,257,4,A,Mixed-Humid,Stephens
+GA,13,259,3,A,Hot-Humid,Stewart
+GA,13,261,3,A,Hot-Humid,Sumter
+GA,13,263,3,A,Mixed-Humid,Talbot
+GA,13,265,3,A,Mixed-Humid,Taliaferro
+GA,13,267,2,A,Hot-Humid,Tattnall
+GA,13,269,3,A,Hot-Humid,Taylor
+GA,13,271,3,A,Hot-Humid,Telfair
+GA,13,273,3,A,Hot-Humid,Terrell
+GA,13,275,2,A,Hot-Humid,Thomas
+GA,13,277,3,A,Hot-Humid,Tift
+GA,13,279,2,A,Hot-Humid,Toombs
+GA,13,281,4,A,Mixed-Humid,Towns
+GA,13,283,3,A,Hot-Humid,Treutlen
+GA,13,285,3,A,Mixed-Humid,Troup
+GA,13,287,3,A,Hot-Humid,Turner
+GA,13,289,3,A,Hot-Humid,Twiggs
+GA,13,291,4,A,Mixed-Humid,Union
+GA,13,293,3,A,Mixed-Humid,Upson
+GA,13,295,4,A,Mixed-Humid,Walker
+GA,13,297,3,A,Mixed-Humid,Walton
+GA,13,299,2,A,Hot-Humid,Ware
+GA,13,301,3,A,Mixed-Humid,Warren
+GA,13,303,3,A,Mixed-Humid,Washington
+GA,13,305,2,A,Hot-Humid,Wayne
+GA,13,307,3,A,Hot-Humid,Webster
+GA,13,309,3,A,Hot-Humid,Wheeler
+GA,13,311,4,A,Mixed-Humid,White
+GA,13,313,4,A,Mixed-Humid,Whitfield
+GA,13,315,3,A,Hot-Humid,Wilcox
+GA,13,317,3,A,Mixed-Humid,Wilkes
+GA,13,319,3,A,Mixed-Humid,Wilkinson
+GA,13,321,3,A,Hot-Humid,Worth
+GU,66,010,1,A,Hot-Humid,Guam
+HI,15,001,1,A,Hot-Humid,Hawaii
+HI,15,003,1,A,Hot-Humid,Honolulu
+HI,15,005,1,A,Hot-Humid,Kalawao
+HI,15,007,1,A,Hot-Humid,Kauai
+HI,15,009,1,A,Hot-Humid,Maui
+IA,19,001,5,A,Cold,Adair
+IA,19,003,5,A,Cold,Adams
+IA,19,005,6,A,Cold,Allamakee
+IA,19,007,5,A,Cold,Appanoose
+IA,19,009,5,A,Cold,Audubon
+IA,19,011,5,A,Cold,Benton
+IA,19,013,6,A,Cold,Black Hawk
+IA,19,015,5,A,Cold,Boone
+IA,19,017,6,A,Cold,Bremer
+IA,19,019,6,A,Cold,Buchanan
+IA,19,021,6,A,Cold,Buena Vista
+IA,19,023,6,A,Cold,Butler
+IA,19,025,6,A,Cold,Calhoun
+IA,19,027,5,A,Cold,Carroll
+IA,19,029,5,A,Cold,Cass
+IA,19,031,5,A,Cold,Cedar
+IA,19,033,6,A,Cold,Cerro Gordo
+IA,19,035,6,A,Cold,Cherokee
+IA,19,037,6,A,Cold,Chickasaw
+IA,19,039,5,A,Cold,Clarke
+IA,19,041,6,A,Cold,Clay
+IA,19,043,6,A,Cold,Clayton
+IA,19,045,5,A,Cold,Clinton
+IA,19,047,6,A,Cold,Crawford
+IA,19,049,5,A,Cold,Dallas
+IA,19,051,5,A,Cold,Davis
+IA,19,053,5,A,Cold,Decatur
+IA,19,055,6,A,Cold,Delaware
+IA,19,057,5,A,Cold,Des Moines
+IA,19,059,6,A,Cold,Dickinson
+IA,19,061,5,A,Cold,Dubuque
+IA,19,063,6,A,Cold,Emmet
+IA,19,065,6,A,Cold,Fayette
+IA,19,067,6,A,Cold,Floyd
+IA,19,069,6,A,Cold,Franklin
+IA,19,071,5,A,Cold,Fremont
+IA,19,073,5,A,Cold,Greene
+IA,19,075,6,A,Cold,Grundy
+IA,19,077,5,A,Cold,Guthrie
+IA,19,079,6,A,Cold,Hamilton
+IA,19,081,6,A,Cold,Hancock
+IA,19,083,6,A,Cold,Hardin
+IA,19,085,5,A,Cold,Harrison
+IA,19,087,5,A,Cold,Henry
+IA,19,089,6,A,Cold,Howard
+IA,19,091,6,A,Cold,Humboldt
+IA,19,093,6,A,Cold,Ida
+IA,19,095,5,A,Cold,Iowa
+IA,19,097,5,A,Cold,Jackson
+IA,19,099,5,A,Cold,Jasper
+IA,19,101,5,A,Cold,Jefferson
+IA,19,103,5,A,Cold,Johnson
+IA,19,105,5,A,Cold,Jones
+IA,19,107,5,A,Cold,Keokuk
+IA,19,109,6,A,Cold,Kossuth
+IA,19,111,5,A,Cold,Lee
+IA,19,113,5,A,Cold,Linn
+IA,19,115,5,A,Cold,Louisa
+IA,19,117,5,A,Cold,Lucas
+IA,19,119,6,A,Cold,Lyon
+IA,19,121,5,A,Cold,Madison
+IA,19,123,5,A,Cold,Mahaska
+IA,19,125,5,A,Cold,Marion
+IA,19,127,5,A,Cold,Marshall
+IA,19,129,5,A,Cold,Mills
+IA,19,131,6,A,Cold,Mitchell
+IA,19,133,5,A,Cold,Monona
+IA,19,135,5,A,Cold,Monroe
+IA,19,137,5,A,Cold,Montgomery
+IA,19,139,5,A,Cold,Muscatine
+IA,19,141,6,A,Cold,O'Brien
+IA,19,143,6,A,Cold,Osceola
+IA,19,145,5,A,Cold,Page
+IA,19,147,6,A,Cold,Palo Alto
+IA,19,149,6,A,Cold,Plymouth
+IA,19,151,6,A,Cold,Pocahontas
+IA,19,153,5,A,Cold,Polk County
+IA,19,155,5,A,Cold,Pottawattamie
+IA,19,157,5,A,Cold,Poweshiek
+IA,19,159,5,A,Cold,Ringgold
+IA,19,161,6,A,Cold,Sac
+IA,19,163,5,A,Cold,Scott
+IA,19,165,5,A,Cold,Shelby
+IA,19,167,6,A,Cold,Sioux
+IA,19,169,5,A,Cold,Story
+IA,19,171,5,A,Cold,Tama
+IA,19,173,5,A,Cold,Taylor
+IA,19,175,5,A,Cold,Union
+IA,19,177,5,A,Cold,Van Buren
+IA,19,179,5,A,Cold,Wapello
+IA,19,181,5,A,Cold,Warren
+IA,19,183,5,A,Cold,Washington
+IA,19,185,5,A,Cold,Wayne
+IA,19,187,6,A,Cold,Webster
+IA,19,189,6,A,Cold,Winnebago
+IA,19,191,6,A,Cold,Winneshiek
+IA,19,193,5,A,Cold,Woodbury
+IA,19,195,6,A,Cold,Worth
+IA,19,197,6,A,Cold,Wright
+ID,16,001,5,B,Cold,Ada
+ID,16,003,6,B,Cold,Adams
+ID,16,005,6,B,Cold,Bannock
+ID,16,007,6,B,Cold,Bear Lake
+ID,16,009,5,B,Cold,Benewah
+ID,16,011,6,B,Cold,Bingham
+ID,16,013,6,B,Cold,Blaine
+ID,16,015,6,B,Cold,Boise
+ID,16,017,6,B,Cold,Bonner
+ID,16,019,6,B,Cold,Bonneville
+ID,16,021,6,B,Cold,Boundary
+ID,16,023,6,B,Cold,Butte
+ID,16,025,6,B,Cold,Camas
+ID,16,027,5,B,Cold,Canyon
+ID,16,029,6,B,Cold,Caribou
+ID,16,031,5,B,Cold,Cassia
+ID,16,033,6,B,Cold,Clark
+ID,16,035,5,B,Cold,Clearwater
+ID,16,037,6,B,Cold,Custer
+ID,16,039,5,B,Cold,Elmore
+ID,16,041,6,B,Cold,Franklin
+ID,16,043,6,B,Cold,Fremont
+ID,16,045,5,B,Cold,Gem
+ID,16,047,5,B,Cold,Gooding
+ID,16,049,5,B,Cold,Idaho
+ID,16,051,6,B,Cold,Jefferson
+ID,16,053,5,B,Cold,Jerome
+ID,16,055,5,B,Cold,Kootenai
+ID,16,057,5,B,Cold,Latah
+ID,16,059,6,B,Cold,Lemhi
+ID,16,061,5,B,Cold,Lewis
+ID,16,063,5,B,Cold,Lincoln
+ID,16,065,6,B,Cold,Madison
+ID,16,067,5,B,Cold,Minidoka
+ID,16,069,5,B,Cold,Nez Perce
+ID,16,071,6,B,Cold,Oneida
+ID,16,073,5,B,Cold,Owyhee
+ID,16,075,5,B,Cold,Payette
+ID,16,077,5,B,Cold,Power
+ID,16,079,5,B,Cold,Shoshone
+ID,16,081,6,B,Cold,Teton
+ID,16,083,5,B,Cold,Twin Falls
+ID,16,085,6,B,Cold,Valley
+ID,16,087,5,B,Cold,Washington
+IL,17,001,5,A,Cold,Adams
+IL,17,003,4,A,Mixed-Humid,Alexander
+IL,17,005,4,A,Mixed-Humid,Bond
+IL,17,007,5,A,Cold,Boone
+IL,17,009,5,A,Cold,Brown
+IL,17,011,5,A,Cold,Bureau
+IL,17,013,5,A,Cold,Calhoun
+IL,17,015,5,A,Cold,Carroll
+IL,17,017,5,A,Cold,Cass
+IL,17,019,5,A,Cold,Champaign
+IL,17,021,4,A,Mixed-Humid,Christian
+IL,17,023,5,A,Cold,Clark
+IL,17,025,4,A,Mixed-Humid,Clay
+IL,17,027,4,A,Mixed-Humid,Clinton
+IL,17,029,5,A,Cold,Coles
+IL,17,031,5,A,Cold,Cook
+IL,17,033,4,A,Mixed-Humid,Crawford
+IL,17,035,5,A,Cold,Cumberland
+IL,17,037,5,A,Cold,DeKalb
+IL,17,039,5,A,Cold,DeWitt
+IL,17,041,5,A,Cold,Douglas
+IL,17,043,5,A,Cold,DuPage
+IL,17,045,5,A,Cold,Edgar
+IL,17,047,4,A,Mixed-Humid,Edwards
+IL,17,049,4,A,Mixed-Humid,Effingham
+IL,17,051,4,A,Mixed-Humid,Fayette
+IL,17,053,5,A,Cold,Ford
+IL,17,055,4,A,Mixed-Humid,Franklin
+IL,17,057,5,A,Cold,Fulton
+IL,17,059,4,A,Mixed-Humid,Gallatin
+IL,17,061,5,A,Cold,Greene
+IL,17,063,5,A,Cold,Grundy
+IL,17,065,4,A,Mixed-Humid,Hamilton
+IL,17,067,5,A,Cold,Hancock
+IL,17,069,4,A,Mixed-Humid,Hardin
+IL,17,071,5,A,Cold,Henderson
+IL,17,073,5,A,Cold,Henry
+IL,17,075,5,A,Cold,Iroquois
+IL,17,077,4,A,Mixed-Humid,Jackson
+IL,17,079,4,A,Mixed-Humid,Jasper
+IL,17,081,4,A,Mixed-Humid,Jefferson
+IL,17,083,5,A,Cold,Jersey
+IL,17,085,5,A,Cold,Jo Daviess
+IL,17,087,4,A,Mixed-Humid,Johnson
+IL,17,089,5,A,Cold,Kane
+IL,17,091,5,A,Cold,Kankakee
+IL,17,093,5,A,Cold,Kendall
+IL,17,095,5,A,Cold,Knox
+IL,17,097,5,A,Cold,Lake
+IL,17,099,5,A,Cold,LaSalle
+IL,17,101,4,A,Mixed-Humid,Lawrence
+IL,17,103,5,A,Cold,Lee
+IL,17,105,5,A,Cold,Livingston
+IL,17,107,5,A,Cold,Logan
+IL,17,115,5,A,Cold,Macon
+IL,17,117,4,A,Mixed-Humid,Macoupin
+IL,17,119,4,A,Mixed-Humid,Madison
+IL,17,121,4,A,Mixed-Humid,Marion
+IL,17,123,5,A,Cold,Marshall
+IL,17,125,5,A,Cold,Mason
+IL,17,127,4,A,Mixed-Humid,Massac
+IL,17,109,5,A,Cold,McDonough
+IL,17,111,5,A,Cold,McHenry
+IL,17,113,5,A,Cold,McLean
+IL,17,129,5,A,Cold,Menard
+IL,17,131,5,A,Cold,Mercer
+IL,17,133,4,A,Mixed-Humid,Monroe
+IL,17,135,4,A,Mixed-Humid,Montgomery
+IL,17,137,5,A,Cold,Morgan
+IL,17,139,5,A,Cold,Moultrie
+IL,17,141,5,A,Cold,Ogle
+IL,17,143,5,A,Cold,Peoria
+IL,17,145,4,A,Mixed-Humid,Perry
+IL,17,147,5,A,Cold,Piatt
+IL,17,149,5,A,Cold,Pike
+IL,17,151,4,A,Mixed-Humid,Pope
+IL,17,153,4,A,Mixed-Humid,Pulaski
+IL,17,155,5,A,Cold,Putnam
+IL,17,157,4,A,Mixed-Humid,Randolph
+IL,17,159,4,A,Mixed-Humid,Richland
+IL,17,161,5,A,Cold,Rock Island
+IL,17,165,4,A,Mixed-Humid,Saline
+IL,17,167,5,A,Cold,Sangamon
+IL,17,169,5,A,Cold,Schuyler
+IL,17,171,5,A,Cold,Scott
+IL,17,173,4,A,Mixed-Humid,Shelby
+IL,17,163,4,A,Mixed-Humid,St. Clair
+IL,17,175,5,A,Cold,Stark
+IL,17,177,5,A,Cold,Stephenson
+IL,17,179,5,A,Cold,Tazewell
+IL,17,181,4,A,Mixed-Humid,Union
+IL,17,183,5,A,Cold,Vermilion
+IL,17,185,4,A,Mixed-Humid,Wabash
+IL,17,187,5,A,Cold,Warren
+IL,17,189,4,A,Mixed-Humid,Washington
+IL,17,191,4,A,Mixed-Humid,Wayne
+IL,17,193,4,A,Mixed-Humid,White
+IL,17,195,5,A,Cold,Whiteside
+IL,17,197,5,A,Cold,Will
+IL,17,199,4,A,Mixed-Humid,Williamson
+IL,17,201,5,A,Cold,Winnebago
+IL,17,203,5,A,Cold,Woodford
+IN,18,001,5,A,Cold,Adams
+IN,18,003,5,A,Cold,Allen
+IN,18,005,5,A,Cold,Bartholomew
+IN,18,007,5,A,Cold,Benton
+IN,18,009,5,A,Cold,Blackford
+IN,18,011,5,A,Cold,Boone
+IN,18,013,4,A,Mixed-Humid,Brown
+IN,18,015,5,A,Cold,Carroll
+IN,18,017,5,A,Cold,Cass
+IN,18,019,4,A,Mixed-Humid,Clark
+IN,18,021,5,A,Cold,Clay
+IN,18,023,5,A,Cold,Clinton
+IN,18,025,4,A,Mixed-Humid,Crawford
+IN,18,027,4,A,Mixed-Humid,Daviess
+IN,18,029,4,A,Mixed-Humid,Dearborn
+IN,18,031,5,A,Cold,Decatur
+IN,18,033,5,A,Cold,DeKalb
+IN,18,035,5,A,Cold,Delaware
+IN,18,037,4,A,Mixed-Humid,Dubois
+IN,18,039,5,A,Cold,Elkhart
+IN,18,041,5,A,Cold,Fayette
+IN,18,043,4,A,Mixed-Humid,Floyd
+IN,18,045,5,A,Cold,Fountain
+IN,18,047,5,A,Cold,Franklin
+IN,18,049,5,A,Cold,Fulton
+IN,18,051,4,A,Mixed-Humid,Gibson
+IN,18,053,5,A,Cold,Grant
+IN,18,055,4,A,Mixed-Humid,Greene
+IN,18,057,5,A,Cold,Hamilton
+IN,18,059,5,A,Cold,Hancock
+IN,18,061,4,A,Mixed-Humid,Harrison
+IN,18,063,5,A,Cold,Hendricks
+IN,18,065,5,A,Cold,Henry
+IN,18,067,5,A,Cold,Howard
+IN,18,069,5,A,Cold,Huntington
+IN,18,071,4,A,Mixed-Humid,Jackson
+IN,18,073,5,A,Cold,Jasper
+IN,18,075,5,A,Cold,Jay
+IN,18,077,4,A,Mixed-Humid,Jefferson
+IN,18,079,4,A,Mixed-Humid,Jennings
+IN,18,081,5,A,Cold,Johnson
+IN,18,083,4,A,Mixed-Humid,Knox
+IN,18,085,5,A,Cold,Kosciusko
+IN,18,087,5,A,Cold,LaGrange
+IN,18,089,5,A,Cold,Lake
+IN,18,091,5,A,Cold,LaPorte
+IN,18,093,4,A,Mixed-Humid,Lawrence
+IN,18,095,5,A,Cold,Madison
+IN,18,097,5,A,Cold,Marion
+IN,18,099,5,A,Cold,Marshall
+IN,18,101,4,A,Mixed-Humid,Martin
+IN,18,103,5,A,Cold,Miami
+IN,18,105,4,A,Mixed-Humid,Monroe
+IN,18,107,5,A,Cold,Montgomery
+IN,18,109,5,A,Cold,Morgan
+IN,18,111,5,A,Cold,Newton
+IN,18,113,5,A,Cold,Noble
+IN,18,115,4,A,Mixed-Humid,Ohio
+IN,18,117,4,A,Mixed-Humid,Orange
+IN,18,119,5,A,Cold,Owen
+IN,18,121,5,A,Cold,Parke
+IN,18,123,4,A,Mixed-Humid,Perry
+IN,18,125,4,A,Mixed-Humid,Pike
+IN,18,127,5,A,Cold,Porter
+IN,18,129,4,A,Mixed-Humid,Posey
+IN,18,131,5,A,Cold,Pulaski
+IN,18,133,5,A,Cold,Putnam
+IN,18,135,5,A,Cold,Randolph
+IN,18,137,4,A,Mixed-Humid,Ripley
+IN,18,139,5,A,Cold,Rush
+IN,18,143,4,A,Mixed-Humid,Scott
+IN,18,145,5,A,Cold,Shelby
+IN,18,147,4,A,Mixed-Humid,Spencer
+IN,18,141,5,A,Cold,St. Joseph
+IN,18,149,5,A,Cold,Starke
+IN,18,151,5,A,Cold,Steuben
+IN,18,153,4,A,Mixed-Humid,Sullivan
+IN,18,155,4,A,Mixed-Humid,Switzerland
+IN,18,157,5,A,Cold,Tippecanoe
+IN,18,159,5,A,Cold,Tipton
+IN,18,161,5,A,Cold,Union
+IN,18,163,4,A,Mixed-Humid,Vanderburgh
+IN,18,165,5,A,Cold,Vermillion
+IN,18,167,5,A,Cold,Vigo
+IN,18,169,5,A,Cold,Wabash
+IN,18,171,5,A,Cold,Warren
+IN,18,173,4,A,Mixed-Humid,Warrick
+IN,18,175,4,A,Mixed-Humid,Washington
+IN,18,177,5,A,Cold,Wayne
+IN,18,179,5,A,Cold,Wells
+IN,18,181,5,A,Cold,White
+IN,18,183,5,A,Cold,Whitley
+KS,20,001,4,A,Mixed-Humid,Allen
+KS,20,003,4,A,Mixed-Humid,Anderson
+KS,20,005,4,A,Mixed-Humid,Atchison
+KS,20,007,4,A,Mixed-Humid,Barber
+KS,20,009,4,A,Mixed-Humid,Barton
+KS,20,011,4,A,Mixed-Humid,Bourbon
+KS,20,013,4,A,Mixed-Humid,Brown
+KS,20,015,4,A,Mixed-Humid,Butler
+KS,20,017,4,A,Mixed-Humid,Chase
+KS,20,019,4,A,Mixed-Humid,Chautauqua
+KS,20,021,4,A,Mixed-Humid,Cherokee
+KS,20,023,5,A,Cold,Cheyenne
+KS,20,025,4,A,Mixed-Humid,Clark
+KS,20,027,4,A,Mixed-Humid,Clay
+KS,20,029,5,A,Cold,Cloud
+KS,20,031,4,A,Mixed-Humid,Coffey
+KS,20,033,4,A,Mixed-Humid,Comanche
+KS,20,035,4,A,Mixed-Humid,Cowley
+KS,20,037,4,A,Mixed-Humid,Crawford
+KS,20,039,5,A,Cold,Decatur
+KS,20,041,4,A,Mixed-Humid,Dickinson
+KS,20,043,4,A,Mixed-Humid,Doniphan
+KS,20,045,4,A,Mixed-Humid,Douglas
+KS,20,047,4,A,Mixed-Humid,Edwards
+KS,20,049,4,A,Mixed-Humid,Elk
+KS,20,051,5,A,Cold,Ellis
+KS,20,053,4,A,Mixed-Humid,Ellsworth
+KS,20,055,4,A,Mixed-Humid,Finney
+KS,20,057,4,A,Mixed-Humid,Ford
+KS,20,059,4,A,Mixed-Humid,Franklin
+KS,20,061,4,A,Mixed-Humid,Geary
+KS,20,063,5,A,Cold,Gove
+KS,20,065,5,A,Cold,Graham
+KS,20,067,4,A,Mixed-Humid,Grant
+KS,20,069,4,A,Mixed-Humid,Gray
+KS,20,071,5,A,Cold,Greeley
+KS,20,073,4,A,Mixed-Humid,Greenwood
+KS,20,075,5,A,Cold,Hamilton
+KS,20,077,4,A,Mixed-Humid,Harper
+KS,20,079,4,A,Mixed-Humid,Harvey
+KS,20,081,4,A,Mixed-Humid,Haskell
+KS,20,083,4,A,Mixed-Humid,Hodgeman
+KS,20,085,4,A,Mixed-Humid,Jackson
+KS,20,087,4,A,Mixed-Humid,Jefferson
+KS,20,089,5,A,Cold,Jewell
+KS,20,091,4,A,Mixed-Humid,Johnson
+KS,20,093,4,A,Mixed-Humid,Kearny
+KS,20,095,4,A,Mixed-Humid,Kingman
+KS,20,097,4,A,Mixed-Humid,Kiowa
+KS,20,099,4,A,Mixed-Humid,Labette
+KS,20,101,5,A,Cold,Lane
+KS,20,103,4,A,Mixed-Humid,Leavenworth
+KS,20,105,4,A,Mixed-Humid,Lincoln
+KS,20,107,4,A,Mixed-Humid,Linn
+KS,20,109,5,A,Cold,Logan
+KS,20,111,4,A,Mixed-Humid,Lyon
+KS,20,113,4,A,Mixed-Humid,McPherson
+KS,20,115,4,A,Mixed-Humid,Marion
+KS,20,117,4,A,Mixed-Humid,Marshall
+KS,20,119,4,A,Mixed-Humid,Meade
+KS,20,121,4,A,Mixed-Humid,Miami
+KS,20,123,5,A,Cold,Mitchell
+KS,20,125,4,A,Mixed-Humid,Montgomery
+KS,20,127,4,A,Mixed-Humid,Morris
+KS,20,129,4,A,Mixed-Humid,Morton
+KS,20,131,4,A,Mixed-Humid,Nemaha
+KS,20,133,4,A,Mixed-Humid,Neosho
+KS,20,135,5,A,Cold,Ness
+KS,20,137,5,A,Cold,Norton
+KS,20,139,4,A,Mixed-Humid,Osage
+KS,20,141,5,A,Cold,Osborne
+KS,20,143,4,A,Mixed-Humid,Ottawa
+KS,20,145,4,A,Mixed-Humid,Pawnee
+KS,20,147,5,A,Cold,Phillips
+KS,20,149,4,A,Mixed-Humid,Pottawatomie
+KS,20,151,4,A,Mixed-Humid,Pratt
+KS,20,153,5,A,Cold,Rawlins
+KS,20,155,4,A,Mixed-Humid,Reno
+KS,20,157,5,A,Cold,Republic
+KS,20,159,4,A,Mixed-Humid,Rice
+KS,20,161,4,A,Mixed-Humid,Riley
+KS,20,163,5,A,Cold,Rooks
+KS,20,165,4,A,Mixed-Humid,Rush
+KS,20,167,4,A,Mixed-Humid,Russell
+KS,20,169,4,A,Mixed-Humid,Saline
+KS,20,171,5,A,Cold,Scott
+KS,20,173,4,A,Mixed-Humid,Sedgwick
+KS,20,175,4,A,Mixed-Humid,Seward
+KS,20,177,4,A,Mixed-Humid,Shawnee
+KS,20,179,5,A,Cold,Sheridan
+KS,20,181,5,A,Cold,Sherman
+KS,20,183,5,A,Cold,Smith
+KS,20,185,4,A,Mixed-Humid,Stafford
+KS,20,187,4,A,Mixed-Humid,Stanton
+KS,20,189,4,A,Mixed-Humid,Stevens
+KS,20,191,4,A,Mixed-Humid,Sumner
+KS,20,193,5,A,Cold,Thomas
+KS,20,195,5,A,Cold,Trego
+KS,20,197,4,A,Mixed-Humid,Wabaunsee
+KS,20,199,5,A,Cold,Wallace
+KS,20,201,4,A,Mixed-Humid,Washington
+KS,20,203,5,A,Cold,Wichita
+KS,20,205,4,A,Mixed-Humid,Wilson
+KS,20,207,4,A,Mixed-Humid,Woodson
+KS,20,209,4,A,Mixed-Humid,Wyandotte
+KY,21,001,4,A,Mixed-Humid,Adair
+KY,21,003,4,A,Mixed-Humid,Allen
+KY,21,005,4,A,Mixed-Humid,Anderson
+KY,21,007,4,A,Mixed-Humid,Ballard
+KY,21,009,4,A,Mixed-Humid,Barren
+KY,21,011,4,A,Mixed-Humid,Bath
+KY,21,013,4,A,Mixed-Humid,Bell
+KY,21,015,4,A,Mixed-Humid,Boone
+KY,21,017,4,A,Mixed-Humid,Bourbon
+KY,21,019,4,A,Mixed-Humid,Boyd
+KY,21,021,4,A,Mixed-Humid,Boyle
+KY,21,023,4,A,Mixed-Humid,Bracken
+KY,21,025,4,A,Mixed-Humid,Breathitt
+KY,21,027,4,A,Mixed-Humid,Breckinridge
+KY,21,029,4,A,Mixed-Humid,Bullitt
+KY,21,031,4,A,Mixed-Humid,Butler
+KY,21,033,4,A,Mixed-Humid,Caldwell
+KY,21,035,4,A,Mixed-Humid,Calloway
+KY,21,037,4,A,Mixed-Humid,Campbell
+KY,21,039,4,A,Mixed-Humid,Carlisle
+KY,21,041,4,A,Mixed-Humid,Carroll
+KY,21,043,4,A,Mixed-Humid,Carter
+KY,21,045,4,A,Mixed-Humid,Casey
+KY,21,047,4,A,Mixed-Humid,Christian
+KY,21,049,4,A,Mixed-Humid,Clark
+KY,21,051,4,A,Mixed-Humid,Clay
+KY,21,053,4,A,Mixed-Humid,Clinton
+KY,21,055,4,A,Mixed-Humid,Crittenden
+KY,21,057,4,A,Mixed-Humid,Cumberland
+KY,21,059,4,A,Mixed-Humid,Daviess
+KY,21,061,4,A,Mixed-Humid,Edmonson
+KY,21,063,4,A,Mixed-Humid,Elliott
+KY,21,065,4,A,Mixed-Humid,Estill
+KY,21,067,4,A,Mixed-Humid,Fayette
+KY,21,069,4,A,Mixed-Humid,Fleming
+KY,21,071,4,A,Mixed-Humid,Floyd
+KY,21,073,4,A,Mixed-Humid,Franklin
+KY,21,075,4,A,Mixed-Humid,Fulton
+KY,21,077,4,A,Mixed-Humid,Gallatin
+KY,21,079,4,A,Mixed-Humid,Garrard
+KY,21,081,4,A,Mixed-Humid,Grant
+KY,21,083,4,A,Mixed-Humid,Graves
+KY,21,085,4,A,Mixed-Humid,Grayson
+KY,21,087,4,A,Mixed-Humid,Green
+KY,21,089,4,A,Mixed-Humid,Greenup
+KY,21,091,4,A,Mixed-Humid,Hancock
+KY,21,093,4,A,Mixed-Humid,Hardin
+KY,21,095,4,A,Mixed-Humid,Harlan
+KY,21,097,4,A,Mixed-Humid,Harrison
+KY,21,099,4,A,Mixed-Humid,Hart
+KY,21,101,4,A,Mixed-Humid,Henderson
+KY,21,103,4,A,Mixed-Humid,Henry
+KY,21,105,4,A,Mixed-Humid,Hickman
+KY,21,107,4,A,Mixed-Humid,Hopkins
+KY,21,109,4,A,Mixed-Humid,Jackson
+KY,21,111,4,A,Mixed-Humid,Jefferson
+KY,21,113,4,A,Mixed-Humid,Jessamine
+KY,21,115,4,A,Mixed-Humid,Johnson
+KY,21,117,4,A,Mixed-Humid,Kenton
+KY,21,119,4,A,Mixed-Humid,Knott
+KY,21,121,4,A,Mixed-Humid,Knox
+KY,21,123,4,A,Mixed-Humid,Larue
+KY,21,125,4,A,Mixed-Humid,Laurel
+KY,21,127,4,A,Mixed-Humid,Lawrence
+KY,21,129,4,A,Mixed-Humid,Lee
+KY,21,131,4,A,Mixed-Humid,Leslie
+KY,21,133,4,A,Mixed-Humid,Letcher
+KY,21,135,4,A,Mixed-Humid,Lewis
+KY,21,137,4,A,Mixed-Humid,Lincoln
+KY,21,139,4,A,Mixed-Humid,Livingston
+KY,21,141,4,A,Mixed-Humid,Logan
+KY,21,143,4,A,Mixed-Humid,Lyon
+KY,21,145,4,A,Mixed-Humid,McCracken
+KY,21,147,4,A,Mixed-Humid,McCreary
+KY,21,149,4,A,Mixed-Humid,McLean
+KY,21,151,4,A,Mixed-Humid,Madison
+KY,21,153,4,A,Mixed-Humid,Magoffin
+KY,21,155,4,A,Mixed-Humid,Marion
+KY,21,157,4,A,Mixed-Humid,Marshall
+KY,21,159,4,A,Mixed-Humid,Martin
+KY,21,161,4,A,Mixed-Humid,Mason
+KY,21,163,4,A,Mixed-Humid,Meade
+KY,21,165,4,A,Mixed-Humid,Menifee
+KY,21,167,4,A,Mixed-Humid,Mercer
+KY,21,169,4,A,Mixed-Humid,Metcalfe
+KY,21,171,4,A,Mixed-Humid,Monroe
+KY,21,173,4,A,Mixed-Humid,Montgomery
+KY,21,175,4,A,Mixed-Humid,Morgan
+KY,21,177,4,A,Mixed-Humid,Muhlenberg
+KY,21,179,4,A,Mixed-Humid,Nelson
+KY,21,181,4,A,Mixed-Humid,Nicholas
+KY,21,183,4,A,Mixed-Humid,Ohio
+KY,21,185,4,A,Mixed-Humid,Oldham
+KY,21,187,4,A,Mixed-Humid,Owen
+KY,21,189,4,A,Mixed-Humid,Owsley
+KY,21,191,4,A,Mixed-Humid,Pendleton
+KY,21,193,4,A,Mixed-Humid,Perry
+KY,21,195,4,A,Mixed-Humid,Pike
+KY,21,197,4,A,Mixed-Humid,Powell
+KY,21,199,4,A,Mixed-Humid,Pulaski
+KY,21,201,4,A,Mixed-Humid,Robertson
+KY,21,203,4,A,Mixed-Humid,Rockcastle
+KY,21,205,4,A,Mixed-Humid,Rowan
+KY,21,207,4,A,Mixed-Humid,Russell
+KY,21,209,4,A,Mixed-Humid,Scott
+KY,21,211,4,A,Mixed-Humid,Shelby
+KY,21,213,4,A,Mixed-Humid,Simpson
+KY,21,215,4,A,Mixed-Humid,Spencer
+KY,21,217,4,A,Mixed-Humid,Taylor
+KY,21,219,4,A,Mixed-Humid,Todd
+KY,21,221,4,A,Mixed-Humid,Trigg
+KY,21,223,4,A,Mixed-Humid,Trimble
+KY,21,225,4,A,Mixed-Humid,Union
+KY,21,227,4,A,Mixed-Humid,Warren
+KY,21,229,4,A,Mixed-Humid,Washington
+KY,21,231,4,A,Mixed-Humid,Wayne
+KY,21,233,4,A,Mixed-Humid,Webster
+KY,21,235,4,A,Mixed-Humid,Whitley
+KY,21,237,4,A,Mixed-Humid,Wolfe
+KY,21,239,4,A,Mixed-Humid,Woodford
+LA,22,001,2,A,Hot-Humid,Acadia
+LA,22,003,2,A,Hot-Humid,Allen
+LA,22,005,2,A,Hot-Humid,Ascension
+LA,22,007,2,A,Hot-Humid,Assumption
+LA,22,009,2,A,Hot-Humid,Avoyelles
+LA,22,011,2,A,Hot-Humid,Beauregard
+LA,22,013,3,A,Hot-Humid,Bienville
+LA,22,015,3,A,Hot-Humid,Bossier
+LA,22,017,3,A,Hot-Humid,Caddo
+LA,22,019,2,A,Hot-Humid,Calcasieu
+LA,22,021,3,A,Hot-Humid,Caldwell
+LA,22,023,2,A,Hot-Humid,Cameron
+LA,22,025,3,A,Hot-Humid,Catahoula
+LA,22,027,3,A,Hot-Humid,Claiborne
+LA,22,029,3,A,Hot-Humid,Concordia
+LA,22,031,3,A,Hot-Humid,De Soto
+LA,22,033,2,A,Hot-Humid,East Baton Rouge
+LA,22,035,3,A,Mixed-Humid,East Carroll
+LA,22,037,2,A,Hot-Humid,East Feliciana
+LA,22,039,2,A,Hot-Humid,Evangeline
+LA,22,041,3,A,Hot-Humid,Franklin
+LA,22,043,3,A,Hot-Humid,Grant
+LA,22,045,2,A,Hot-Humid,Iberia
+LA,22,047,2,A,Hot-Humid,Iberville
+LA,22,049,3,A,Hot-Humid,Jackson
+LA,22,051,2,A,Hot-Humid,Jefferson
+LA,22,053,2,A,Hot-Humid,Jefferson Davis
+LA,22,059,3,A,Hot-Humid,La Salle
+LA,22,055,2,A,Hot-Humid,Lafayette
+LA,22,057,2,A,Hot-Humid,Lafourche
+LA,22,061,3,A,Hot-Humid,Lincoln
+LA,22,063,2,A,Hot-Humid,Livingston
+LA,22,065,3,A,Hot-Humid,Madison
+LA,22,067,3,A,Mixed-Humid,Morehouse
+LA,22,069,3,A,Hot-Humid,Natchitoches
+LA,22,071,2,A,Hot-Humid,Orleans
+LA,22,073,3,A,Hot-Humid,Ouachita
+LA,22,075,2,A,Hot-Humid,Plaquemines
+LA,22,077,2,A,Hot-Humid,Pointe Coupee
+LA,22,079,2,A,Hot-Humid,Rapides
+LA,22,081,3,A,Hot-Humid,Red River
+LA,22,083,3,A,Hot-Humid,Richland
+LA,22,085,3,A,Hot-Humid,Sabine
+LA,22,087,2,A,Hot-Humid,St. Bernard
+LA,22,089,2,A,Hot-Humid,St. Charles
+LA,22,091,2,A,Hot-Humid,St. Helena
+LA,22,093,2,A,Hot-Humid,St. James
+LA,22,095,2,A,Hot-Humid,St. John the Baptist
+LA,22,097,2,A,Hot-Humid,St. Landry
+LA,22,099,2,A,Hot-Humid,St. Martin
+LA,22,101,2,A,Hot-Humid,St. Mary
+LA,22,103,2,A,Hot-Humid,St. Tammany
+LA,22,105,2,A,Hot-Humid,Tangipahoa
+LA,22,107,3,A,Hot-Humid,Tensas
+LA,22,109,2,A,Hot-Humid,Terrebonne
+LA,22,111,3,A,Hot-Humid,Union
+LA,22,113,2,A,Hot-Humid,Vermilion
+LA,22,115,3,A,Hot-Humid,Vernon
+LA,22,117,2,A,Hot-Humid,Washington
+LA,22,119,3,A,Hot-Humid,Webster
+LA,22,121,2,A,Hot-Humid,West Baton Rouge
+LA,22,123,3,A,Mixed-Humid,West Carroll
+LA,22,125,2,A,Hot-Humid,West Feliciana
+LA,22,127,3,A,Hot-Humid,Winn
+MA,25,001,5,A,Cold,Barnstable
+MA,25,003,5,A,Cold,Berkshire
+MA,25,005,5,A,Cold,Bristol
+MA,25,007,5,A,Cold,Dukes
+MA,25,009,5,A,Cold,Essex
+MA,25,011,5,A,Cold,Franklin
+MA,25,013,5,A,Cold,Hampden
+MA,25,015,5,A,Cold,Hampshire
+MA,25,017,5,A,Cold,Middlesex
+MA,25,019,5,A,Cold,Nantucket
+MA,25,021,5,A,Cold,Norfolk
+MA,25,023,5,A,Cold,Plymouth
+MA,25,025,5,A,Cold,Suffolk
+MA,25,027,5,A,Cold,Worcester
+MD,24,001,4,A,Mixed-Humid,Allegany
+MD,24,003,4,A,Mixed-Humid,Anne Arundel
+MD,24,005,4,A,Mixed-Humid,Baltimore
+MD,24,009,4,A,Mixed-Humid,Calvert
+MD,24,011,4,A,Mixed-Humid,Caroline
+MD,24,013,4,A,Mixed-Humid,Carroll
+MD,24,015,4,A,Mixed-Humid,Cecil
+MD,24,017,4,A,Mixed-Humid,Charles
+MD,24,019,4,A,Mixed-Humid,Dorchester
+MD,24,021,4,A,Mixed-Humid,Frederick
+MD,24,023,5,A,Cold,Garrett
+MD,24,025,4,A,Mixed-Humid,Harford
+MD,24,027,4,A,Mixed-Humid,Howard
+MD,24,029,4,A,Mixed-Humid,Kent
+MD,24,031,4,A,Mixed-Humid,Montgomery
+MD,24,033,4,A,Mixed-Humid,Prince George's
+MD,24,035,4,A,Mixed-Humid,Queen Anne's
+MD,24,037,4,A,Mixed-Humid,St. Mary's
+MD,24,039,4,A,Mixed-Humid,Somerset
+MD,24,041,4,A,Mixed-Humid,Talbot
+MD,24,043,4,A,Mixed-Humid,Washington
+MD,24,045,4,A,Mixed-Humid,Wicomico
+MD,24,047,4,A,Mixed-Humid,Worcester
+MD,24,510,4,A,Mixed-Humid,Baltimore
+ME,23,001,6,A,Cold,Androscoggin
+ME,23,003,7,N/A,Very Cold,Aroostook
+ME,23,005,6,A,Cold,Cumberland
+ME,23,007,6,A,Cold,Franklin
+ME,23,009,6,A,Cold,Hancock
+ME,23,011,6,A,Cold,Kennebec
+ME,23,013,6,A,Cold,Knox
+ME,23,015,6,A,Cold,Lincoln
+ME,23,017,6,A,Cold,Oxford
+ME,23,019,6,A,Cold,Penobscot
+ME,23,021,6,A,Cold,Piscataquis
+ME,23,023,6,A,Cold,Sagadahoc
+ME,23,025,6,A,Cold,Somerset
+ME,23,027,6,A,Cold,Waldo
+ME,23,029,6,A,Cold,Washington
+ME,23,031,6,A,Cold,York
+MI,26,001,6,A,Cold,Alcona
+MI,26,003,6,A,Cold,Alger
+MI,26,005,5,A,Cold,Allegan
+MI,26,007,6,A,Cold,Alpena
+MI,26,009,6,A,Cold,Antrim
+MI,26,011,6,A,Cold,Arenac
+MI,26,013,7,N/A,Very Cold,Baraga
+MI,26,015,5,A,Cold,Barry
+MI,26,017,5,A,Cold,Bay
+MI,26,019,6,A,Cold,Benzie
+MI,26,021,5,A,Cold,Berrien
+MI,26,023,5,A,Cold,Branch
+MI,26,025,5,A,Cold,Calhoun
+MI,26,027,5,A,Cold,Cass
+MI,26,029,6,A,Cold,Charlevoix
+MI,26,031,6,A,Cold,Cheboygan
+MI,26,033,7,N/A,Very Cold,Chippewa
+MI,26,035,6,A,Cold,Clare
+MI,26,037,5,A,Cold,Clinton
+MI,26,039,6,A,Cold,Crawford
+MI,26,041,6,A,Cold,Delta
+MI,26,043,6,A,Cold,Dickinson
+MI,26,045,5,A,Cold,Eaton
+MI,26,047,6,A,Cold,Emmet
+MI,26,049,5,A,Cold,Genesee
+MI,26,051,6,A,Cold,Gladwin
+MI,26,053,7,N/A,Very Cold,Gogebic
+MI,26,055,6,A,Cold,Grand Traverse
+MI,26,057,5,A,Cold,Gratiot
+MI,26,059,5,A,Cold,Hillsdale
+MI,26,061,7,N/A,Very Cold,Houghton
+MI,26,063,6,A,Cold,Huron
+MI,26,065,5,A,Cold,Ingham
+MI,26,067,5,A,Cold,Ionia
+MI,26,069,6,A,Cold,Iosco
+MI,26,071,7,N/A,Very Cold,Iron
+MI,26,073,6,A,Cold,Isabella
+MI,26,075,5,A,Cold,Jackson
+MI,26,077,5,A,Cold,Kalamazoo
+MI,26,079,6,A,Cold,Kalkaska
+MI,26,081,5,A,Cold,Kent
+MI,26,083,7,N/A,Very Cold,Keweenaw
+MI,26,085,6,A,Cold,Lake
+MI,26,087,5,A,Cold,Lapeer
+MI,26,089,6,A,Cold,Leelanau
+MI,26,091,5,A,Cold,Lenawee
+MI,26,093,5,A,Cold,Livingston
+MI,26,095,7,N/A,Very Cold,Luce
+MI,26,097,7,N/A,Very Cold,Mackinac
+MI,26,099,5,A,Cold,Macomb
+MI,26,101,6,A,Cold,Manistee
+MI,26,103,6,A,Cold,Marquette
+MI,26,105,6,A,Cold,Mason
+MI,26,107,6,A,Cold,Mecosta
+MI,26,109,6,A,Cold,Menominee
+MI,26,111,5,A,Cold,Midland
+MI,26,113,6,A,Cold,Missaukee
+MI,26,115,5,A,Cold,Monroe
+MI,26,117,5,A,Cold,Montcalm
+MI,26,119,6,A,Cold,Montmorency
+MI,26,121,5,A,Cold,Muskegon
+MI,26,123,6,A,Cold,Newaygo
+MI,26,125,5,A,Cold,Oakland
+MI,26,127,6,A,Cold,Oceana
+MI,26,129,6,A,Cold,Ogemaw
+MI,26,131,7,N/A,Very Cold,Ontonagon
+MI,26,133,6,A,Cold,Osceola
+MI,26,135,6,A,Cold,Oscoda
+MI,26,137,6,A,Cold,Otsego
+MI,26,139,5,A,Cold,Ottawa
+MI,26,141,6,A,Cold,Presque Isle
+MI,26,143,6,A,Cold,Roscommon
+MI,26,145,5,A,Cold,Saginaw
+MI,26,151,6,A,Cold,Sanilac
+MI,26,153,7,N/A,Very Cold,Schoolcraft
+MI,26,155,5,A,Cold,Shiawassee
+MI,26,147,5,A,Cold,St. Clair
+MI,26,149,5,A,Cold,St. Joseph
+MI,26,157,5,A,Cold,Tuscola
+MI,26,159,5,A,Cold,Van Buren
+MI,26,161,5,A,Cold,Washtenaw
+MI,26,163,5,A,Cold,Wayne
+MI,26,165,6,A,Cold,Wexford
+MN,27,001,7,N/A,Very Cold,Aitkin
+MN,27,003,6,A,Cold,Anoka
+MN,27,005,7,N/A,Very Cold,Becker
+MN,27,007,7,N/A,Very Cold,Beltrami
+MN,27,009,6,A,Cold,Benton
+MN,27,011,6,A,Cold,Big Stone
+MN,27,013,6,A,Cold,Blue Earth
+MN,27,015,6,A,Cold,Brown
+MN,27,017,7,N/A,Very Cold,Carlton
+MN,27,019,6,A,Cold,Carver
+MN,27,021,7,N/A,Very Cold,Cass
+MN,27,023,6,A,Cold,Chippewa
+MN,27,025,6,A,Cold,Chisago
+MN,27,027,7,N/A,Very Cold,Clay
+MN,27,029,7,N/A,Very Cold,Clearwater
+MN,27,031,7,N/A,Very Cold,Cook
+MN,27,033,6,A,Cold,Cottonwood
+MN,27,035,7,N/A,Very Cold,Crow Wing
+MN,27,037,6,A,Cold,Dakota
+MN,27,039,6,A,Cold,Dodge
+MN,27,041,6,A,Cold,Douglas
+MN,27,043,6,A,Cold,Faribault
+MN,27,045,6,A,Cold,Fillmore
+MN,27,047,6,A,Cold,Freeborn
+MN,27,049,6,A,Cold,Goodhue
+MN,27,051,7,N/A,Very Cold,Grant
+MN,27,053,6,A,Cold,Hennepin
+MN,27,055,6,A,Cold,Houston
+MN,27,057,7,N/A,Very Cold,Hubbard
+MN,27,059,6,A,Cold,Isanti
+MN,27,061,7,N/A,Very Cold,Itasca
+MN,27,063,6,A,Cold,Jackson
+MN,27,065,7,N/A,Very Cold,Kanabec
+MN,27,067,6,A,Cold,Kandiyohi
+MN,27,069,7,N/A,Very Cold,Kittson
+MN,27,071,7,N/A,Very Cold,Koochiching
+MN,27,073,6,A,Cold,Lac qui Parle
+MN,27,075,7,N/A,Very Cold,Lake
+MN,27,077,7,N/A,Very Cold,Lake of the Woods
+MN,27,079,6,A,Cold,Le Sueur
+MN,27,081,6,A,Cold,Lincoln
+MN,27,083,6,A,Cold,Lyon
+MN,27,087,7,N/A,Very Cold,Mahnomen
+MN,27,089,7,N/A,Very Cold,Marshall
+MN,27,091,6,A,Cold,Martin
+MN,27,085,6,A,Cold,McLeod
+MN,27,093,6,A,Cold,Meeker
+MN,27,095,7,N/A,Very Cold,Mille Lacs
+MN,27,097,6,A,Cold,Morrison
+MN,27,099,6,A,Cold,Mower
+MN,27,101,6,A,Cold,Murray
+MN,27,103,6,A,Cold,Nicollet
+MN,27,105,6,A,Cold,Nobles
+MN,27,107,7,N/A,Very Cold,Norman
+MN,27,109,6,A,Cold,Olmsted
+MN,27,111,7,N/A,Very Cold,Otter Tail
+MN,27,113,7,N/A,Very Cold,Pennington
+MN,27,115,7,N/A,Very Cold,Pine
+MN,27,117,6,A,Cold,Pipestone
+MN,27,119,7,N/A,Very Cold,Polk
+MN,27,121,6,A,Cold,Pope
+MN,27,123,6,A,Cold,Ramsey
+MN,27,125,7,N/A,Very Cold,Red Lake
+MN,27,127,6,A,Cold,Redwood
+MN,27,129,6,A,Cold,Renville
+MN,27,131,6,A,Cold,Rice
+MN,27,133,6,A,Cold,Rock
+MN,27,135,7,N/A,Very Cold,Roseau
+MN,27,139,6,A,Cold,Scott
+MN,27,141,6,A,Cold,Sherburne
+MN,27,143,6,A,Cold,Sibley
+MN,27,137,7,N/A,Very Cold,St. Louis
+MN,27,145,6,A,Cold,Stearns
+MN,27,147,6,A,Cold,Steele
+MN,27,149,6,A,Cold,Stevens
+MN,27,151,6,A,Cold,Swift
+MN,27,153,6,A,Cold,Todd
+MN,27,155,6,A,Cold,Traverse
+MN,27,157,6,A,Cold,Wabasha
+MN,27,159,7,N/A,Very Cold,Wadena
+MN,27,161,6,A,Cold,Waseca
+MN,27,163,6,A,Cold,Washington
+MN,27,165,6,A,Cold,Watonwan
+MN,27,167,7,N/A,Very Cold,Wilkin
+MN,27,169,6,A,Cold,Winona
+MN,27,171,6,A,Cold,Wright
+MN,27,173,6,A,Cold,Yellow Medicine
+MO,29,001,5,A,Cold,Adair
+MO,29,003,5,A,Cold,Andrew
+MO,29,005,5,A,Cold,Atchison
+MO,29,007,4,A,Mixed-Humid,Audrain
+MO,29,009,4,A,Mixed-Humid,Barry
+MO,29,011,4,A,Mixed-Humid,Barton
+MO,29,013,4,A,Mixed-Humid,Bates
+MO,29,015,4,A,Mixed-Humid,Benton
+MO,29,017,4,A,Mixed-Humid,Bollinger
+MO,29,019,4,A,Mixed-Humid,Boone
+MO,29,021,5,A,Cold,Buchanan
+MO,29,023,4,A,Mixed-Humid,Butler
+MO,29,025,5,A,Cold,Caldwell
+MO,29,027,4,A,Mixed-Humid,Callaway
+MO,29,029,4,A,Mixed-Humid,Camden
+MO,29,031,4,A,Mixed-Humid,Cape Girardeau
+MO,29,033,4,A,Mixed-Humid,Carroll
+MO,29,035,4,A,Mixed-Humid,Carter
+MO,29,037,4,A,Mixed-Humid,Cass
+MO,29,039,4,A,Mixed-Humid,Cedar
+MO,29,041,5,A,Cold,Chariton
+MO,29,043,4,A,Mixed-Humid,Christian
+MO,29,045,5,A,Cold,Clark
+MO,29,047,4,A,Mixed-Humid,Clay
+MO,29,049,5,A,Cold,Clinton
+MO,29,051,4,A,Mixed-Humid,Cole
+MO,29,053,4,A,Mixed-Humid,Cooper
+MO,29,055,4,A,Mixed-Humid,Crawford
+MO,29,057,4,A,Mixed-Humid,Dade
+MO,29,059,4,A,Mixed-Humid,Dallas
+MO,29,061,5,A,Cold,Daviess
+MO,29,063,5,A,Cold,DeKalb
+MO,29,065,4,A,Mixed-Humid,Dent
+MO,29,067,4,A,Mixed-Humid,Douglas
+MO,29,069,4,A,Mixed-Humid,Dunklin
+MO,29,071,4,A,Mixed-Humid,Franklin
+MO,29,073,4,A,Mixed-Humid,Gasconade
+MO,29,075,5,A,Cold,Gentry
+MO,29,077,4,A,Mixed-Humid,Greene
+MO,29,079,5,A,Cold,Grundy
+MO,29,081,5,A,Cold,Harrison
+MO,29,083,4,A,Mixed-Humid,Henry
+MO,29,085,4,A,Mixed-Humid,Hickory
+MO,29,087,5,A,Cold,Holt
+MO,29,089,4,A,Mixed-Humid,Howard
+MO,29,091,4,A,Mixed-Humid,Howell
+MO,29,093,4,A,Mixed-Humid,Iron
+MO,29,095,4,A,Mixed-Humid,Jackson
+MO,29,097,4,A,Mixed-Humid,Jasper
+MO,29,099,4,A,Mixed-Humid,Jefferson
+MO,29,101,4,A,Mixed-Humid,Johnson
+MO,29,103,5,A,Cold,Knox
+MO,29,105,4,A,Mixed-Humid,Laclede
+MO,29,107,4,A,Mixed-Humid,Lafayette
+MO,29,109,4,A,Mixed-Humid,Lawrence
+MO,29,111,5,A,Cold,Lewis
+MO,29,113,4,A,Mixed-Humid,Lincoln
+MO,29,115,5,A,Cold,Linn
+MO,29,117,5,A,Cold,Livingston
+MO,29,121,5,A,Cold,Macon
+MO,29,123,4,A,Mixed-Humid,Madison
+MO,29,125,4,A,Mixed-Humid,Maries
+MO,29,127,5,A,Cold,Marion
+MO,29,119,4,A,Mixed-Humid,McDonald
+MO,29,129,5,A,Cold,Mercer
+MO,29,131,4,A,Mixed-Humid,Miller
+MO,29,133,4,A,Mixed-Humid,Mississippi
+MO,29,135,4,A,Mixed-Humid,Moniteau
+MO,29,137,4,A,Mixed-Humid,Monroe
+MO,29,139,4,A,Mixed-Humid,Montgomery
+MO,29,141,4,A,Mixed-Humid,Morgan
+MO,29,143,4,A,Mixed-Humid,New Madrid
+MO,29,145,4,A,Mixed-Humid,Newton
+MO,29,147,5,A,Cold,Nodaway
+MO,29,149,4,A,Mixed-Humid,Oregon
+MO,29,151,4,A,Mixed-Humid,Osage
+MO,29,153,4,A,Mixed-Humid,Ozark
+MO,29,155,4,A,Mixed-Humid,Pemiscot
+MO,29,157,4,A,Mixed-Humid,Perry
+MO,29,159,4,A,Mixed-Humid,Pettis
+MO,29,161,4,A,Mixed-Humid,Phelps
+MO,29,163,5,A,Cold,Pike
+MO,29,165,4,A,Mixed-Humid,Platte
+MO,29,167,4,A,Mixed-Humid,Polk
+MO,29,169,4,A,Mixed-Humid,Pulaski
+MO,29,171,5,A,Cold,Putnam
+MO,29,173,5,A,Cold,Ralls
+MO,29,175,4,A,Mixed-Humid,Randolph
+MO,29,177,4,A,Mixed-Humid,Ray
+MO,29,179,4,A,Mixed-Humid,Reynolds
+MO,29,181,4,A,Mixed-Humid,Ripley
+MO,29,195,4,A,Mixed-Humid,Saline
+MO,29,197,5,A,Cold,Schuyler
+MO,29,199,5,A,Cold,Scotland
+MO,29,201,4,A,Mixed-Humid,Scott
+MO,29,203,4,A,Mixed-Humid,Shannon
+MO,29,205,5,A,Cold,Shelby
+MO,29,183,4,A,Mixed-Humid,St. Charles
+MO,29,185,4,A,Mixed-Humid,St. Clair
+MO,29,187,4,A,Mixed-Humid,St. Francois
+MO,29,189,4,A,Mixed-Humid,St. Louis
+MO,29,510,4,A,Mixed-Humid,St. Louis (city)
+MO,29,186,4,A,Mixed-Humid,Ste. Genevieve
+MO,29,207,4,A,Mixed-Humid,Stoddard
+MO,29,209,4,A,Mixed-Humid,Stone
+MO,29,211,5,A,Cold,Sullivan
+MO,29,213,4,A,Mixed-Humid,Taney
+MO,29,215,4,A,Mixed-Humid,Texas
+MO,29,217,4,A,Mixed-Humid,Vernon
+MO,29,219,4,A,Mixed-Humid,Warren
+MO,29,221,4,A,Mixed-Humid,Washington
+MO,29,223,4,A,Mixed-Humid,Wayne
+MO,29,225,4,A,Mixed-Humid,Webster
+MO,29,227,5,A,Cold,Worth
+MO,29,229,4,A,Mixed-Humid,Wright
+MP,69,085,1,A,Hot-Humid,Northern Islands
+MP,69,100,1,A,Hot-Humid,Rota
+MP,69,110,1,A,Hot-Humid,Saipan
+MP,69,120,1,A,Hot-Humid,Tinian
+MS,28,001,3,A,Hot-Humid,Adams
+MS,28,003,3,A,Mixed-Humid,Alcorn
+MS,28,005,3,A,Hot-Humid,Amite
+MS,28,007,3,A,Mixed-Humid,Attala
+MS,28,009,3,A,Mixed-Humid,Benton
+MS,28,011,3,A,Mixed-Humid,Bolivar
+MS,28,013,3,A,Mixed-Humid,Calhoun
+MS,28,015,3,A,Mixed-Humid,Carroll
+MS,28,017,3,A,Mixed-Humid,Chickasaw
+MS,28,019,3,A,Mixed-Humid,Choctaw
+MS,28,021,3,A,Hot-Humid,Claiborne
+MS,28,023,3,A,Mixed-Humid,Clarke
+MS,28,025,3,A,Mixed-Humid,Clay
+MS,28,027,3,A,Mixed-Humid,Coahoma
+MS,28,029,3,A,Hot-Humid,Copiah
+MS,28,031,3,A,Hot-Humid,Covington
+MS,28,033,3,A,Mixed-Humid,DeSoto
+MS,28,035,3,A,Hot-Humid,Forrest
+MS,28,037,3,A,Hot-Humid,Franklin
+MS,28,039,3,A,Hot-Humid,George
+MS,28,041,3,A,Hot-Humid,Greene
+MS,28,043,3,A,Mixed-Humid,Grenada
+MS,28,045,2,A,Hot-Humid,Hancock
+MS,28,047,2,A,Hot-Humid,Harrison
+MS,28,049,3,A,Hot-Humid,Hinds
+MS,28,051,3,A,Mixed-Humid,Holmes
+MS,28,053,3,A,Mixed-Humid,Humphreys
+MS,28,055,3,A,Mixed-Humid,Issaquena
+MS,28,057,3,A,Mixed-Humid,Itawamba
+MS,28,059,2,A,Hot-Humid,Jackson
+MS,28,061,3,A,Mixed-Humid,Jasper
+MS,28,063,3,A,Hot-Humid,Jefferson
+MS,28,065,3,A,Hot-Humid,Jefferson Davis
+MS,28,067,3,A,Hot-Humid,Jones
+MS,28,069,3,A,Mixed-Humid,Kemper
+MS,28,071,3,A,Mixed-Humid,Lafayette
+MS,28,073,3,A,Hot-Humid,Lamar
+MS,28,075,3,A,Mixed-Humid,Lauderdale
+MS,28,077,3,A,Hot-Humid,Lawrence
+MS,28,079,3,A,Mixed-Humid,Leake
+MS,28,081,3,A,Mixed-Humid,Lee
+MS,28,083,3,A,Mixed-Humid,Leflore
+MS,28,085,3,A,Hot-Humid,Lincoln
+MS,28,087,3,A,Mixed-Humid,Lowndes
+MS,28,089,3,A,Mixed-Humid,Madison
+MS,28,091,3,A,Hot-Humid,Marion
+MS,28,093,3,A,Mixed-Humid,Marshall
+MS,28,095,3,A,Mixed-Humid,Monroe
+MS,28,097,3,A,Mixed-Humid,Montgomery
+MS,28,099,3,A,Mixed-Humid,Neshoba
+MS,28,101,3,A,Mixed-Humid,Newton
+MS,28,103,3,A,Mixed-Humid,Noxubee
+MS,28,105,3,A,Mixed-Humid,Oktibbeha
+MS,28,107,3,A,Mixed-Humid,Panola
+MS,28,109,2,A,Hot-Humid,Pearl River
+MS,28,111,3,A,Hot-Humid,Perry
+MS,28,113,3,A,Hot-Humid,Pike
+MS,28,115,3,A,Mixed-Humid,Pontotoc
+MS,28,117,3,A,Mixed-Humid,Prentiss
+MS,28,119,3,A,Mixed-Humid,Quitman
+MS,28,121,3,A,Hot-Humid,Rankin
+MS,28,123,3,A,Mixed-Humid,Scott
+MS,28,125,3,A,Mixed-Humid,Sharkey
+MS,28,127,3,A,Hot-Humid,Simpson
+MS,28,129,3,A,Hot-Humid,Smith
+MS,28,131,2,A,Hot-Humid,Stone
+MS,28,133,3,A,Mixed-Humid,Sunflower
+MS,28,135,3,A,Mixed-Humid,Tallahatchie
+MS,28,137,3,A,Mixed-Humid,Tate
+MS,28,139,3,A,Mixed-Humid,Tippah
+MS,28,141,3,A,Mixed-Humid,Tishomingo
+MS,28,143,3,A,Mixed-Humid,Tunica
+MS,28,145,3,A,Mixed-Humid,Union
+MS,28,147,3,A,Hot-Humid,Walthall
+MS,28,149,3,A,Hot-Humid,Warren
+MS,28,151,3,A,Mixed-Humid,Washington
+MS,28,153,3,A,Hot-Humid,Wayne
+MS,28,155,3,A,Mixed-Humid,Webster
+MS,28,157,3,A,Hot-Humid,Wilkinson
+MS,28,159,3,A,Mixed-Humid,Winston
+MS,28,161,3,A,Mixed-Humid,Yalobusha
+MS,28,163,3,A,Mixed-Humid,Yazoo
+MT,30,001,6,B,Cold,Beaverhead
+MT,30,003,6,B,Cold,Big Horn
+MT,30,005,6,B,Cold,Blaine
+MT,30,007,6,B,Cold,Broadwater
+MT,30,009,6,B,Cold,Carbon
+MT,30,011,6,B,Cold,Carter
+MT,30,013,6,B,Cold,Cascade
+MT,30,015,6,B,Cold,Chouteau
+MT,30,017,6,B,Cold,Custer
+MT,30,019,6,B,Cold,Daniels
+MT,30,021,6,B,Cold,Dawson
+MT,30,023,6,B,Cold,Deer Lodge
+MT,30,025,6,B,Cold,Fallon
+MT,30,027,6,B,Cold,Fergus
+MT,30,029,6,B,Cold,Flathead
+MT,30,031,6,B,Cold,Gallatin
+MT,30,033,6,B,Cold,Garfield
+MT,30,035,6,B,Cold,Glacier
+MT,30,037,6,B,Cold,Golden Valley
+MT,30,039,6,B,Cold,Granite
+MT,30,041,6,B,Cold,Hill
+MT,30,043,6,B,Cold,Jefferson
+MT,30,045,6,B,Cold,Judith Basin
+MT,30,047,6,B,Cold,Lake
+MT,30,049,6,B,Cold,Lewis and Clark
+MT,30,051,6,B,Cold,Liberty
+MT,30,053,6,B,Cold,Lincoln
+MT,30,057,6,B,Cold,Madison
+MT,30,055,6,B,Cold,McCone
+MT,30,059,6,B,Cold,Meagher
+MT,30,061,6,B,Cold,Mineral
+MT,30,063,6,B,Cold,Missoula
+MT,30,065,6,B,Cold,Musselshell
+MT,30,067,6,B,Cold,Park
+MT,30,069,6,B,Cold,Petroleum
+MT,30,071,6,B,Cold,Phillips
+MT,30,073,6,B,Cold,Pondera
+MT,30,075,6,B,Cold,Powder River
+MT,30,077,6,B,Cold,Powell
+MT,30,079,6,B,Cold,Prairie
+MT,30,081,6,B,Cold,Ravalli
+MT,30,083,6,B,Cold,Richland
+MT,30,085,6,B,Cold,Roosevelt
+MT,30,087,6,B,Cold,Rosebud
+MT,30,089,6,B,Cold,Sanders
+MT,30,091,6,B,Cold,Sheridan
+MT,30,093,6,B,Cold,Silver Bow
+MT,30,095,6,B,Cold,Stillwater
+MT,30,097,6,B,Cold,Sweet Grass
+MT,30,099,6,B,Cold,Teton
+MT,30,101,6,B,Cold,Toole
+MT,30,103,6,B,Cold,Treasure
+MT,30,105,6,B,Cold,Valley
+MT,30,107,6,B,Cold,Wheatland
+MT,30,109,6,B,Cold,Wibaux
+MT,30,111,6,B,Cold,Yellowstone
+NC,37,001,4,A,Mixed-Humid,Alamance
+NC,37,003,4,A,Mixed-Humid,Alexander
+NC,37,005,5,A,Cold,Alleghany
+NC,37,007,3,A,Mixed-Humid,Anson
+NC,37,009,5,A,Cold,Ashe
+NC,37,011,5,A,Cold,Avery
+NC,37,013,3,A,Mixed-Humid,Beaufort
+NC,37,015,4,A,Mixed-Humid,Bertie
+NC,37,017,3,A,Mixed-Humid,Bladen
+NC,37,019,3,A,Hot-Humid,Brunswick
+NC,37,021,4,A,Mixed-Humid,Buncombe
+NC,37,023,4,A,Mixed-Humid,Burke
+NC,37,025,3,A,Mixed-Humid,Cabarrus
+NC,37,027,4,A,Mixed-Humid,Caldwell
+NC,37,029,3,A,Mixed-Humid,Camden
+NC,37,031,3,A,Hot-Humid,Carteret
+NC,37,033,4,A,Mixed-Humid,Caswell
+NC,37,035,4,A,Mixed-Humid,Catawba
+NC,37,037,4,A,Mixed-Humid,Chatham
+NC,37,039,4,A,Mixed-Humid,Cherokee
+NC,37,041,3,A,Mixed-Humid,Chowan
+NC,37,043,4,A,Mixed-Humid,Clay
+NC,37,045,4,A,Mixed-Humid,Cleveland
+NC,37,047,3,A,Hot-Humid,Columbus
+NC,37,049,3,A,Mixed-Humid,Craven
+NC,37,051,3,A,Mixed-Humid,Cumberland
+NC,37,053,3,A,Mixed-Humid,Currituck
+NC,37,055,3,A,Mixed-Humid,Dare
+NC,37,057,3,A,Mixed-Humid,Davidson
+NC,37,059,4,A,Mixed-Humid,Davie
+NC,37,061,3,A,Mixed-Humid,Duplin
+NC,37,063,4,A,Mixed-Humid,Durham
+NC,37,065,3,A,Mixed-Humid,Edgecombe
+NC,37,067,4,A,Mixed-Humid,Forsyth
+NC,37,069,4,A,Mixed-Humid,Franklin
+NC,37,071,3,A,Mixed-Humid,Gaston
+NC,37,073,4,A,Mixed-Humid,Gates
+NC,37,075,4,A,Mixed-Humid,Graham
+NC,37,077,4,A,Mixed-Humid,Granville
+NC,37,079,3,A,Mixed-Humid,Greene
+NC,37,081,4,A,Mixed-Humid,Guilford
+NC,37,083,4,A,Mixed-Humid,Halifax
+NC,37,085,4,A,Mixed-Humid,Harnett
+NC,37,087,4,A,Mixed-Humid,Haywood
+NC,37,089,4,A,Mixed-Humid,Henderson
+NC,37,091,4,A,Mixed-Humid,Hertford
+NC,37,093,3,A,Mixed-Humid,Hoke
+NC,37,095,3,A,Mixed-Humid,Hyde
+NC,37,097,4,A,Mixed-Humid,Iredell
+NC,37,099,4,A,Mixed-Humid,Jackson
+NC,37,101,3,A,Mixed-Humid,Johnston
+NC,37,103,3,A,Mixed-Humid,Jones
+NC,37,105,4,A,Mixed-Humid,Lee
+NC,37,107,3,A,Mixed-Humid,Lenoir
+NC,37,109,4,A,Mixed-Humid,Lincoln
+NC,37,113,4,A,Mixed-Humid,Macon
+NC,37,115,4,A,Mixed-Humid,Madison
+NC,37,117,3,A,Mixed-Humid,Martin
+NC,37,111,4,A,Mixed-Humid,McDowell
+NC,37,119,3,A,Mixed-Humid,Mecklenburg
+NC,37,121,5,A,Cold,Mitchell
+NC,37,123,3,A,Mixed-Humid,Montgomery
+NC,37,125,3,A,Mixed-Humid,Moore
+NC,37,127,4,A,Mixed-Humid,Nash
+NC,37,129,3,A,Hot-Humid,New Hanover
+NC,37,131,4,A,Mixed-Humid,Northampton
+NC,37,133,3,A,Hot-Humid,Onslow
+NC,37,135,4,A,Mixed-Humid,Orange
+NC,37,137,3,A,Mixed-Humid,Pamlico
+NC,37,139,3,A,Mixed-Humid,Pasquotank
+NC,37,141,3,A,Hot-Humid,Pender
+NC,37,143,3,A,Mixed-Humid,Perquimans
+NC,37,145,4,A,Mixed-Humid,Person
+NC,37,147,3,A,Mixed-Humid,Pitt
+NC,37,149,4,A,Mixed-Humid,Polk
+NC,37,151,3,A,Mixed-Humid,Randolph
+NC,37,153,3,A,Mixed-Humid,Richmond
+NC,37,155,3,A,Mixed-Humid,Robeson
+NC,37,157,4,A,Mixed-Humid,Rockingham
+NC,37,159,3,A,Mixed-Humid,Rowan
+NC,37,161,4,A,Mixed-Humid,Rutherford
+NC,37,163,3,A,Mixed-Humid,Sampson
+NC,37,165,3,A,Mixed-Humid,Scotland
+NC,37,167,3,A,Mixed-Humid,Stanly
+NC,37,169,4,A,Mixed-Humid,Stokes
+NC,37,171,4,A,Mixed-Humid,Surry
+NC,37,173,4,A,Mixed-Humid,Swain
+NC,37,175,4,A,Mixed-Humid,Transylvania
+NC,37,177,3,A,Mixed-Humid,Tyrrell
+NC,37,179,3,A,Mixed-Humid,Union
+NC,37,181,4,A,Mixed-Humid,Vance
+NC,37,183,4,A,Mixed-Humid,Wake
+NC,37,185,4,A,Mixed-Humid,Warren
+NC,37,187,3,A,Mixed-Humid,Washington
+NC,37,189,5,A,Cold,Watauga
+NC,37,191,3,A,Mixed-Humid,Wayne
+NC,37,193,4,A,Mixed-Humid,Wilkes
+NC,37,195,3,A,Mixed-Humid,Wilson
+NC,37,197,4,A,Mixed-Humid,Yadkin
+NC,37,199,5,A,Cold,Yancey
+ND,38,001,6,A,Cold,Adams
+ND,38,003,7,N/A,Very Cold,Barnes
+ND,38,005,7,N/A,Very Cold,Benson
+ND,38,007,6,A,Cold,Billings
+ND,38,009,7,N/A,Very Cold,Bottineau
+ND,38,011,6,A,Cold,Bowman
+ND,38,013,7,N/A,Very Cold,Burke
+ND,38,015,6,A,Cold,Burleigh
+ND,38,017,7,N/A,Very Cold,Cass
+ND,38,019,7,N/A,Very Cold,Cavalier
+ND,38,021,6,A,Cold,Dickey
+ND,38,023,7,N/A,Very Cold,Divide
+ND,38,025,6,A,Cold,Dunn
+ND,38,027,7,N/A,Very Cold,Eddy
+ND,38,029,6,A,Cold,Emmons
+ND,38,031,7,N/A,Very Cold,Foster
+ND,38,033,6,A,Cold,Golden Valley
+ND,38,035,7,N/A,Very Cold,Grand Forks
+ND,38,037,6,A,Cold,Grant
+ND,38,039,7,N/A,Very Cold,Griggs
+ND,38,041,6,A,Cold,Hettinger
+ND,38,043,7,N/A,Very Cold,Kidder
+ND,38,045,6,A,Cold,LaMoure
+ND,38,047,6,A,Cold,Logan
+ND,38,049,7,N/A,Very Cold,McHenry
+ND,38,051,6,A,Cold,McIntosh
+ND,38,053,6,A,Cold,McKenzie
+ND,38,055,7,N/A,Very Cold,McLean
+ND,38,057,6,A,Cold,Mercer
+ND,38,059,6,A,Cold,Morton
+ND,38,061,7,N/A,Very Cold,Mountrail
+ND,38,063,7,N/A,Very Cold,Nelson
+ND,38,065,6,A,Cold,Oliver
+ND,38,067,7,N/A,Very Cold,Pembina
+ND,38,069,7,N/A,Very Cold,Pierce
+ND,38,071,7,N/A,Very Cold,Ramsey
+ND,38,073,6,A,Cold,Ransom
+ND,38,075,7,N/A,Very Cold,Renville
+ND,38,077,6,A,Cold,Richland
+ND,38,079,7,N/A,Very Cold,Rolette
+ND,38,081,6,A,Cold,Sargent
+ND,38,083,7,N/A,Very Cold,Sheridan
+ND,38,085,6,A,Cold,Sioux
+ND,38,087,6,A,Cold,Slope
+ND,38,089,6,A,Cold,Stark
+ND,38,091,7,N/A,Very Cold,Steele
+ND,38,093,7,N/A,Very Cold,Stutsman
+ND,38,095,7,N/A,Very Cold,Towner
+ND,38,097,7,N/A,Very Cold,Traill
+ND,38,099,7,N/A,Very Cold,Walsh
+ND,38,101,7,N/A,Very Cold,Ward
+ND,38,103,7,N/A,Very Cold,Wells
+ND,38,105,7,N/A,Very Cold,Williams
+NE,31,001,5,A,Cold,Adams
+NE,31,003,5,A,Cold,Antelope
+NE,31,005,5,A,Cold,Arthur
+NE,31,007,5,A,Cold,Banner
+NE,31,009,5,A,Cold,Blaine
+NE,31,011,5,A,Cold,Boone
+NE,31,013,5,A,Cold,Box Butte
+NE,31,015,5,A,Cold,Boyd
+NE,31,017,5,A,Cold,Brown
+NE,31,019,5,A,Cold,Buffalo
+NE,31,021,5,A,Cold,Burt
+NE,31,023,5,A,Cold,Butler
+NE,31,025,5,A,Cold,Cass
+NE,31,027,5,A,Cold,Cedar
+NE,31,029,5,A,Cold,Chase
+NE,31,031,5,A,Cold,Cherry
+NE,31,033,5,A,Cold,Cheyenne
+NE,31,035,5,A,Cold,Clay
+NE,31,037,5,A,Cold,Colfax
+NE,31,039,5,A,Cold,Cuming
+NE,31,041,5,A,Cold,Custer
+NE,31,043,5,A,Cold,Dakota
+NE,31,045,5,A,Cold,Dawes
+NE,31,047,5,A,Cold,Dawson
+NE,31,049,5,A,Cold,Deuel
+NE,31,051,5,A,Cold,Dixon
+NE,31,053,5,A,Cold,Dodge
+NE,31,055,5,A,Cold,Douglas
+NE,31,057,5,A,Cold,Dundy
+NE,31,059,5,A,Cold,Fillmore
+NE,31,061,5,A,Cold,Franklin
+NE,31,063,5,A,Cold,Frontier
+NE,31,065,5,A,Cold,Furnas
+NE,31,067,5,A,Cold,Gage
+NE,31,069,5,A,Cold,Garden
+NE,31,071,5,A,Cold,Garfield
+NE,31,073,5,A,Cold,Gosper
+NE,31,075,5,A,Cold,Grant
+NE,31,077,5,A,Cold,Greeley
+NE,31,079,5,A,Cold,Hall
+NE,31,081,5,A,Cold,Hamilton
+NE,31,083,5,A,Cold,Harlan
+NE,31,085,5,A,Cold,Hayes
+NE,31,087,5,A,Cold,Hitchcock
+NE,31,089,5,A,Cold,Holt
+NE,31,091,5,A,Cold,Hooker
+NE,31,093,5,A,Cold,Howard
+NE,31,095,5,A,Cold,Jefferson
+NE,31,097,5,A,Cold,Johnson
+NE,31,099,5,A,Cold,Kearney
+NE,31,101,5,A,Cold,Keith
+NE,31,103,5,A,Cold,Keya Paha
+NE,31,105,5,A,Cold,Kimball
+NE,31,107,5,A,Cold,Knox
+NE,31,109,5,A,Cold,Lancaster
+NE,31,111,5,A,Cold,Lincoln
+NE,31,113,5,A,Cold,Logan
+NE,31,115,5,A,Cold,Loup
+NE,31,119,5,A,Cold,Madison
+NE,31,117,5,A,Cold,McPherson
+NE,31,121,5,A,Cold,Merrick
+NE,31,123,5,A,Cold,Morrill
+NE,31,125,5,A,Cold,Nance
+NE,31,127,5,A,Cold,Nemaha
+NE,31,129,5,A,Cold,Nuckolls
+NE,31,131,5,A,Cold,Otoe
+NE,31,133,5,A,Cold,Pawnee
+NE,31,135,5,A,Cold,Perkins
+NE,31,137,5,A,Cold,Phelps
+NE,31,139,5,A,Cold,Pierce
+NE,31,141,5,A,Cold,Platte
+NE,31,143,5,A,Cold,Polk
+NE,31,145,5,A,Cold,Red Willow
+NE,31,147,5,A,Cold,Richardson
+NE,31,149,5,A,Cold,Rock
+NE,31,151,5,A,Cold,Saline
+NE,31,153,5,A,Cold,Sarpy
+NE,31,155,5,A,Cold,Saunders
+NE,31,157,5,A,Cold,Scotts Bluff
+NE,31,159,5,A,Cold,Seward
+NE,31,161,5,A,Cold,Sheridan
+NE,31,163,5,A,Cold,Sherman
+NE,31,165,5,A,Cold,Sioux
+NE,31,167,5,A,Cold,Stanton
+NE,31,169,5,A,Cold,Thayer
+NE,31,171,5,A,Cold,Thomas
+NE,31,173,5,A,Cold,Thurston
+NE,31,175,5,A,Cold,Valley
+NE,31,177,5,A,Cold,Washington
+NE,31,179,5,A,Cold,Wayne
+NE,31,181,5,A,Cold,Webster
+NE,31,183,5,A,Cold,Wheeler
+NE,31,185,5,A,Cold,York
+NH,33,001,6,A,Cold,Belknap
+NH,33,003,6,A,Cold,Carroll
+NH,33,005,5,A,Cold,Cheshire
+NH,33,007,6,A,Cold,Coos
+NH,33,009,6,A,Cold,Grafton
+NH,33,011,5,A,Cold,Hillsborough
+NH,33,013,6,A,Cold,Merrimack
+NH,33,015,5,A,Cold,Rockingham
+NH,33,017,5,A,Cold,Strafford
+NH,33,019,6,A,Cold,Sullivan
+NJ,34,001,4,A,Mixed-Humid,Atlantic
+NJ,34,003,5,A,Cold,Bergen
+NJ,34,005,4,A,Mixed-Humid,Burlington
+NJ,34,007,4,A,Mixed-Humid,Camden
+NJ,34,009,4,A,Mixed-Humid,Cape May
+NJ,34,011,4,A,Mixed-Humid,Cumberland
+NJ,34,013,4,A,Mixed-Humid,Essex
+NJ,34,015,4,A,Mixed-Humid,Gloucester
+NJ,34,017,4,A,Mixed-Humid,Hudson
+NJ,34,019,5,A,Cold,Hunterdon
+NJ,34,021,5,A,Cold,Mercer
+NJ,34,023,4,A,Mixed-Humid,Middlesex
+NJ,34,025,4,A,Mixed-Humid,Monmouth
+NJ,34,027,5,A,Cold,Morris
+NJ,34,029,4,A,Mixed-Humid,Ocean
+NJ,34,031,5,A,Cold,Passaic
+NJ,34,033,4,A,Mixed-Humid,Salem
+NJ,34,035,5,A,Cold,Somerset
+NJ,34,037,5,A,Cold,Sussex
+NJ,34,039,4,A,Mixed-Humid,Union
+NJ,34,041,5,A,Cold,Warren
+NM,35,001,4,B,Mixed-Dry,Bernalillo
+NM,35,003,5,B,Cold,Catron
+NM,35,005,3,B,Hot-Dry,Chaves
+NM,35,006,4,B,Cold,Cibola
+NM,35,007,5,B,Cold,Colfax
+NM,35,009,4,B,Mixed-Dry,Curry
+NM,35,011,4,B,Mixed-Dry,De Baca
+NM,35,013,3,B,Hot-Dry,Doa Ana
+NM,35,015,3,B,Hot-Dry,Eddy
+NM,35,017,4,B,Mixed-Dry,Grant
+NM,35,019,4,B,Mixed-Dry,Guadalupe
+NM,35,021,5,B,Cold,Harding
+NM,35,023,3,B,Hot-Dry,Hidalgo
+NM,35,025,3,B,Hot-Dry,Lea
+NM,35,027,4,B,Mixed-Dry,Lincoln
+NM,35,028,5,B,Cold,Los Alamos
+NM,35,029,3,B,Hot-Dry,Luna
+NM,35,031,5,B,Cold,McKinley
+NM,35,033,5,B,Cold,Mora
+NM,35,035,3,B,Hot-Dry,Otero
+NM,35,037,4,B,Mixed-Dry,Quay
+NM,35,039,5,B,Cold,Rio Arriba
+NM,35,041,4,B,Mixed-Dry,Roosevelt
+NM,35,045,5,B,Cold,San Juan
+NM,35,047,5,B,Cold,San Miguel
+NM,35,043,5,B,Cold,Sandoval
+NM,35,049,5,B,Cold,Santa Fe
+NM,35,051,4,B,Mixed-Dry,Sierra
+NM,35,053,4,B,Mixed-Dry,Socorro
+NM,35,055,5,B,Cold,Taos
+NM,35,057,5,B,Cold,Torrance
+NM,35,059,4,B,Mixed-Dry,Union
+NM,35,061,4,B,Mixed-Dry,Valencia
+NV,32,510,5,B,Cold,Carson City (city)
+NV,32,001,5,B,Cold,Churchill
+NV,32,003,3,B,Hot-Dry,Clark
+NV,32,005,5,B,Cold,Douglas
+NV,32,007,5,B,Cold,Elko
+NV,32,009,5,B,Cold,Esmeralda
+NV,32,011,5,B,Cold,Eureka
+NV,32,013,5,B,Cold,Humboldt
+NV,32,015,5,B,Cold,Lander
+NV,32,017,5,B,Cold,Lincoln
+NV,32,019,5,B,Cold,Lyon
+NV,32,021,5,B,Cold,Mineral
+NV,32,023,5,B,Cold,Nye
+NV,32,027,5,B,Cold,Pershing
+NV,32,029,5,B,Cold,Storey
+NV,32,031,5,B,Cold,Washoe
+NV,32,033,5,B,Cold,White Pine
+NY,36,001,5,A,Cold,Albany
+NY,36,003,6,A,Cold,Allegany
+NY,36,005,4,A,Mixed-Humid,Bronx
+NY,36,007,6,A,Cold,Broome
+NY,36,009,6,A,Cold,Cattaraugus
+NY,36,011,5,A,Cold,Cayuga
+NY,36,013,5,A,Cold,Chautauqua
+NY,36,015,5,A,Cold,Chemung
+NY,36,017,6,A,Cold,Chenango
+NY,36,019,6,A,Cold,Clinton
+NY,36,021,5,A,Cold,Columbia
+NY,36,023,5,A,Cold,Cortland
+NY,36,025,6,A,Cold,Delaware
+NY,36,027,5,A,Cold,Dutchess
+NY,36,029,5,A,Cold,Erie
+NY,36,031,6,A,Cold,Essex
+NY,36,033,6,A,Cold,Franklin
+NY,36,035,6,A,Cold,Fulton
+NY,36,037,5,A,Cold,Genesee
+NY,36,039,5,A,Cold,Greene
+NY,36,041,6,A,Cold,Hamilton
+NY,36,043,6,A,Cold,Herkimer
+NY,36,045,6,A,Cold,Jefferson
+NY,36,047,4,A,Mixed-Humid,Kings
+NY,36,049,6,A,Cold,Lewis
+NY,36,051,5,A,Cold,Livingston
+NY,36,053,6,A,Cold,Madison
+NY,36,055,5,A,Cold,Monroe
+NY,36,057,6,A,Cold,Montgomery
+NY,36,059,4,A,Mixed-Humid,Nassau
+NY,36,061,4,A,Mixed-Humid,New York
+NY,36,063,5,A,Cold,Niagara
+NY,36,065,6,A,Cold,Oneida
+NY,36,067,5,A,Cold,Onondaga
+NY,36,069,5,A,Cold,Ontario
+NY,36,071,5,A,Cold,Orange
+NY,36,073,5,A,Cold,Orleans
+NY,36,075,5,A,Cold,Oswego
+NY,36,077,6,A,Cold,Otsego
+NY,36,079,5,A,Cold,Putnam
+NY,36,081,4,A,Mixed-Humid,Queens
+NY,36,083,5,A,Cold,Rensselaer
+NY,36,085,4,A,Mixed-Humid,Richmond
+NY,36,087,5,A,Cold,Rockland
+NY,36,091,5,A,Cold,Saratoga
+NY,36,093,5,A,Cold,Schenectady
+NY,36,095,6,A,Cold,Schoharie
+NY,36,097,6,A,Cold,Schuyler
+NY,36,099,5,A,Cold,Seneca
+NY,36,089,6,A,Cold,St. Lawrence
+NY,36,101,6,A,Cold,Steuben
+NY,36,103,4,A,Mixed-Humid,Suffolk
+NY,36,105,6,A,Cold,Sullivan
+NY,36,107,5,A,Cold,Tioga
+NY,36,109,6,A,Cold,Tompkins
+NY,36,111,6,A,Cold,Ulster
+NY,36,113,6,A,Cold,Warren
+NY,36,115,5,A,Cold,Washington
+NY,36,117,5,A,Cold,Wayne
+NY,36,119,4,A,Mixed-Humid,Westchester
+NY,36,121,6,A,Cold,Wyoming
+NY,36,123,5,A,Cold,Yates
+OH,39,001,4,A,Mixed-Humid,Adams
+OH,39,003,5,A,Cold,Allen
+OH,39,005,5,A,Cold,Ashland
+OH,39,007,5,A,Cold,Ashtabula
+OH,39,009,5,A,Cold,Athens
+OH,39,011,5,A,Cold,Auglaize
+OH,39,013,5,A,Cold,Belmont
+OH,39,015,4,A,Mixed-Humid,Brown
+OH,39,017,5,A,Cold,Butler
+OH,39,019,5,A,Cold,Carroll
+OH,39,021,5,A,Cold,Champaign
+OH,39,023,5,A,Cold,Clark
+OH,39,025,4,A,Mixed-Humid,Clermont
+OH,39,027,5,A,Cold,Clinton
+OH,39,029,5,A,Cold,Columbiana
+OH,39,031,5,A,Cold,Coshocton
+OH,39,033,5,A,Cold,Crawford
+OH,39,035,5,A,Cold,Cuyahoga
+OH,39,037,5,A,Cold,Darke
+OH,39,039,5,A,Cold,Defiance
+OH,39,041,5,A,Cold,Delaware
+OH,39,043,5,A,Cold,Erie
+OH,39,045,5,A,Cold,Fairfield
+OH,39,047,5,A,Cold,Fayette
+OH,39,049,5,A,Cold,Franklin
+OH,39,051,5,A,Cold,Fulton
+OH,39,053,4,A,Mixed-Humid,Gallia
+OH,39,055,5,A,Cold,Geauga
+OH,39,057,5,A,Cold,Greene
+OH,39,059,5,A,Cold,Guernsey
+OH,39,061,4,A,Mixed-Humid,Hamilton
+OH,39,063,5,A,Cold,Hancock
+OH,39,065,5,A,Cold,Hardin
+OH,39,067,5,A,Cold,Harrison
+OH,39,069,5,A,Cold,Henry
+OH,39,071,5,A,Cold,Highland
+OH,39,073,5,A,Cold,Hocking
+OH,39,075,5,A,Cold,Holmes
+OH,39,077,5,A,Cold,Huron
+OH,39,079,5,A,Cold,Jackson
+OH,39,081,5,A,Cold,Jefferson
+OH,39,083,5,A,Cold,Knox
+OH,39,085,5,A,Cold,Lake
+OH,39,087,4,A,Mixed-Humid,Lawrence
+OH,39,089,5,A,Cold,Licking
+OH,39,091,5,A,Cold,Logan
+OH,39,093,5,A,Cold,Lorain
+OH,39,095,5,A,Cold,Lucas
+OH,39,097,5,A,Cold,Madison
+OH,39,099,5,A,Cold,Mahoning
+OH,39,101,5,A,Cold,Marion
+OH,39,103,5,A,Cold,Medina
+OH,39,105,5,A,Cold,Meigs
+OH,39,107,5,A,Cold,Mercer
+OH,39,109,5,A,Cold,Miami
+OH,39,111,5,A,Cold,Monroe
+OH,39,113,5,A,Cold,Montgomery
+OH,39,115,5,A,Cold,Morgan
+OH,39,117,5,A,Cold,Morrow
+OH,39,119,5,A,Cold,Muskingum
+OH,39,121,5,A,Cold,Noble
+OH,39,123,5,A,Cold,Ottawa
+OH,39,125,5,A,Cold,Paulding
+OH,39,127,5,A,Cold,Perry
+OH,39,129,5,A,Cold,Pickaway
+OH,39,131,4,A,Mixed-Humid,Pike
+OH,39,133,5,A,Cold,Portage
+OH,39,135,5,A,Cold,Preble
+OH,39,137,5,A,Cold,Putnam
+OH,39,139,5,A,Cold,Richland
+OH,39,141,5,A,Cold,Ross
+OH,39,143,5,A,Cold,Sandusky
+OH,39,145,4,A,Mixed-Humid,Scioto
+OH,39,147,5,A,Cold,Seneca
+OH,39,149,5,A,Cold,Shelby
+OH,39,151,5,A,Cold,Stark
+OH,39,153,5,A,Cold,Summit
+OH,39,155,5,A,Cold,Trumbull
+OH,39,157,5,A,Cold,Tuscarawas
+OH,39,159,5,A,Cold,Union
+OH,39,161,5,A,Cold,Van Wert
+OH,39,163,5,A,Cold,Vinton
+OH,39,165,5,A,Cold,Warren
+OH,39,167,4,A,Mixed-Humid,Washington
+OH,39,169,5,A,Cold,Wayne
+OH,39,171,5,A,Cold,Williams
+OH,39,173,5,A,Cold,Wood
+OH,39,175,5,A,Cold,Wyandot
+OK,40,001,3,A,Mixed-Humid,Adair
+OK,40,003,3,A,Mixed-Humid,Alfalfa
+OK,40,005,3,A,Mixed-Humid,Atoka
+OK,40,007,4,B,Mixed-Dry,Beaver
+OK,40,009,3,A,Mixed-Humid,Beckham
+OK,40,011,3,A,Mixed-Humid,Blaine
+OK,40,013,3,A,Mixed-Humid,Bryan
+OK,40,015,3,A,Mixed-Humid,Caddo
+OK,40,017,3,A,Mixed-Humid,Canadian
+OK,40,019,3,A,Mixed-Humid,Carter
+OK,40,021,3,A,Mixed-Humid,Cherokee
+OK,40,023,3,A,Mixed-Humid,Choctaw
+OK,40,025,4,B,Mixed-Dry,Cimarron
+OK,40,027,3,A,Mixed-Humid,Cleveland
+OK,40,029,3,A,Mixed-Humid,Coal
+OK,40,031,3,A,Mixed-Humid,Comanche
+OK,40,033,3,A,Mixed-Humid,Cotton
+OK,40,035,3,A,Mixed-Humid,Craig
+OK,40,037,3,A,Mixed-Humid,Creek
+OK,40,039,3,A,Mixed-Humid,Custer
+OK,40,041,3,A,Mixed-Humid,Delaware
+OK,40,043,3,A,Mixed-Humid,Dewey
+OK,40,045,3,A,Mixed-Humid,Ellis
+OK,40,047,3,A,Mixed-Humid,Garfield
+OK,40,049,3,A,Mixed-Humid,Garvin
+OK,40,051,3,A,Mixed-Humid,Grady
+OK,40,053,3,A,Mixed-Humid,Grant
+OK,40,055,3,A,Mixed-Humid,Greer
+OK,40,057,3,A,Mixed-Humid,Harmon
+OK,40,059,3,A,Mixed-Humid,Harper
+OK,40,061,3,A,Mixed-Humid,Haskell
+OK,40,063,3,A,Mixed-Humid,Hughes
+OK,40,065,3,A,Mixed-Humid,Jackson
+OK,40,067,3,A,Mixed-Humid,Jefferson
+OK,40,069,3,A,Mixed-Humid,Johnston
+OK,40,071,3,A,Mixed-Humid,Kay
+OK,40,073,3,A,Mixed-Humid,Kingfisher
+OK,40,075,3,A,Mixed-Humid,Kiowa
+OK,40,077,3,A,Mixed-Humid,Latimer
+OK,40,079,3,A,Mixed-Humid,Le Flore
+OK,40,081,3,A,Mixed-Humid,Lincoln
+OK,40,083,3,A,Mixed-Humid,Logan
+OK,40,085,3,A,Mixed-Humid,Love
+OK,40,093,3,A,Mixed-Humid,Major
+OK,40,095,3,A,Mixed-Humid,Marshall
+OK,40,097,3,A,Mixed-Humid,Mayes
+OK,40,087,3,A,Mixed-Humid,McClain
+OK,40,089,3,A,Mixed-Humid,McCurtain
+OK,40,091,3,A,Mixed-Humid,McIntosh
+OK,40,099,3,A,Mixed-Humid,Murray
+OK,40,101,3,A,Mixed-Humid,Muskogee
+OK,40,103,3,A,Mixed-Humid,Noble
+OK,40,105,3,A,Mixed-Humid,Nowata
+OK,40,107,3,A,Mixed-Humid,Okfuskee
+OK,40,109,3,A,Mixed-Humid,Oklahoma
+OK,40,111,3,A,Mixed-Humid,Okmulgee
+OK,40,113,3,A,Mixed-Humid,Osage
+OK,40,115,3,A,Mixed-Humid,Ottawa
+OK,40,117,3,A,Mixed-Humid,Pawnee
+OK,40,119,3,A,Mixed-Humid,Payne
+OK,40,121,3,A,Mixed-Humid,Pittsburg
+OK,40,123,3,A,Mixed-Humid,Pontotoc
+OK,40,125,3,A,Mixed-Humid,Pottawatomie
+OK,40,127,3,A,Mixed-Humid,Pushmataha
+OK,40,129,3,A,Mixed-Humid,Roger Mills
+OK,40,131,3,A,Mixed-Humid,Rogers
+OK,40,133,3,A,Mixed-Humid,Seminole
+OK,40,135,3,A,Mixed-Humid,Sequoyah
+OK,40,137,3,A,Mixed-Humid,Stephens
+OK,40,139,4,B,Mixed-Dry,Texas
+OK,40,141,3,A,Mixed-Humid,Tillman
+OK,40,143,3,A,Mixed-Humid,Tulsa
+OK,40,145,3,A,Mixed-Humid,Wagoner
+OK,40,147,3,A,Mixed-Humid,Washington
+OK,40,149,3,A,Mixed-Humid,Washita
+OK,40,151,3,A,Mixed-Humid,Woods
+OK,40,153,3,A,Mixed-Humid,Woodward
+OR,41,001,5,B,Cold,Baker
+OR,41,003,4,C,Marine,Benton
+OR,41,005,4,C,Marine,Clackamas
+OR,41,007,4,C,Marine,Clatsop
+OR,41,009,4,C,Marine,Columbia
+OR,41,011,4,C,Marine,Coos
+OR,41,013,5,B,Cold,Crook
+OR,41,015,4,C,Marine,Curry
+OR,41,017,5,B,Cold,Deschutes
+OR,41,019,4,C,Marine,Douglas
+OR,41,021,5,B,Cold,Gilliam
+OR,41,023,5,B,Cold,Grant
+OR,41,025,5,B,Cold,Harney
+OR,41,027,5,B,Cold,Hood River
+OR,41,029,4,C,Marine,Jackson
+OR,41,031,5,B,Cold,Jefferson
+OR,41,033,4,C,Marine,Josephine
+OR,41,035,5,B,Cold,Klamath
+OR,41,037,5,B,Cold,Lake
+OR,41,039,4,C,Marine,Lane
+OR,41,041,4,C,Marine,Lincoln
+OR,41,043,4,C,Marine,Linn
+OR,41,045,5,B,Cold,Malheur
+OR,41,047,4,C,Marine,Marion
+OR,41,049,5,B,Cold,Morrow
+OR,41,051,4,C,Marine,Multnomah
+OR,41,053,4,C,Marine,Polk
+OR,41,055,5,B,Cold,Sherman
+OR,41,057,4,C,Marine,Tillamook
+OR,41,059,5,B,Cold,Umatilla
+OR,41,061,5,B,Cold,Union
+OR,41,063,5,B,Cold,Wallowa
+OR,41,065,5,B,Cold,Wasco
+OR,41,067,4,C,Marine,Washington
+OR,41,069,5,B,Cold,Wheeler
+OR,41,071,4,C,Marine,Yamhill
+PA,42,001,5,A,Cold,Adams
+PA,42,003,5,A,Cold,Allegheny
+PA,42,005,5,A,Cold,Armstrong
+PA,42,007,5,A,Cold,Beaver
+PA,42,009,5,A,Cold,Bedford
+PA,42,011,5,A,Cold,Berks
+PA,42,013,5,A,Cold,Blair
+PA,42,015,5,A,Cold,Bradford
+PA,42,017,4,A,Mixed-Humid,Bucks
+PA,42,019,5,A,Cold,Butler
+PA,42,021,5,A,Cold,Cambria
+PA,42,023,6,A,Cold,Cameron
+PA,42,025,5,A,Cold,Carbon
+PA,42,027,5,A,Cold,Centre
+PA,42,029,4,A,Mixed-Humid,Chester
+PA,42,031,5,A,Cold,Clarion
+PA,42,033,6,A,Cold,Clearfield
+PA,42,035,5,A,Cold,Clinton
+PA,42,037,5,A,Cold,Columbia
+PA,42,039,5,A,Cold,Crawford
+PA,42,041,5,A,Cold,Cumberland
+PA,42,043,5,A,Cold,Dauphin
+PA,42,045,4,A,Mixed-Humid,Delaware
+PA,42,047,6,A,Cold,Elk
+PA,42,049,5,A,Cold,Erie
+PA,42,051,5,A,Cold,Fayette
+PA,42,053,5,A,Cold,Forest
+PA,42,055,5,A,Cold,Franklin
+PA,42,057,5,A,Cold,Fulton
+PA,42,059,5,A,Cold,Greene
+PA,42,061,5,A,Cold,Huntingdon
+PA,42,063,5,A,Cold,Indiana
+PA,42,065,5,A,Cold,Jefferson
+PA,42,067,5,A,Cold,Juniata
+PA,42,069,5,A,Cold,Lackawanna
+PA,42,071,5,A,Cold,Lancaster
+PA,42,073,5,A,Cold,Lawrence
+PA,42,075,5,A,Cold,Lebanon
+PA,42,077,5,A,Cold,Lehigh
+PA,42,079,5,A,Cold,Luzerne
+PA,42,081,5,A,Cold,Lycoming
+PA,42,083,6,A,Cold,McKean
+PA,42,085,5,A,Cold,Mercer
+PA,42,087,5,A,Cold,Mifflin
+PA,42,089,5,A,Cold,Monroe
+PA,42,091,4,A,Mixed-Humid,Montgomery
+PA,42,093,5,A,Cold,Montour
+PA,42,095,5,A,Cold,Northampton
+PA,42,097,5,A,Cold,Northumberland
+PA,42,099,5,A,Cold,Perry
+PA,42,101,4,A,Mixed-Humid,Philadelphia
+PA,42,103,5,A,Cold,Pike
+PA,42,105,6,A,Cold,Potter
+PA,42,107,5,A,Cold,Schuylkill
+PA,42,109,5,A,Cold,Snyder
+PA,42,111,5,A,Cold,Somerset
+PA,42,113,5,A,Cold,Sullivan
+PA,42,115,6,A,Cold,Susquehanna
+PA,42,117,6,A,Cold,Tioga
+PA,42,119,5,A,Cold,Union
+PA,42,121,5,A,Cold,Venango
+PA,42,123,5,A,Cold,Warren
+PA,42,125,5,A,Cold,Washington
+PA,42,127,6,A,Cold,Wayne
+PA,42,129,5,A,Cold,Westmoreland
+PA,42,131,5,A,Cold,Wyoming
+PA,42,133,4,A,Mixed-Humid,York
+PR,72,001,1,A,Hot-Humid,Adjuntas
+PR,72,003,1,A,Hot-Humid,Aguada
+PR,72,005,1,A,Hot-Humid,Aguadilla
+PR,72,007,1,A,Hot-Humid,Aguas Buenas
+PR,72,009,1,A,Hot-Humid,Aibonito
+PR,72,011,1,A,Hot-Humid,Anasco
+PR,72,013,1,A,Hot-Humid,Arecibo
+PR,72,015,1,A,Hot-Humid,Arroyo
+PR,72,017,1,A,Hot-Humid,Barceloneta
+PR,72,019,1,A,Hot-Humid,Barranquitas
+PR,72,021,1,A,Hot-Humid,Bayamon
+PR,72,023,1,A,Hot-Humid,Cabo Rojo
+PR,72,025,1,A,Hot-Humid,Caguas
+PR,72,027,1,A,Hot-Humid,Camuy
+PR,72,029,1,A,Hot-Humid,Canovanas
+PR,72,031,1,A,Hot-Humid,Carolina
+PR,72,033,1,A,Hot-Humid,Catano
+PR,72,035,1,A,Hot-Humid,Cayey
+PR,72,037,1,A,Hot-Humid,Ceiba
+PR,72,039,1,A,Hot-Humid,Ciales
+PR,72,041,1,A,Hot-Humid,Cidra
+PR,72,043,1,A,Hot-Humid,Coamo
+PR,72,045,1,A,Hot-Humid,Comerio
+PR,72,047,1,A,Hot-Humid,Corozal
+PR,72,049,1,A,Hot-Humid,Culebra
+PR,72,051,1,A,Hot-Humid,Dorado
+PR,72,053,1,A,Hot-Humid,Fajardo
+PR,72,054,1,A,Hot-Humid,Florida
+PR,72,055,1,A,Hot-Humid,Guanica
+PR,72,057,1,A,Hot-Humid,Guayama
+PR,72,059,1,A,Hot-Humid,Guayanilla
+PR,72,061,1,A,Hot-Humid,Guaynabo
+PR,72,063,1,A,Hot-Humid,Gurabo
+PR,72,065,1,A,Hot-Humid,Hatillo
+PR,72,067,1,A,Hot-Humid,Hormigueros
+PR,72,069,1,A,Hot-Humid,Humacao
+PR,72,071,1,A,Hot-Humid,Isabela
+PR,72,073,1,A,Hot-Humid,Jayuya
+PR,72,075,1,A,Hot-Humid,Juana Diaz
+PR,72,077,1,A,Hot-Humid,Juncos
+PR,72,079,1,A,Hot-Humid,Lajas
+PR,72,081,1,A,Hot-Humid,Lares
+PR,72,083,1,A,Hot-Humid,Las Marias
+PR,72,085,1,A,Hot-Humid,Las Piedras
+PR,72,087,1,A,Hot-Humid,Loiza
+PR,72,089,1,A,Hot-Humid,Luquillo
+PR,72,091,1,A,Hot-Humid,Manati
+PR,72,093,1,A,Hot-Humid,Maricao
+PR,72,095,1,A,Hot-Humid,Maunabo
+PR,72,097,1,A,Hot-Humid,Mayaguez
+PR,72,099,1,A,Hot-Humid,Moca
+PR,72,101,1,A,Hot-Humid,Morovis
+PR,72,103,1,A,Hot-Humid,Naguabo
+PR,72,105,1,A,Hot-Humid,Naranjito
+PR,72,107,1,A,Hot-Humid,Orocovis
+PR,72,109,1,A,Hot-Humid,Patillas
+PR,72,111,1,A,Hot-Humid,Penuelas
+PR,72,113,1,A,Hot-Humid,Ponce
+PR,72,115,1,A,Hot-Humid,Quebradillas
+PR,72,117,1,A,Hot-Humid,Rincon
+PR,72,119,1,A,Hot-Humid,Rio Grande
+PR,72,121,1,A,Hot-Humid,Sabana Grande
+PR,72,123,1,A,Hot-Humid,Salinas
+PR,72,125,1,A,Hot-Humid,San German
+PR,72,127,1,A,Hot-Humid,San Juan
+PR,72,129,1,A,Hot-Humid,San Lorenzo
+PR,72,131,1,A,Hot-Humid,San Sebastian
+PR,72,133,1,A,Hot-Humid,Santa Isabel
+PR,72,135,1,A,Hot-Humid,Toa Alta
+PR,72,137,1,A,Hot-Humid,Toa Baja
+PR,72,139,1,A,Hot-Humid,Trujillo Alto
+PR,72,141,1,A,Hot-Humid,Utuado
+PR,72,143,1,A,Hot-Humid,Vega Alta
+PR,72,145,1,A,Hot-Humid,Vega Baja
+PR,72,147,1,A,Hot-Humid,Vieques
+PR,72,149,1,A,Hot-Humid,Villalba
+PR,72,151,1,A,Hot-Humid,Yabucoa
+PR,72,153,1,A,Hot-Humid,Yauco
+RI,44,001,5,A,Cold,Bristol
+RI,44,003,5,A,Cold,Kent
+RI,44,005,5,A,Cold,Newport
+RI,44,007,5,A,Cold,Providence
+RI,44,009,5,A,Cold,Washington
+SC,45,001,3,A,Mixed-Humid,Abbeville
+SC,45,003,3,A,Mixed-Humid,Aiken
+SC,45,005,3,A,Hot-Humid,Allendale
+SC,45,007,3,A,Mixed-Humid,Anderson
+SC,45,009,3,A,Hot-Humid,Bamberg
+SC,45,011,3,A,Hot-Humid,Barnwell
+SC,45,013,3,A,Hot-Humid,Beaufort
+SC,45,015,3,A,Hot-Humid,Berkeley
+SC,45,017,3,A,Mixed-Humid,Calhoun
+SC,45,019,3,A,Hot-Humid,Charleston
+SC,45,021,3,A,Mixed-Humid,Cherokee
+SC,45,023,3,A,Mixed-Humid,Chester
+SC,45,025,3,A,Mixed-Humid,Chesterfield
+SC,45,027,3,A,Mixed-Humid,Clarendon
+SC,45,029,3,A,Hot-Humid,Colleton
+SC,45,031,3,A,Mixed-Humid,Darlington
+SC,45,033,3,A,Mixed-Humid,Dillon
+SC,45,035,3,A,Hot-Humid,Dorchester
+SC,45,037,3,A,Mixed-Humid,Edgefield
+SC,45,039,3,A,Mixed-Humid,Fairfield
+SC,45,041,3,A,Mixed-Humid,Florence
+SC,45,043,3,A,Hot-Humid,Georgetown
+SC,45,045,3,A,Mixed-Humid,Greenville
+SC,45,047,3,A,Mixed-Humid,Greenwood
+SC,45,049,3,A,Hot-Humid,Hampton
+SC,45,051,3,A,Hot-Humid,Horry
+SC,45,053,3,A,Hot-Humid,Jasper
+SC,45,055,3,A,Mixed-Humid,Kershaw
+SC,45,057,3,A,Mixed-Humid,Lancaster
+SC,45,059,3,A,Mixed-Humid,Laurens
+SC,45,061,3,A,Mixed-Humid,Lee
+SC,45,063,3,A,Mixed-Humid,Lexington
+SC,45,067,3,A,Mixed-Humid,Marion
+SC,45,069,3,A,Mixed-Humid,Marlboro
+SC,45,065,3,A,Mixed-Humid,McCormick
+SC,45,071,3,A,Mixed-Humid,Newberry
+SC,45,073,3,A,Mixed-Humid,Oconee
+SC,45,075,3,A,Mixed-Humid,Orangeburg
+SC,45,077,3,A,Mixed-Humid,Pickens
+SC,45,079,3,A,Mixed-Humid,Richland
+SC,45,081,3,A,Mixed-Humid,Saluda
+SC,45,083,3,A,Mixed-Humid,Spartanburg
+SC,45,085,3,A,Mixed-Humid,Sumter
+SC,45,087,3,A,Mixed-Humid,Union
+SC,45,089,3,A,Mixed-Humid,Williamsburg
+SC,45,091,3,A,Mixed-Humid,York
+SD,46,003,6,A,Cold,Aurora
+SD,46,005,6,A,Cold,Beadle
+SD,46,007,5,A,Cold,Bennett
+SD,46,009,5,A,Cold,Bon Homme
+SD,46,011,6,A,Cold,Brookings
+SD,46,013,6,A,Cold,Brown
+SD,46,015,6,A,Cold,Brule
+SD,46,017,6,A,Cold,Buffalo
+SD,46,019,6,A,Cold,Butte
+SD,46,021,6,A,Cold,Campbell
+SD,46,023,5,A,Cold,Charles Mix
+SD,46,025,6,A,Cold,Clark
+SD,46,027,5,A,Cold,Clay
+SD,46,029,6,A,Cold,Codington
+SD,46,031,6,A,Cold,Corson
+SD,46,033,6,A,Cold,Custer
+SD,46,035,6,A,Cold,Davison
+SD,46,037,6,A,Cold,Day
+SD,46,039,6,A,Cold,Deuel
+SD,46,041,6,A,Cold,Dewey
+SD,46,043,5,A,Cold,Douglas
+SD,46,045,6,A,Cold,Edmunds
+SD,46,047,6,A,Cold,Fall River
+SD,46,049,6,A,Cold,Faulk
+SD,46,051,6,A,Cold,Grant
+SD,46,053,5,A,Cold,Gregory
+SD,46,055,6,A,Cold,Haakon
+SD,46,057,6,A,Cold,Hamlin
+SD,46,059,6,A,Cold,Hand
+SD,46,061,6,A,Cold,Hanson
+SD,46,063,6,A,Cold,Harding
+SD,46,065,6,A,Cold,Hughes
+SD,46,067,5,A,Cold,Hutchinson
+SD,46,069,6,A,Cold,Hyde
+SD,46,071,5,A,Cold,Jackson
+SD,46,073,6,A,Cold,Jerauld
+SD,46,075,6,A,Cold,Jones
+SD,46,077,6,A,Cold,Kingsbury
+SD,46,079,6,A,Cold,Lake
+SD,46,081,6,A,Cold,Lawrence
+SD,46,083,6,A,Cold,Lincoln
+SD,46,085,6,A,Cold,Lyman
+SD,46,091,6,A,Cold,Marshall
+SD,46,087,6,A,Cold,McCook
+SD,46,089,6,A,Cold,McPherson
+SD,46,093,6,A,Cold,Meade
+SD,46,095,5,A,Cold,Mellette
+SD,46,097,6,A,Cold,Miner
+SD,46,099,6,A,Cold,Minnehaha
+SD,46,101,6,A,Cold,Moody
+SD,46,102,6,A,Cold,Oglala Lakota
+SD,46,103,6,A,Cold,Pennington
+SD,46,105,6,A,Cold,Perkins
+SD,46,107,6,A,Cold,Potter
+SD,46,109,6,A,Cold,Roberts
+SD,46,111,6,A,Cold,Sanborn
+SD,46,115,6,A,Cold,Spink
+SD,46,117,6,A,Cold,Stanley
+SD,46,119,6,A,Cold,Sully
+SD,46,121,5,A,Cold,Todd
+SD,46,123,5,A,Cold,Tripp
+SD,46,125,6,A,Cold,Turner
+SD,46,127,5,A,Cold,Union
+SD,46,129,6,A,Cold,Walworth
+SD,46,135,5,A,Cold,Yankton
+SD,46,137,6,A,Cold,Ziebach
+TN,47,001,4,A,Mixed-Humid,Anderson
+TN,47,003,4,A,Mixed-Humid,Bedford
+TN,47,005,4,A,Mixed-Humid,Benton
+TN,47,007,4,A,Mixed-Humid,Bledsoe
+TN,47,009,4,A,Mixed-Humid,Blount
+TN,47,011,4,A,Mixed-Humid,Bradley
+TN,47,013,4,A,Mixed-Humid,Campbell
+TN,47,015,4,A,Mixed-Humid,Cannon
+TN,47,017,4,A,Mixed-Humid,Carroll
+TN,47,019,4,A,Mixed-Humid,Carter
+TN,47,021,4,A,Mixed-Humid,Cheatham
+TN,47,023,3,A,Mixed-Humid,Chester
+TN,47,025,4,A,Mixed-Humid,Claiborne
+TN,47,027,4,A,Mixed-Humid,Clay
+TN,47,029,4,A,Mixed-Humid,Cocke
+TN,47,031,4,A,Mixed-Humid,Coffee
+TN,47,033,3,A,Mixed-Humid,Crockett
+TN,47,035,4,A,Mixed-Humid,Cumberland
+TN,47,037,4,A,Mixed-Humid,Davidson
+TN,47,039,4,A,Mixed-Humid,Decatur
+TN,47,041,4,A,Mixed-Humid,DeKalb
+TN,47,043,4,A,Mixed-Humid,Dickson
+TN,47,045,3,A,Mixed-Humid,Dyer
+TN,47,047,3,A,Mixed-Humid,Fayette
+TN,47,049,4,A,Mixed-Humid,Fentress
+TN,47,051,4,A,Mixed-Humid,Franklin
+TN,47,053,4,A,Mixed-Humid,Gibson
+TN,47,055,4,A,Mixed-Humid,Giles
+TN,47,057,4,A,Mixed-Humid,Grainger
+TN,47,059,4,A,Mixed-Humid,Greene
+TN,47,061,4,A,Mixed-Humid,Grundy
+TN,47,063,4,A,Mixed-Humid,Hamblen
+TN,47,065,4,A,Mixed-Humid,Hamilton
+TN,47,067,4,A,Mixed-Humid,Hancock
+TN,47,069,3,A,Mixed-Humid,Hardeman
+TN,47,071,3,A,Mixed-Humid,Hardin
+TN,47,073,4,A,Mixed-Humid,Hawkins
+TN,47,075,3,A,Mixed-Humid,Haywood
+TN,47,077,3,A,Mixed-Humid,Henderson
+TN,47,079,4,A,Mixed-Humid,Henry
+TN,47,081,4,A,Mixed-Humid,Hickman
+TN,47,083,4,A,Mixed-Humid,Houston
+TN,47,085,4,A,Mixed-Humid,Humphreys
+TN,47,087,4,A,Mixed-Humid,Jackson
+TN,47,089,4,A,Mixed-Humid,Jefferson
+TN,47,091,4,A,Mixed-Humid,Johnson
+TN,47,093,4,A,Mixed-Humid,Knox
+TN,47,095,3,A,Mixed-Humid,Lake
+TN,47,097,3,A,Mixed-Humid,Lauderdale
+TN,47,099,4,A,Mixed-Humid,Lawrence
+TN,47,101,4,A,Mixed-Humid,Lewis
+TN,47,103,4,A,Mixed-Humid,Lincoln
+TN,47,105,4,A,Mixed-Humid,Loudon
+TN,47,111,4,A,Mixed-Humid,Macon
+TN,47,113,3,A,Mixed-Humid,Madison
+TN,47,115,4,A,Mixed-Humid,Marion
+TN,47,117,4,A,Mixed-Humid,Marshall
+TN,47,119,4,A,Mixed-Humid,Maury
+TN,47,107,4,A,Mixed-Humid,McMinn
+TN,47,109,3,A,Mixed-Humid,McNairy
+TN,47,121,4,A,Mixed-Humid,Meigs
+TN,47,123,4,A,Mixed-Humid,Monroe
+TN,47,125,4,A,Mixed-Humid,Montgomery
+TN,47,127,4,A,Mixed-Humid,Moore
+TN,47,129,4,A,Mixed-Humid,Morgan
+TN,47,131,4,A,Mixed-Humid,Obion
+TN,47,133,4,A,Mixed-Humid,Overton
+TN,47,135,4,A,Mixed-Humid,Perry
+TN,47,137,4,A,Mixed-Humid,Pickett
+TN,47,139,4,A,Mixed-Humid,Polk
+TN,47,141,4,A,Mixed-Humid,Putnam
+TN,47,143,4,A,Mixed-Humid,Rhea
+TN,47,145,4,A,Mixed-Humid,Roane
+TN,47,147,4,A,Mixed-Humid,Robertson
+TN,47,149,4,A,Mixed-Humid,Rutherford
+TN,47,151,4,A,Mixed-Humid,Scott
+TN,47,153,4,A,Mixed-Humid,Sequatchie
+TN,47,155,4,A,Mixed-Humid,Sevier
+TN,47,157,3,A,Mixed-Humid,Shelby
+TN,47,159,4,A,Mixed-Humid,Smith
+TN,47,161,4,A,Mixed-Humid,Stewart
+TN,47,163,4,A,Mixed-Humid,Sullivan
+TN,47,165,4,A,Mixed-Humid,Sumner
+TN,47,167,3,A,Mixed-Humid,Tipton
+TN,47,169,4,A,Mixed-Humid,Trousdale
+TN,47,171,4,A,Mixed-Humid,Unicoi
+TN,47,173,4,A,Mixed-Humid,Union
+TN,47,175,4,A,Mixed-Humid,Van Buren
+TN,47,177,4,A,Mixed-Humid,Warren
+TN,47,179,4,A,Mixed-Humid,Washington
+TN,47,181,4,A,Mixed-Humid,Wayne
+TN,47,183,4,A,Mixed-Humid,Weakley
+TN,47,185,4,A,Mixed-Humid,White
+TN,47,187,4,A,Mixed-Humid,Williamson
+TN,47,189,4,A,Mixed-Humid,Wilson
+TX,48,001,2,A,Hot-Humid,Anderson
+TX,48,003,3,B,Hot-Dry,Andrews
+TX,48,005,2,A,Hot-Humid,Angelina
+TX,48,007,2,A,Hot-Humid,Aransas
+TX,48,009,3,A,Mixed-Humid,Archer
+TX,48,011,4,B,Mixed-Dry,Armstrong
+TX,48,013,2,A,Hot-Humid,Atascosa
+TX,48,015,2,A,Hot-Humid,Austin
+TX,48,017,4,B,Mixed-Dry,Bailey
+TX,48,019,2,B,Hot-Humid,Bandera
+TX,48,021,2,A,Hot-Humid,Bastrop
+TX,48,023,3,B,Hot-Dry,Baylor
+TX,48,025,2,A,Hot-Humid,Bee
+TX,48,027,2,A,Hot-Humid,Bell
+TX,48,029,2,A,Hot-Humid,Bexar
+TX,48,031,3,A,Hot-Humid,Blanco
+TX,48,033,3,B,Hot-Dry,Borden
+TX,48,035,2,A,Hot-Humid,Bosque
+TX,48,037,3,A,Hot-Humid,Bowie
+TX,48,039,2,A,Hot-Humid,Brazoria
+TX,48,041,2,A,Hot-Humid,Brazos
+TX,48,043,3,B,Hot-Dry,Brewster
+TX,48,045,4,B,Mixed-Dry,Briscoe
+TX,48,047,2,A,Hot-Humid,Brooks
+TX,48,049,3,A,Hot-Humid,Brown
+TX,48,051,2,A,Hot-Humid,Burleson
+TX,48,053,3,A,Hot-Humid,Burnet
+TX,48,055,2,A,Hot-Humid,Caldwell
+TX,48,057,2,A,Hot-Humid,Calhoun
+TX,48,059,3,B,Hot-Dry,Callahan
+TX,48,061,2,A,Hot-Humid,Cameron
+TX,48,063,3,A,Hot-Humid,Camp
+TX,48,065,4,B,Mixed-Dry,Carson
+TX,48,067,3,A,Hot-Humid,Cass
+TX,48,069,4,B,Mixed-Dry,Castro
+TX,48,071,2,A,Hot-Humid,Chambers
+TX,48,073,2,A,Hot-Humid,Cherokee
+TX,48,075,3,B,Hot-Dry,Childress
+TX,48,077,3,A,Mixed-Humid,Clay
+TX,48,079,4,B,Mixed-Dry,Cochran
+TX,48,081,3,B,Hot-Dry,Coke
+TX,48,083,3,B,Hot-Dry,Coleman
+TX,48,085,3,A,Hot-Humid,Collin
+TX,48,087,3,B,Hot-Dry,Collingsworth
+TX,48,089,2,A,Hot-Humid,Colorado
+TX,48,091,2,A,Hot-Humid,Comal
+TX,48,093,3,A,Hot-Humid,Comanche
+TX,48,095,3,B,Hot-Dry,Concho
+TX,48,097,3,A,Mixed-Humid,Cooke
+TX,48,099,2,A,Hot-Humid,Coryell
+TX,48,101,3,B,Hot-Dry,Cottle
+TX,48,103,3,B,Hot-Dry,Crane
+TX,48,105,3,B,Hot-Dry,Crockett
+TX,48,107,3,B,Hot-Dry,Crosby
+TX,48,109,3,B,Hot-Dry,Culberson
+TX,48,111,4,B,Mixed-Dry,Dallam
+TX,48,113,3,A,Hot-Humid,Dallas
+TX,48,115,3,B,Hot-Dry,Dawson
+TX,48,117,4,B,Mixed-Dry,Deaf Smith
+TX,48,119,3,A,Hot-Humid,Delta
+TX,48,121,3,A,Hot-Humid,Denton
+TX,48,123,2,A,Hot-Humid,DeWitt
+TX,48,125,3,B,Hot-Dry,Dickens
+TX,48,127,2,B,Hot-Humid,Dimmit
+TX,48,129,4,B,Mixed-Dry,Donley
+TX,48,131,2,A,Hot-Humid,Duval
+TX,48,133,3,A,Mixed-Humid,Eastland
+TX,48,135,3,B,Hot-Dry,Ector
+TX,48,137,2,B,Hot-Humid,Edwards
+TX,48,141,3,B,Hot-Dry,El Paso
+TX,48,139,3,A,Hot-Humid,Ellis
+TX,48,143,3,A,Hot-Humid,Erath
+TX,48,145,2,A,Hot-Humid,Falls
+TX,48,147,3,A,Mixed-Humid,Fannin
+TX,48,149,2,A,Hot-Humid,Fayette
+TX,48,151,3,B,Hot-Dry,Fisher
+TX,48,153,4,B,Mixed-Dry,Floyd
+TX,48,155,3,B,Hot-Dry,Foard
+TX,48,157,2,A,Hot-Humid,Fort Bend
+TX,48,159,3,A,Hot-Humid,Franklin
+TX,48,161,2,A,Hot-Humid,Freestone
+TX,48,163,2,B,Hot-Humid,Frio
+TX,48,165,3,B,Hot-Dry,Gaines
+TX,48,167,2,A,Hot-Humid,Galveston
+TX,48,169,3,B,Hot-Dry,Garza
+TX,48,171,3,A,Hot-Humid,Gillespie
+TX,48,173,3,B,Hot-Dry,Glasscock
+TX,48,175,2,A,Hot-Humid,Goliad
+TX,48,177,2,A,Hot-Humid,Gonzales
+TX,48,179,4,B,Mixed-Dry,Gray
+TX,48,181,3,A,Mixed-Humid,Grayson
+TX,48,183,3,A,Hot-Humid,Gregg
+TX,48,185,2,A,Hot-Humid,Grimes
+TX,48,187,2,A,Hot-Humid,Guadalupe
+TX,48,189,4,B,Mixed-Dry,Hale
+TX,48,191,3,B,Hot-Dry,Hall
+TX,48,193,3,A,Hot-Humid,Hamilton
+TX,48,195,4,B,Mixed-Dry,Hansford
+TX,48,197,3,B,Hot-Dry,Hardeman
+TX,48,199,2,A,Hot-Humid,Hardin
+TX,48,201,2,A,Hot-Humid,Harris
+TX,48,203,3,A,Hot-Humid,Harrison
+TX,48,205,4,B,Mixed-Dry,Hartley
+TX,48,207,3,B,Hot-Dry,Haskell
+TX,48,209,2,A,Hot-Humid,Hays
+TX,48,211,3,B,Hot-Dry,Hemphill
+TX,48,213,3,A,Hot-Humid,Henderson
+TX,48,215,2,A,Hot-Humid,Hidalgo
+TX,48,217,2,A,Hot-Humid,Hill
+TX,48,219,4,B,Mixed-Dry,Hockley
+TX,48,221,3,A,Hot-Humid,Hood
+TX,48,223,3,A,Hot-Humid,Hopkins
+TX,48,225,2,A,Hot-Humid,Houston
+TX,48,227,3,B,Hot-Dry,Howard
+TX,48,229,3,B,Hot-Dry,Hudspeth
+TX,48,231,3,A,Hot-Humid,Hunt
+TX,48,233,4,B,Mixed-Dry,Hutchinson
+TX,48,235,3,B,Hot-Dry,Irion
+TX,48,237,3,A,Mixed-Humid,Jack
+TX,48,239,2,A,Hot-Humid,Jackson
+TX,48,241,2,A,Hot-Humid,Jasper
+TX,48,243,3,B,Hot-Dry,Jeff Davis
+TX,48,245,2,A,Hot-Humid,Jefferson
+TX,48,247,2,A,Hot-Humid,Jim Hogg
+TX,48,249,2,A,Hot-Humid,Jim Wells
+TX,48,251,3,A,Hot-Humid,Johnson
+TX,48,253,3,B,Hot-Dry,Jones
+TX,48,255,2,A,Hot-Humid,Karnes
+TX,48,257,3,A,Hot-Humid,Kaufman
+TX,48,259,3,A,Hot-Humid,Kendall
+TX,48,261,2,A,Hot-Humid,Kenedy
+TX,48,263,3,B,Hot-Dry,Kent
+TX,48,265,3,B,Hot-Dry,Kerr
+TX,48,267,3,B,Hot-Dry,Kimble
+TX,48,269,3,B,Hot-Dry,King
+TX,48,271,2,B,Hot-Humid,Kinney
+TX,48,273,2,A,Hot-Humid,Kleberg
+TX,48,275,3,B,Hot-Dry,Knox
+TX,48,283,2,B,Hot-Humid,La Salle
+TX,48,277,3,A,Hot-Humid,Lamar
+TX,48,279,4,B,Mixed-Dry,Lamb
+TX,48,281,3,A,Hot-Humid,Lampasas
+TX,48,285,2,A,Hot-Humid,Lavaca
+TX,48,287,2,A,Hot-Humid,Lee
+TX,48,289,2,A,Hot-Humid,Leon
+TX,48,291,2,A,Hot-Humid,Liberty
+TX,48,293,2,A,Hot-Humid,Limestone
+TX,48,295,4,B,Mixed-Dry,Lipscomb
+TX,48,297,2,A,Hot-Humid,Live Oak
+TX,48,299,3,A,Hot-Humid,Llano
+TX,48,301,3,B,Hot-Dry,Loving
+TX,48,303,3,B,Hot-Dry,Lubbock
+TX,48,305,3,B,Hot-Dry,Lynn
+TX,48,307,3,B,Hot-Dry,McCulloch
+TX,48,309,2,A,Hot-Humid,McLennan
+TX,48,311,2,A,Hot-Humid,McMullen
+TX,48,313,2,A,Hot-Humid,Madison
+TX,48,315,3,A,Hot-Humid,Marion
+TX,48,317,3,B,Hot-Dry,Martin
+TX,48,319,3,B,Hot-Dry,Mason
+TX,48,321,2,A,Hot-Humid,Matagorda
+TX,48,323,2,B,Hot-Humid,Maverick
+TX,48,325,2,B,Hot-Humid,Medina
+TX,48,327,3,B,Hot-Dry,Menard
+TX,48,329,3,B,Hot-Dry,Midland
+TX,48,331,2,A,Hot-Humid,Milam
+TX,48,333,3,A,Hot-Humid,Mills
+TX,48,335,3,B,Hot-Dry,Mitchell
+TX,48,337,3,A,Mixed-Humid,Montague
+TX,48,339,2,A,Hot-Humid,Montgomery
+TX,48,341,4,B,Mixed-Dry,Moore
+TX,48,343,3,A,Hot-Humid,Morris
+TX,48,345,3,B,Hot-Dry,Motley
+TX,48,347,3,A,Hot-Humid,Nacogdoches
+TX,48,349,3,A,Hot-Humid,Navarro
+TX,48,351,2,A,Hot-Humid,Newton
+TX,48,353,3,B,Hot-Dry,Nolan
+TX,48,355,2,A,Hot-Humid,Nueces
+TX,48,357,4,B,Mixed-Dry,Ochiltree
+TX,48,359,4,B,Mixed-Dry,Oldham
+TX,48,361,2,A,Hot-Humid,Orange
+TX,48,363,3,A,Mixed-Humid,Palo Pinto
+TX,48,365,3,A,Hot-Humid,Panola
+TX,48,367,3,A,Hot-Humid,Parker
+TX,48,369,4,B,Mixed-Dry,Parmer
+TX,48,371,3,B,Hot-Dry,Pecos
+TX,48,373,2,A,Hot-Humid,Polk
+TX,48,375,4,B,Mixed-Dry,Potter
+TX,48,377,3,B,Hot-Dry,Presidio
+TX,48,379,3,A,Hot-Humid,Rains
+TX,48,381,4,B,Mixed-Dry,Randall
+TX,48,383,3,B,Hot-Dry,Reagan
+TX,48,385,2,B,Hot-Humid,Real
+TX,48,387,3,A,Hot-Humid,Red River
+TX,48,389,3,B,Hot-Dry,Reeves
+TX,48,391,2,A,Hot-Humid,Refugio
+TX,48,393,4,B,Mixed-Dry,Roberts
+TX,48,395,2,A,Hot-Humid,Robertson
+TX,48,397,3,A,Hot-Humid,Rockwall
+TX,48,399,3,B,Hot-Dry,Runnels
+TX,48,401,3,A,Hot-Humid,Rusk
+TX,48,403,3,A,Hot-Humid,Sabine
+TX,48,405,3,A,Hot-Humid,San Augustine
+TX,48,407,2,A,Hot-Humid,San Jacinto
+TX,48,409,2,A,Hot-Humid,San Patricio
+TX,48,411,3,A,Hot-Humid,San Saba
+TX,48,413,3,B,Hot-Dry,Schleicher
+TX,48,415,3,B,Hot-Dry,Scurry
+TX,48,417,3,B,Hot-Dry,Shackelford
+TX,48,419,3,A,Hot-Humid,Shelby
+TX,48,421,4,B,Mixed-Dry,Sherman
+TX,48,423,3,A,Hot-Humid,Smith
+TX,48,425,3,A,Hot-Humid,Somervell
+TX,48,427,2,A,Hot-Humid,Starr
+TX,48,429,3,A,Mixed-Humid,Stephens
+TX,48,431,3,B,Hot-Dry,Sterling
+TX,48,433,3,B,Hot-Dry,Stonewall
+TX,48,435,3,B,Hot-Dry,Sutton
+TX,48,437,4,B,Mixed-Dry,Swisher
+TX,48,439,3,A,Hot-Humid,Tarrant
+TX,48,441,3,B,Hot-Dry,Taylor
+TX,48,443,3,B,Hot-Dry,Terrell
+TX,48,445,3,B,Hot-Dry,Terry
+TX,48,447,3,B,Hot-Dry,Throckmorton
+TX,48,449,3,A,Hot-Humid,Titus
+TX,48,451,3,B,Hot-Dry,Tom Green
+TX,48,453,2,A,Hot-Humid,Travis
+TX,48,455,2,A,Hot-Humid,Trinity
+TX,48,457,2,A,Hot-Humid,Tyler
+TX,48,459,3,A,Hot-Humid,Upshur
+TX,48,461,3,B,Hot-Dry,Upton
+TX,48,463,2,B,Hot-Humid,Uvalde
+TX,48,465,2,B,Hot-Humid,Val Verde
+TX,48,467,3,A,Hot-Humid,Van Zandt
+TX,48,469,2,A,Hot-Humid,Victoria
+TX,48,471,2,A,Hot-Humid,Walker
+TX,48,473,2,A,Hot-Humid,Waller
+TX,48,475,3,B,Hot-Dry,Ward
+TX,48,477,2,A,Hot-Humid,Washington
+TX,48,479,2,B,Hot-Humid,Webb
+TX,48,481,2,A,Hot-Humid,Wharton
+TX,48,483,3,B,Hot-Dry,Wheeler
+TX,48,485,3,A,Mixed-Humid,Wichita
+TX,48,487,3,B,Hot-Dry,Wilbarger
+TX,48,489,2,A,Hot-Humid,Willacy
+TX,48,491,2,A,Hot-Humid,Williamson
+TX,48,493,2,A,Hot-Humid,Wilson
+TX,48,495,3,B,Hot-Dry,Winkler
+TX,48,497,3,A,Mixed-Humid,Wise
+TX,48,499,3,A,Hot-Humid,Wood
+TX,48,501,4,B,Mixed-Dry,Yoakum
+TX,48,503,3,A,Mixed-Humid,Young
+TX,48,505,2,B,Hot-Humid,Zapata
+TX,48,507,2,B,Hot-Humid,Zavala
+UM,74,300,1,A,Hot-Humid,Midway Islands
+UT,49,001,5,B,Cold,Beaver
+UT,49,003,6,B,Cold,Box Elder
+UT,49,005,6,B,Cold,Cache
+UT,49,007,6,B,Cold,Carbon
+UT,49,009,6,B,Cold,Daggett
+UT,49,011,5,B,Cold,Davis
+UT,49,013,6,B,Cold,Duchesne
+UT,49,015,5,B,Cold,Emery
+UT,49,017,5,B,Cold,Garfield
+UT,49,019,5,B,Cold,Grand
+UT,49,021,5,B,Cold,Iron
+UT,49,023,5,B,Cold,Juab
+UT,49,025,5,B,Cold,Kane
+UT,49,027,5,B,Cold,Millard
+UT,49,029,6,B,Cold,Morgan
+UT,49,031,5,B,Cold,Piute
+UT,49,033,6,B,Cold,Rich
+UT,49,035,5,B,Cold,Salt Lake
+UT,49,037,5,B,Cold,San Juan
+UT,49,039,5,B,Cold,Sanpete
+UT,49,041,5,B,Cold,Sevier
+UT,49,043,6,B,Cold,Summit
+UT,49,045,5,B,Cold,Tooele
+UT,49,047,6,B,Cold,Uintah
+UT,49,049,5,B,Cold,Utah
+UT,49,051,6,B,Cold,Wasatch
+UT,49,053,3,B,Hot-Dry,Washington
+UT,49,055,5,B,Cold,Wayne
+UT,49,057,5,B,Cold,Weber
+VA,51,001,4,A,Mixed-Humid,Accomack
+VA,51,003,4,A,Mixed-Humid,Albemarle
+VA,51,510,4,A,Mixed-Humid,Alexandria (city)
+VA,51,005,4,A,Mixed-Humid,Alleghany
+VA,51,007,4,A,Mixed-Humid,Amelia
+VA,51,009,4,A,Mixed-Humid,Amherst
+VA,51,011,4,A,Mixed-Humid,Appomattox
+VA,51,013,4,A,Mixed-Humid,Arlington
+VA,51,015,4,A,Mixed-Humid,Augusta
+VA,51,017,4,A,Mixed-Humid,Bath
+VA,51,019,4,A,Mixed-Humid,Bedford
+VA,51,515,4,A,Mixed-Humid,Bedford (city)
+VA,51,021,4,A,Mixed-Humid,Bland
+VA,51,023,4,A,Mixed-Humid,Botetourt
+VA,51,520,4,A,Mixed-Humid,Bristol (city)
+VA,51,025,4,A,Mixed-Humid,Brunswick
+VA,51,027,4,A,Mixed-Humid,Buchanan
+VA,51,029,4,A,Mixed-Humid,Buckingham
+VA,51,530,4,A,Mixed-Humid,Buena Vista (city)
+VA,51,031,4,A,Mixed-Humid,Campbell
+VA,51,033,4,A,Mixed-Humid,Caroline
+VA,51,035,4,A,Mixed-Humid,Carroll
+VA,51,036,4,A,Mixed-Humid,Charles City
+VA,51,037,4,A,Mixed-Humid,Charlotte
+VA,51,540,4,A,Mixed-Humid,Charlottesville (city)
+VA,51,550,4,A,Mixed-Humid,Chesapeake (city)
+VA,51,041,4,A,Mixed-Humid,Chesterfield
+VA,51,043,4,A,Mixed-Humid,Clarke
+VA,51,570,4,A,Mixed-Humid,Colonial Heights (city)
+VA,51,580,4,A,Mixed-Humid,Covington (city)
+VA,51,045,4,A,Mixed-Humid,Craig
+VA,51,047,4,A,Mixed-Humid,Culpeper
+VA,51,049,4,A,Mixed-Humid,Cumberland
+VA,51,590,4,A,Mixed-Humid,Danville (city)
+VA,51,051,4,A,Mixed-Humid,Dickenson
+VA,51,053,4,A,Mixed-Humid,Dinwiddie
+VA,51,595,4,A,Mixed-Humid,Emporia (city)
+VA,51,057,4,A,Mixed-Humid,Essex
+VA,51,059,4,A,Mixed-Humid,Fairfax
+VA,51,600,4,A,Mixed-Humid,Fairfax (city)
+VA,51,610,4,A,Mixed-Humid,Falls Church (city)
+VA,51,061,4,A,Mixed-Humid,Fauquier
+VA,51,063,4,A,Mixed-Humid,Floyd
+VA,51,065,4,A,Mixed-Humid,Fluvanna
+VA,51,067,4,A,Mixed-Humid,Franklin
+VA,51,620,4,A,Mixed-Humid,Franklin (city)
+VA,51,069,4,A,Mixed-Humid,Frederick
+VA,51,630,4,A,Mixed-Humid,Fredericksburg (city)
+VA,51,640,4,A,Mixed-Humid,Galax (city)
+VA,51,071,4,A,Mixed-Humid,Giles
+VA,51,073,4,A,Mixed-Humid,Gloucester
+VA,51,075,4,A,Mixed-Humid,Goochland
+VA,51,077,4,A,Mixed-Humid,Grayson
+VA,51,079,4,A,Mixed-Humid,Greene
+VA,51,081,4,A,Mixed-Humid,Greensville
+VA,51,083,4,A,Mixed-Humid,Halifax
+VA,51,650,4,A,Mixed-Humid,Hampton (city)
+VA,51,085,4,A,Mixed-Humid,Hanover
+VA,51,660,4,A,Mixed-Humid,Harrisonburg (city)
+VA,51,087,4,A,Mixed-Humid,Henrico
+VA,51,089,4,A,Mixed-Humid,Henry
+VA,51,091,4,A,Mixed-Humid,Highland
+VA,51,670,4,A,Mixed-Humid,Hopewell (city)
+VA,51,093,4,A,Mixed-Humid,Isle of Wight
+VA,51,095,4,A,Mixed-Humid,James City
+VA,51,097,4,A,Mixed-Humid,King and Queen
+VA,51,099,4,A,Mixed-Humid,King George
+VA,51,101,4,A,Mixed-Humid,King William
+VA,51,103,4,A,Mixed-Humid,Lancaster
+VA,51,105,4,A,Mixed-Humid,Lee
+VA,51,678,4,A,Mixed-Humid,Lexington (city)
+VA,51,107,4,A,Mixed-Humid,Loudoun
+VA,51,109,4,A,Mixed-Humid,Louisa
+VA,51,111,4,A,Mixed-Humid,Lunenburg
+VA,51,680,4,A,Mixed-Humid,Lynchburg (city)
+VA,51,113,4,A,Mixed-Humid,Madison
+VA,51,683,4,A,Mixed-Humid,Manassas (city)
+VA,51,685,4,A,Mixed-Humid,Manassas Park (city)
+VA,51,690,4,A,Mixed-Humid,Martinsville (city)
+VA,51,115,4,A,Mixed-Humid,Mathews
+VA,51,117,4,A,Mixed-Humid,Mecklenburg
+VA,51,119,4,A,Mixed-Humid,Middlesex
+VA,51,121,4,A,Mixed-Humid,Montgomery
+VA,51,125,4,A,Mixed-Humid,Nelson
+VA,51,127,4,A,Mixed-Humid,New Kent
+VA,51,700,4,A,Mixed-Humid,Newport News (city)
+VA,51,710,4,A,Mixed-Humid,Norfolk (city)
+VA,51,131,4,A,Mixed-Humid,Northampton
+VA,51,133,4,A,Mixed-Humid,Northumberland
+VA,51,720,4,A,Mixed-Humid,Norton (city)
+VA,51,135,4,A,Mixed-Humid,Nottoway
+VA,51,137,4,A,Mixed-Humid,Orange
+VA,51,139,4,A,Mixed-Humid,Page
+VA,51,141,4,A,Mixed-Humid,Patrick
+VA,51,730,4,A,Mixed-Humid,Petersburg (city)
+VA,51,143,4,A,Mixed-Humid,Pittsylvania
+VA,51,735,4,A,Mixed-Humid,Poquoson (city)
+VA,51,740,4,A,Mixed-Humid,Portsmouth (city)
+VA,51,145,4,A,Mixed-Humid,Powhatan
+VA,51,147,4,A,Mixed-Humid,Prince Edward
+VA,51,149,4,A,Mixed-Humid,Prince George
+VA,51,153,4,A,Mixed-Humid,Prince William
+VA,51,155,4,A,Mixed-Humid,Pulaski
+VA,51,750,4,A,Mixed-Humid,Radford (city)
+VA,51,157,4,A,Mixed-Humid,Rappahannock
+VA,51,159,4,A,Mixed-Humid,Richmond
+VA,51,760,4,A,Mixed-Humid,Richmond (city)
+VA,51,161,4,A,Mixed-Humid,Roanoke
+VA,51,770,4,A,Mixed-Humid,Roanoke (city)
+VA,51,163,4,A,Mixed-Humid,Rockbridge
+VA,51,165,4,A,Mixed-Humid,Rockingham
+VA,51,167,4,A,Mixed-Humid,Russell
+VA,51,775,4,A,Mixed-Humid,Salem (city)
+VA,51,169,4,A,Mixed-Humid,Scott
+VA,51,171,4,A,Mixed-Humid,Shenandoah
+VA,51,173,4,A,Mixed-Humid,Smyth
+VA,51,175,4,A,Mixed-Humid,Southampton
+VA,51,177,4,A,Mixed-Humid,Spotsylvania
+VA,51,179,4,A,Mixed-Humid,Stafford
+VA,51,790,4,A,Mixed-Humid,Staunton (city)
+VA,51,800,4,A,Mixed-Humid,Suffolk (city)
+VA,51,181,4,A,Mixed-Humid,Surry
+VA,51,183,4,A,Mixed-Humid,Sussex
+VA,51,185,4,A,Mixed-Humid,Tazewell
+VA,51,810,4,A,Mixed-Humid,Virginia Beach (city)
+VA,51,187,4,A,Mixed-Humid,Warren
+VA,51,191,4,A,Mixed-Humid,Washington
+VA,51,820,4,A,Mixed-Humid,Waynesboro (city)
+VA,51,193,4,A,Mixed-Humid,Westmoreland
+VA,51,830,4,A,Mixed-Humid,Williamsburg (city)
+VA,51,840,4,A,Mixed-Humid,Winchester (city)
+VA,51,195,4,A,Mixed-Humid,Wise
+VA,51,197,4,A,Mixed-Humid,Wythe
+VA,51,199,4,A,Mixed-Humid,York
+VI,78,010,1,A,Hot-Humid,St. Croix Island
+VI,78,020,1,A,Hot-Humid,St. John Island
+VI,78,030,1,A,Hot-Humid,St. Thomas Island
+VT,50,001,6,A,Cold,Addison
+VT,50,003,6,A,Cold,Bennington
+VT,50,005,6,A,Cold,Caledonia
+VT,50,007,6,A,Cold,Chittenden
+VT,50,009,6,A,Cold,Essex
+VT,50,011,6,A,Cold,Franklin
+VT,50,013,6,A,Cold,Grand Isle
+VT,50,015,6,A,Cold,Lamoille
+VT,50,017,6,A,Cold,Orange
+VT,50,019,6,A,Cold,Orleans
+VT,50,021,6,A,Cold,Rutland
+VT,50,023,6,A,Cold,Washington
+VT,50,025,6,A,Cold,Windham
+VT,50,027,6,A,Cold,Windsor
+WA,53,001,5,B,Cold,Adams
+WA,53,003,5,B,Cold,Asotin
+WA,53,005,5,B,Cold,Benton
+WA,53,007,5,B,Cold,Chelan
+WA,53,009,4,C,Marine,Clallam
+WA,53,011,4,C,Marine,Clark
+WA,53,013,5,B,Cold,Columbia
+WA,53,015,4,C,Marine,Cowlitz
+WA,53,017,5,B,Cold,Douglas
+WA,53,019,6,B,Cold,Ferry
+WA,53,021,5,B,Cold,Franklin
+WA,53,023,5,B,Cold,Garfield
+WA,53,025,5,B,Cold,Grant
+WA,53,027,4,C,Marine,Grays Harbor
+WA,53,029,4,C,Marine,Island
+WA,53,031,4,C,Marine,Jefferson
+WA,53,033,4,C,Marine,King
+WA,53,035,4,C,Marine,Kitsap
+WA,53,037,5,B,Cold,Kittitas
+WA,53,039,5,B,Cold,Klickitat
+WA,53,041,4,C,Marine,Lewis
+WA,53,043,5,B,Cold,Lincoln
+WA,53,045,4,C,Marine,Mason
+WA,53,047,6,B,Cold,Okanogan
+WA,53,049,4,C,Marine,Pacific
+WA,53,051,6,B,Cold,Pend Oreille
+WA,53,053,4,C,Marine,Pierce
+WA,53,055,4,C,Marine,San Juan
+WA,53,057,4,C,Marine,Skagit
+WA,53,059,5,B,Cold,Skamania
+WA,53,061,4,C,Marine,Snohomish
+WA,53,063,5,B,Cold,Spokane
+WA,53,065,6,B,Cold,Stevens
+WA,53,067,4,C,Marine,Thurston
+WA,53,069,4,C,Marine,Wahkiakum
+WA,53,071,5,B,Cold,Walla Walla
+WA,53,073,4,C,Marine,Whatcom
+WA,53,075,5,B,Cold,Whitman
+WA,53,077,5,B,Cold,Yakima
+WI,55,001,6,A,Cold,Adams
+WI,55,003,7,N/A,Very Cold,Ashland
+WI,55,005,6,A,Cold,Barron
+WI,55,007,7,N/A,Very Cold,Bayfield
+WI,55,009,6,A,Cold,Brown
+WI,55,011,6,A,Cold,Buffalo
+WI,55,013,7,N/A,Very Cold,Burnett
+WI,55,015,6,A,Cold,Calumet
+WI,55,017,6,A,Cold,Chippewa
+WI,55,019,6,A,Cold,Clark
+WI,55,021,6,A,Cold,Columbia
+WI,55,023,6,A,Cold,Crawford
+WI,55,025,6,A,Cold,Dane
+WI,55,027,6,A,Cold,Dodge
+WI,55,029,6,A,Cold,Door
+WI,55,031,7,N/A,Very Cold,Douglas
+WI,55,033,6,A,Cold,Dunn
+WI,55,035,6,A,Cold,Eau Claire
+WI,55,037,7,N/A,Very Cold,Florence
+WI,55,039,6,A,Cold,Fond du Lac
+WI,55,041,7,N/A,Very Cold,Forest
+WI,55,043,6,A,Cold,Grant
+WI,55,045,6,A,Cold,Green
+WI,55,047,6,A,Cold,Green Lake
+WI,55,049,6,A,Cold,Iowa
+WI,55,051,7,N/A,Very Cold,Iron
+WI,55,053,6,A,Cold,Jackson
+WI,55,055,6,A,Cold,Jefferson
+WI,55,057,6,A,Cold,Juneau
+WI,55,059,6,A,Cold,Kenosha
+WI,55,061,6,A,Cold,Kewaunee
+WI,55,063,6,A,Cold,La Crosse
+WI,55,065,6,A,Cold,Lafayette
+WI,55,067,7,N/A,Very Cold,Langlade
+WI,55,069,7,N/A,Very Cold,Lincoln
+WI,55,071,6,A,Cold,Manitowoc
+WI,55,073,6,A,Cold,Marathon
+WI,55,075,6,A,Cold,Marinette
+WI,55,077,6,A,Cold,Marquette
+WI,55,078,6,A,Cold,Menominee
+WI,55,079,6,A,Cold,Milwaukee
+WI,55,081,6,A,Cold,Monroe
+WI,55,083,6,A,Cold,Oconto
+WI,55,085,7,N/A,Very Cold,Oneida
+WI,55,087,6,A,Cold,Outagamie
+WI,55,089,6,A,Cold,Ozaukee
+WI,55,091,6,A,Cold,Pepin
+WI,55,093,6,A,Cold,Pierce
+WI,55,095,6,A,Cold,Polk
+WI,55,097,6,A,Cold,Portage
+WI,55,099,7,N/A,Very Cold,Price
+WI,55,101,6,A,Cold,Racine
+WI,55,103,6,A,Cold,Richland
+WI,55,105,6,A,Cold,Rock
+WI,55,107,6,A,Cold,Rusk
+WI,55,111,6,A,Cold,Sauk
+WI,55,113,7,N/A,Very Cold,Sawyer
+WI,55,115,6,A,Cold,Shawano
+WI,55,117,6,A,Cold,Sheboygan
+WI,55,109,6,A,Cold,St. Croix
+WI,55,119,7,N/A,Very Cold,Taylor
+WI,55,121,6,A,Cold,Trempealeau
+WI,55,123,6,A,Cold,Vernon
+WI,55,125,7,N/A,Very Cold,Vilas
+WI,55,127,6,A,Cold,Walworth
+WI,55,129,7,N/A,Very Cold,Washburn
+WI,55,131,6,A,Cold,Washington
+WI,55,133,6,A,Cold,Waukesha
+WI,55,135,6,A,Cold,Waupaca
+WI,55,137,6,A,Cold,Waushara
+WI,55,139,6,A,Cold,Winnebago
+WI,55,141,6,A,Cold,Wood
+WV,54,001,5,A,Cold,Barbour
+WV,54,003,4,A,Mixed-Humid,Berkeley
+WV,54,005,4,A,Mixed-Humid,Boone
+WV,54,007,4,A,Mixed-Humid,Braxton
+WV,54,009,5,A,Cold,Brooke
+WV,54,011,4,A,Mixed-Humid,Cabell
+WV,54,013,4,A,Mixed-Humid,Calhoun
+WV,54,015,4,A,Mixed-Humid,Clay
+WV,54,017,5,A,Cold,Doddridge
+WV,54,019,5,A,Cold,Fayette
+WV,54,021,4,A,Mixed-Humid,Gilmer
+WV,54,023,5,A,Cold,Grant
+WV,54,025,5,A,Cold,Greenbrier
+WV,54,027,5,A,Cold,Hampshire
+WV,54,029,5,A,Cold,Hancock
+WV,54,031,5,A,Cold,Hardy
+WV,54,033,5,A,Cold,Harrison
+WV,54,035,4,A,Mixed-Humid,Jackson
+WV,54,037,4,A,Mixed-Humid,Jefferson
+WV,54,039,4,A,Mixed-Humid,Kanawha
+WV,54,041,5,A,Cold,Lewis
+WV,54,043,4,A,Mixed-Humid,Lincoln
+WV,54,045,4,A,Mixed-Humid,Logan
+WV,54,049,5,A,Cold,Marion
+WV,54,051,5,A,Cold,Marshall
+WV,54,053,4,A,Mixed-Humid,Mason
+WV,54,047,4,A,Mixed-Humid,McDowell
+WV,54,055,4,A,Mixed-Humid,Mercer
+WV,54,057,5,A,Cold,Mineral
+WV,54,059,4,A,Mixed-Humid,Mingo
+WV,54,061,5,A,Cold,Monongalia
+WV,54,063,4,A,Mixed-Humid,Monroe
+WV,54,065,4,A,Mixed-Humid,Morgan
+WV,54,067,5,A,Cold,Nicholas
+WV,54,069,5,A,Cold,Ohio
+WV,54,071,5,A,Cold,Pendleton
+WV,54,073,4,A,Mixed-Humid,Pleasants
+WV,54,075,5,A,Cold,Pocahontas
+WV,54,077,5,A,Cold,Preston
+WV,54,079,4,A,Mixed-Humid,Putnam
+WV,54,081,5,A,Cold,Raleigh
+WV,54,083,5,A,Cold,Randolph
+WV,54,085,4,A,Mixed-Humid,Ritchie
+WV,54,087,4,A,Mixed-Humid,Roane
+WV,54,089,5,A,Cold,Summers
+WV,54,091,5,A,Cold,Taylor
+WV,54,093,5,A,Cold,Tucker
+WV,54,095,4,A,Mixed-Humid,Tyler
+WV,54,097,5,A,Cold,Upshur
+WV,54,099,4,A,Mixed-Humid,Wayne
+WV,54,101,5,A,Cold,Webster
+WV,54,103,5,A,Cold,Wetzel
+WV,54,105,4,A,Mixed-Humid,Wirt
+WV,54,107,4,A,Mixed-Humid,Wood
+WV,54,109,4,A,Mixed-Humid,Wyoming
+WY,56,001,6,B,Cold,Albany
+WY,56,003,6,B,Cold,Big Horn
+WY,56,005,6,B,Cold,Campbell
+WY,56,007,6,B,Cold,Carbon
+WY,56,009,6,B,Cold,Converse
+WY,56,011,6,B,Cold,Crook
+WY,56,013,6,B,Cold,Fremont
+WY,56,015,5,B,Cold,Goshen
+WY,56,017,6,B,Cold,Hot Springs
+WY,56,019,6,B,Cold,Johnson
+WY,56,021,6,B,Cold,Laramie
+WY,56,023,7,N/A,Very Cold,Lincoln
+WY,56,025,6,B,Cold,Natrona
+WY,56,027,6,B,Cold,Niobrara
+WY,56,029,6,B,Cold,Park
+WY,56,031,5,B,Cold,Platte
+WY,56,033,6,B,Cold,Sheridan
+WY,56,035,7,N/A,Very Cold,Sublette
+WY,56,037,6,B,Cold,Sweetwater
+WY,56,039,7,N/A,Very Cold,Teton
+WY,56,041,6,B,Cold,Uinta
+WY,56,043,6,B,Cold,Washakie
+WY,56,045,6,B,Cold,Weston
