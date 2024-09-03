@@ -7,11 +7,11 @@ defaults:
 
 data_dir: ../data
 
-model:
+arch:
   num_hidden_layers: ???
   hidden_dim: ???
 
-name: ${hydra:runtime.choices.model}_${hydra:runtime.choices.training}_${hydra:runtime.choices.hospitalizations}
+name: ${hydra:runtime.choices.arch}_${hydra:runtime.choices.training}_${hydra:runtime.choices.hospitalizations}
 
 training:
   batch_size:   # leave empty it will be chose according to S and N

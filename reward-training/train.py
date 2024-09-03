@@ -5,7 +5,7 @@ import hydra
 import pyro
 import pytorch_lightning as pl
 import torch
-import tensordict
+# import tensordict
 from omegaconf import DictConfig, OmegaConf
 
 from modules import (
@@ -115,14 +115,15 @@ def main(cfg: DictConfig):
 
     # save posterior samples
     td = dict()
-    for b in dm.baseline_feature_names + ["baseline_bias"]:
+    for b in dm.baseline_feature_names + ["bias"]:
         td[b] = preds[f"baseline_{b}"]
-    for e in dm.effectiveness_feature_names + ["eff_bias"]:
+    for e in dm.effectiveness_feature_names + ["bias"]:
         td[e] = preds[f"effectiveness_{e}"]
-    preds = tensordict.TensorDict(td, batch_size=cfg.num_samples)
     savedir = f"../weights/{cfg.name}"
     os.makedirs(savedir, exist_ok=True)
-    torch.save(preds, f"{savedir}/posterior_samples.pt")
+    torch.save(td, f"{savedir}/posterior_samples.pt")
+    # preds = tensordict.TensorDict(td, batch_size=cfg.num_samples)
+    # torch.save(td, f"{savedir}/posterior_samples.pt")
 
     # save the config in the folder for completeness
     # make sure to resolve the config with hydra/omegaconf
