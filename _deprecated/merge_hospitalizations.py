@@ -15,7 +15,7 @@ def main(cfg):
     confounders = pd.read_parquet(f"{cfg.data_dir}/processed/confounders.parquet")
     confounders = confounders.set_index("fips", drop=True)
 
-    # Load heatmetrics and alerts
+    # Load heatmetrics and alertsc
     exo = pd.read_parquet(f"{cfg.data_dir}/processed/exogenous_states.parquet")
     endo = pd.read_parquet(f"{cfg.data_dir}/processed/endogenous_states_actions.parquet")
     merged = pd.merge(exo, endo, on=["fips", "date"], how="inner")
@@ -23,8 +23,14 @@ def main(cfg):
     # split cases to obtain hostpitalizations
     if cfg.hospitalizations.data_path is not None:
         LOGGER.info("Loading hospitalizations from data_path")
-        # TODO
-        pass
+        hosps = pd.read_parquet(cfg.hospitalizations.data_path)
+        hosps = hosps[["fips", "date", "other_hosps", "total_count"]]
+        # rename for clarity
+        hosps = hosps.rename(
+            columns={"other_hosps": "hospitalizations", "total_count": "eligible_pop"}
+        )
+        hosps = pd.merge(merged, hosps, on=["fips", "date"], how="inner")
+
     elif cfg.hospitalizations.synthetic_path is not None:
         LOGGER.info("Loading synthetic hospitalizations from pretrained weights")
         # TODO
@@ -81,7 +87,7 @@ def main(cfg):
         hosps["eligible_pop"] = eligible_pop
 
     # save
-    target_file = f"{cfg.data_dir}/processed/hospitalizations.parquet"
+    target_file = f"{cfg.data_dir}/processed/training_data.parquet"
     hosps.to_parquet(target_file, index=False)
 
 

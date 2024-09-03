@@ -2,6 +2,7 @@
 
 This pipeline is fully automated and takes care of:
 - Creating the dataset of location confounders
+- 
 - Downloading and processing the heat alerts data from the Iowa Environmental Mesonet API
 - Downloading heat quantile metrics
 - Processing and merging the data

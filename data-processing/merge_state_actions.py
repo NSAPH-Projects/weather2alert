@@ -174,7 +174,7 @@ def main(cfg):
     bspline_basis.to_parquet(f"{cfg.data_dir}/processed/bspline_basis.parquet")
 
     # -------------------
-    # save as exogenous states, endogenous states, actions, hospitalizations
+    # save as exogenous states, endogenous states, actions
     # -------------------
 
     # exogenous_states

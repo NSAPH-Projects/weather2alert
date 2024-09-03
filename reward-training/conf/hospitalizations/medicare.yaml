@@ -1,0 +1,2 @@
+_target_: hospitalizations.load_hosps
+path: ../data/hosps/hosps.parquet  # only available in secure cluster since its sensitive

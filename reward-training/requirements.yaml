@@ -2,12 +2,12 @@ name: weather2alert-training
 channels:
   - conda-forge
   - pytorch
-  # - nvidia  # uncomment if GPU/linux
+  - nvidia  # uncomment/coment if GPU/linux
 dependencies:
   - python=3.10
-  # - pytorch-cuda=12.1   # uncomment if GPU/linux
+  - pytorch-cuda=12.1   # uncomment/comment if GPU/linux
   - pytorch
-  - cpuonly  # comment if GPU/linux
+  # - cpuonly  # uncomment/comment if GPU/linux
   - structlog=20.2.0
   - colorama=0.4.4
   - scipy

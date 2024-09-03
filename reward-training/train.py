@@ -20,7 +20,6 @@ LOGGER = logging.getLogger(__name__)
 
 def load_data(dir):
     # Load data
-    LOGGER.info("Loading prepro")
     path = f"{dir}/processed/exogenous_states.parquet"
     exogenous_states = pd.read_parquet(path)
 
@@ -50,6 +49,13 @@ def main(cfg: DictConfig):
         exogenous_states=exo,
         endogenous_states_actions=endo,
     )
+
+    # Perform a last filter to remove nans from exo, endo if hosps has nans
+    LOGGER.info("Filtering nans")
+    isna = hosps.isna().any(axis=1)
+    exo = exo[~isna]
+    endo = endo[~isna]
+    hosps = hosps[~isna]
 
     # Create data module
     LOGGER.info("Creating data module")

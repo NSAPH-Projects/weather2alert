@@ -28,9 +28,11 @@ def main(cfg):
     download_path = f"{cfg.data_dir}/raw/heatmetrics.rds"  # data is in R's native format
     url = cfg.heatmetrics.url
 
-    if not os.path.exists(download_path.replace(".rds", ".parquet")):
-        wget.download(url, download_path)
-        transform_rds_to_parquet(download_path, processed_path)
+    raw_parquet_path = download_path.replace(".rds", ".parquet")
+    if not os.path.exists(raw_parquet_path):
+        if not os.path.exists(download_path):
+            wget.download(url, download_path)
+        transform_rds_to_parquet(download_path, raw_parquet_path)
         os.remove(download_path)
     else:
         LOGGER.info(f"Skipping download and transform, file exists.")

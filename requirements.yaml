@@ -3,19 +3,20 @@ name: weather2alert
 channels:
   - conda-forge
   - pytorch
-  # - nvidia  # uncomment if GPU/linux
+  - nvidia  # uncomment if GPU/linux
 dependencies:
   - python=3.10
-  # - pytorch-cuda=12.1  # uncomment if GPU/linux
+  - pytorch-cuda=12.1  # uncomment if GPU/linux
   - scipy
-  - pip
   - tensorboardX
   - ipykernel
   - tqdm
-  - pyarrow
-  - tensordict
-  - seaborn
+  - pip
   - pip:
+    - scipy
+    - pyarrow
+    - tensordict
+    - seaborn
     - pytorch-lightning
     - torch-tb-profiler
     - gym==0.17.2

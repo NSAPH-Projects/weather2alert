@@ -9,9 +9,14 @@ configfile: "conf/snakemake.yaml"  # Path: conf/config.yaml
 conda: "requirements.yaml"  # Path: envs/conda.yaml
 
 
+envvars:
+    "CENSUS_API_KEY"
+
+
 # read hydra config from initialize API
 with hydra.initialize(config_path="conf", version_base=None):
-    processing_cfg = hydra.compose(config_name="config", overrides=[])
+    # here we set the data path for real hospitazation training data
+    processing_cfg = hydra.compose(config_name="config")
 
 
 # make sure data locations exist / user can set them to
@@ -24,23 +29,40 @@ rule all:
     input:
         processing_cfg.data_dir + "/processed/endogenous_states_actions.parquet",
         processing_cfg.data_dir + "/processed/exogenous_states.parquet",
-        processing_cfg.data_dir + "/processed/budget.parquet",
+        processing_cfg.data_dir + "/processed/bspline_basis.parquet",
+        processing_cfg.data_dir + "/processed/confounders.parquet",
 
-
-rule merge:
+rule merge_state_actions:
     input:
         expand(
             processing_cfg.data_dir + "/processed/alerts/{state}.parquet",
             state=config["states"],
         ),
+        processing_cfg.data_dir + "/processed/heatmetrics.parquet",
     output:
         processing_cfg.data_dir + "/processed/exogenous_states.parquet",
         processing_cfg.data_dir + "/processed/endogenous_states_actions.parquet",
         processing_cfg.data_dir + "/processed/budget.parquet",
     log:
-        "logs/merge.log",
+        "logs/merge_state_actions.log",
     shell:
-        "python merge.py &> {log}"
+        "python merge_state_actions.py &> {log}"
+
+
+# rule merge_hospitalizations:
+#     input:
+#         processing_cfg.data_dir + "/processed/exogenous_states.parquet",
+#         processing_cfg.data_dir + "/processed/endogenous_states_actions.parquet",
+#     output:
+#         processing_cfg.data_dir + "/processed/training_data.parquet",
+#     log:
+#         "logs/merge_hospitalizations.log",
+#     shell:
+#         f"""
+#         python merge_hospitalizations.py \
+#             hospitalizations.data_path={config['hosps_data_path']} 
+#             &> {{log}}
+#         """
 
 
 rule confounders:
@@ -49,7 +71,11 @@ rule confounders:
     log:
         "logs/confounders.log",
     shell:
-        "python confounders.py &> {log}"
+        f"""
+        python confounders.py \
+            census_api_key={os.environ['CENSUS_API_KEY']} \
+            &> {{log}}
+        """
 
 
 rule heatmetrics:

@@ -7,6 +7,25 @@ from scipy.special import expit
 LOGGER = logging.getLogger(__name__)
 
 
+def load_hosps(data_path: str, endogenous_states_actions: pd.DataFrame, **kwargs):
+    """Loads hospitalizations from data_path"""
+    LOGGER.info("Loading hospitalizations from data_path")
+    hosps = pd.read_parquet(data_path)
+
+    # rename total_count to eligible_pop
+    hosps = hosps.rename(
+        columns={"other_hosps": "hospitalizations", "total_count": "eligible_pop"}
+    )
+
+    # make an right join to index by pd
+    hosps = pd.merge(
+        endogenous_states_actions[["fips", "date"]], hosps, on=["fips", "date"], how="right"
+    )
+    hosps = hosps[["fips", "date", "hospitalizations", "eligible_pop"]]
+
+    return hosps
+
+
 def sim_hosps(
     sim_coefs: dict,
     confounders: pd.DataFrame,
