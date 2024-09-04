@@ -13,7 +13,7 @@ The mathematical model and a detailed description of the data sources and modeli
 
 ```bibtex
 @article{considine2023optimizing,
-  title={Optimizing Heat Alert Issuance for Public Health in the United States with Reinforcement Learning},
+  title={Optimizing Heat Alert Issuance with Reinforcement Learning},
   author={Considine, Ellen M and Nethery, Rachel C and Wellenius, Gregory A and Dominici, Francesca and Tec, Mauricio},
   journal={arXiv preprint arXiv:2312.14196},
   year={2023}
