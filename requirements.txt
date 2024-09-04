@@ -7,3 +7,4 @@ pytorch-lightning
 torch-tb-profiler
 stable-baselines3>=0.10.0
 sb3-contrib
+scikit-learn
