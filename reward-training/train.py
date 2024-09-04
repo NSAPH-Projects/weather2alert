@@ -119,7 +119,7 @@ def main(cfg: DictConfig):
         td[b] = preds[f"baseline_{b}"]
     for e in dm.effectiveness_feature_names + ["bias"]:
         td[e] = preds[f"effectiveness_{e}"]
-    td["fips_list"] = dm.fips_list
+    td["fips_list"] = list(dm.fips_list)
     savedir = f"../weights/{cfg.name}"
     os.makedirs(savedir, exist_ok=True)
     torch.save(td, f"{savedir}/posterior_samples.pt")

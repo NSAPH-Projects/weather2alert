@@ -75,9 +75,8 @@ class MLP(nn.Module):  # for learning a prior informed by the spatial variables
         return self.net(x)
 
 
-class HeatAlertModel(
-    nn.Module
-):  # main model definition, uses Pytorch syntax / mechanics under the hood of Pyro
+class HeatAlertModel(nn.Module):  
+    """main model definition, uses Pytorch syntax / mechanics under the hood of Pyro"""
     def __init__(
         self,
         spatial_features: torch.Tensor | None = None,
@@ -426,11 +425,11 @@ class HeatAlertLightning(pl.LightningModule):
     ):
         super().__init__()
         self.save_hyperparameters(ignore=["model", "guide"])
-        self.model = model
-        self.guide = guide
         elbo = JitTrace_ELBO if jit else Trace_ELBO
         self.loss_fn = elbo(num_particles=num_particles).differentiable_loss
         self.lr = lr
+        self.register_module("model", model)
+        self.register_module("guide", guide)
 
         # spline basis for day of summer, used for plots
         if bspline_basis is not None:
