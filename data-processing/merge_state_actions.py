@@ -20,6 +20,7 @@ def main(cfg):
 
     # Load heatmetrics
     hm = pd.read_parquet(f"{cfg.data_dir}/processed/heatmetrics.parquet")
+    hm = hm.sort_values(["fips", "date"])
 
     # Load and post process heat alerts data
     alerts_files = glob.glob(f"{cfg.data_dir}/processed/alerts/*.parquet")
@@ -152,7 +153,10 @@ def main(cfg):
     budget = df.groupby(["fips", "year"])["alert"].sum().reset_index()
     budget = budget.rename(columns={"alert": "budget"})
     df = df.merge(budget, on=["fips", "year"], how="left")
-    df["remaining_budget"] = df["budget"] - df["alerts_2wks"]
+
+    # compute the rolling of alerts in the the entire summer
+    df["rolling_alerts"] = df.groupby(["fips", "year"])["alert"].transform("cumsum")
+    df["remaiing_budget"] = df["budget"] - df["rolling_alerts"]
 
     # dos splines
     M = max(df.dos)
