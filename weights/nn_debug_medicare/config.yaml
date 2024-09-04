@@ -16,7 +16,7 @@ training:
 num_samples: 100
 hospitalizations:
   _target_: hospitalizations.load_hosps
-  data_path: ../data/hosps/hosps.parquet
+  data_path: ../data/hospitalizations/medicare.parquet
 constraints:
   effectiveness:
     heat_qi: positive
