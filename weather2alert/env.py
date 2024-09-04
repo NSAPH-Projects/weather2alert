@@ -9,7 +9,7 @@ import pandas as pd
 import torch
 import yaml
 
-from datautils import get_similar_counties, process_features
+from datautils import get_similar_counties
 
 
 with open(resources.path("weather2alert.weights", "master.yaml"), "r") as f:
@@ -102,6 +102,9 @@ class HeatAlertEnv(gym.Env):
             locations = [x for x in locations if x in self.fips_list]
             self.location_index = self.rng.choice(range(len(locations)))
             self.location = locations[self.location_index]
+        else:
+            self.location = location
+            self.location_index = self.fips_list.index(location)
 
         # split by year and index by dos, drop data
         if valid_years is None:
@@ -117,7 +120,7 @@ class HeatAlertEnv(gym.Env):
     def reset(
         self,
         location: str | None = None,
-        augment: bool = False,
+        similar_climate_counties: bool = False,
         valid_years: list | None = None,
         sample_budget: bool = False,
         sample_budget_type: Literal["less_than", "centered"] = "less_than",
@@ -127,7 +130,9 @@ class HeatAlertEnv(gym.Env):
             location = self.rng.choice(self.fips_list)
 
         # get potential episode
-        self.ep, year = self._get_episode(location, augment, valid_years)
+        self.ep, year = self._get_episode(
+            location, similar_climate_counties, valid_years
+        )
         self.ep_index = location + "_" + str(year)
         self.n_days = self.ep.shape[0]
 
@@ -229,7 +234,8 @@ class HeatAlertEnv(gym.Env):
 
 if __name__ == "__main__":
     env = HeatAlertEnv()
-    obs, info = env.reset(augment=True)
+    # obs, info = env.reset(location='06037', similar_climate_counties=True)
+    obs, info = env.reset(location="06037", similar_climate_counties=False)
 
     # test step
     done = False
@@ -238,4 +244,4 @@ if __name__ == "__main__":
         action = env.action_space.sample()
         obs, reward, done, _, info = env.step(action)
         ret += reward
-    0
+    print("OK")
