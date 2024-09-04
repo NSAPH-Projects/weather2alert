@@ -161,6 +161,10 @@ def main(cfg):
         {"dos": df.dos.values / M},
         return_type="dataframe",
     )
+    bspline_col_means = bspline_dos.mean(axis=0)
+    bspline_col_stds = bspline_dos.std(axis=0)
+    bspline_dos = (bspline_dos - bspline_col_means) / bspline_col_stds
+
     for i in range(bspline_dos.shape[1]):
         df[f"bspline_dos_{i}"] = bspline_dos.iloc[:, i]
 
@@ -170,11 +174,13 @@ def main(cfg):
         {"dos": np.arange(0, M + 1) / M},
         return_type="dataframe",
     )
+    # standardize and save
+    bspline_basis = (bspline_basis - bspline_col_means) / bspline_col_stds
     bspline_basis.columns = [f"bspline_dos_{i}" for i in range(bspline_basis.shape[1])]
     bspline_basis.to_parquet(f"{cfg.data_dir}/processed/bspline_basis.parquet")
 
     # -------------------
-    # save as exogenous states, endogenous states, actions
+    # save exogenous states, endogenous states, actions
     # -------------------
 
     # exogenous_states

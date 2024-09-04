@@ -286,6 +286,7 @@ class HeatAlertDataModule(pl.LightningDataModule):
         # create location indicator integer id
         fips_list = confounders.fips.values
         fips2ix = {f: i for i, f in enumerate(fips_list)}
+        self.fips_list = fips_list
         sind = merged.fips.map(fips2ix).values
         year = merged.date.str.slice(0, 4).astype(int).values
         offset = hosps.eligible_pop.values
@@ -479,6 +480,10 @@ class HeatAlertLightning(pl.LightningModule):
                 self.logger.experiment.add_figure(
                     "distribs", fig, global_step=self.global_step
                 )
+                mse = ((outcome_mean - batch[0]) ** 2).mean().item()
+                poisson_loss = Poisson(outcome_mean).log_prob(batch[0]).mean().item()
+                self.log("mse", mse, on_epoch=True)
+                self.log("poisson_loss", poisson_loss, on_epoch=True)
 
                 # obtain quantiles
                 sample = self.guide(*batch)
