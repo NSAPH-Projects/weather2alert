@@ -20,7 +20,6 @@ The mathematical model and a detailed description of the data sources and modeli
 }
 ```
 
-
 ### Getting Started
 
 The package is still under development and is not yet available on PyPI. To install the package, run the following command:
