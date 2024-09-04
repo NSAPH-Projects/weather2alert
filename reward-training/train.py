@@ -116,10 +116,10 @@ def main(cfg: DictConfig):
     # save posterior samples
     td = dict()
     for b in dm.baseline_feature_names + ["bias"]:
-        td["baseline_{b}"] = preds[f"baseline_{b}"]
+        td[f"baseline_{b}"] = preds[f"baseline_{b}"]
 
     for e in dm.effectiveness_feature_names + ["bias"]:
-        td["effectiveness_{e}"] = preds[f"effectiveness_{e}"]
+        td[f"effectiveness_{e}"] = preds[f"effectiveness_{e}"]
 
     td["fips_list"] = list(dm.fips_list)
     savedir = f"../weights/{cfg.name}"
