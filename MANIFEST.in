@@ -1,0 +1,7 @@
+include "weights/nn_debug_medicare/config.yaml"
+include "weights/nn_debug_medicare/posterior_samples.pt"
+include "weights/master.yaml"
+include "data/processed/bspline_basis.parquet"
+include "data/processed/endogenous_states_actions.parquet"
+include "data/processed/exogenous_states.parquet"
+include "data/processed/heat_alerts.parquet"

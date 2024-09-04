@@ -6,3 +6,4 @@
 **/logs
 **/outputs
 **/*egg-info
+spacebench/package_data
