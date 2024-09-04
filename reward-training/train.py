@@ -5,10 +5,10 @@ import hydra
 import pyro
 import pytorch_lightning as pl
 import torch
-import tensordict
+# import tensordict
 from omegaconf import DictConfig, OmegaConf
 
-from models import (
+from modules import (
     HeatAlertDataModule,
     HeatAlertLightning,
     HeatAlertModel,
@@ -20,7 +20,6 @@ LOGGER = logging.getLogger(__name__)
 
 def load_data(dir):
     # Load data
-    LOGGER.info("Loading prepro")
     path = f"{dir}/processed/exogenous_states.parquet"
     exogenous_states = pd.read_parquet(path)
 
@@ -51,6 +50,9 @@ def main(cfg: DictConfig):
         endogenous_states_actions=endo,
     )
 
+    # Perform a last filter to remove nans from exo, endo if hosps has nans
+    LOGGER.info("Filtering nans")
+
     # Create data module
     LOGGER.info("Creating data module")
     dm = HeatAlertDataModule(
@@ -70,12 +72,12 @@ def main(cfg: DictConfig):
         data_size=dm.data_size,
         d_baseline=dm.d_baseline,
         d_effectiveness=dm.d_effectiveness,
-        baseline_constraints=dm.baseline_constraints,
+        baseline_constraints=cfg.constraints.baseline,
         baseline_feature_names=dm.baseline_feature_names,
-        effectiveness_constraints=dm.effectiveness_constraints,
+        effectiveness_constraints=cfg.constraints.effectiveness,
         effectiveness_feature_names=dm.effectiveness_feature_names,
-        hidden_dim=cfg.model.hidden_dim,
-        num_hidden_layers=cfg.model.num_hidden_layers,
+        hidden_dim=cfg.arch.hidden_dim,
+        num_hidden_layers=cfg.arch.num_hidden_layers,
     )
 
     # use low-rank normal guide and initialize by calling it once
@@ -95,7 +97,7 @@ def main(cfg: DictConfig):
     # Train model
     logger = pl.loggers.TensorBoardLogger(
         "logs/", name=cfg.name
-    )  # to see output, from terminal run "tensorboard --logdir logs/[cfg.model.name]"
+    )  # to see output, from terminal run "tensorboard --logdir logs/[cfg.arch.name]"
     trainer = pl.Trainer(
         max_epochs=cfg.training.epochs,
         accelerator=cfg.training.accelerator,
@@ -113,14 +115,18 @@ def main(cfg: DictConfig):
 
     # save posterior samples
     td = dict()
-    for b in dm.baseline_feature_names + ["baseline_bias"]:
-        td[b] = preds[f"baseline_{b}"]
-    for e in dm.effectiveness_feature_names + ["eff_bias"]:
-        td[e] = preds[f"effectiveness_{e}"]
-    preds = tensordict.TensorDict(td, batch_size=cfg.num_samples)
+    for b in dm.baseline_feature_names + ["bias"]:
+        td[f"baseline_{b}"] = preds[f"baseline_{b}"]
+
+    for e in dm.effectiveness_feature_names + ["bias"]:
+        td[f"effectiveness_{e}"] = preds[f"effectiveness_{e}"]
+
+    td["fips_list"] = list(dm.fips_list)
     savedir = f"../weights/{cfg.name}"
     os.makedirs(savedir, exist_ok=True)
-    torch.save(preds, f"{savedir}/posterior_samples.pt")
+    torch.save(td, f"{savedir}/posterior_samples.pt")
+    # preds = tensordict.TensorDict(td, batch_size=cfg.num_samples)
+    # torch.save(td, f"{savedir}/posterior_samples.pt")
 
     # save the config in the folder for completeness
     # make sure to resolve the config with hydra/omegaconf

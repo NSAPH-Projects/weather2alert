@@ -1,0 +1,6 @@
+effectiveness:
+  alert_lag1: negative  # alert yesterday less effective
+  alerts_2wks: negative  # more alerts less effective
+baseline:
+  alert_lag1: negative  # alert yesterday less hospitalizations
+  alerts_2wks: negative  # more trailing alerts less hospitalizations

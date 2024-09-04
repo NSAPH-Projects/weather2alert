@@ -7,6 +7,30 @@ from scipy.special import expit
 LOGGER = logging.getLogger(__name__)
 
 
+def load_hosps(
+    data_path: str,
+    **kwargs,
+    # confounders: pd.DataFrame,
+    # exogenous_states: pd.DataFrame,
+    # endogenous_states_actions: pd.DataFrame
+):
+    """Loads hospitalizations from data_path"""
+    LOGGER.info("Loading hospitalizations from data_path")
+    hosps = pd.read_parquet(data_path)
+
+    # rename total_count to eligible_pop
+    hosps = hosps.rename(
+        columns={"other_hosps": "hospitalizations", "total_count": "eligible_pop"}
+    )
+
+    # # make an right join to index by pd
+    # merged = pd.merge(exogenous_states, endogenous_states_actions, on=["fips", "date"])
+    # hosps = pd.merge(merged, hosps, on=["fips", "date"], how="right")
+    # hosps = hosps[["fips", "date", "hospitalizations", "eligible_pop"]]
+
+    return hosps
+
+
 def sim_hosps(
     sim_coefs: dict,
     confounders: pd.DataFrame,
@@ -34,16 +58,12 @@ def sim_hosps(
     state_cols = ["heat_qi", "excess_heat", "alerts_2wks", "intercept"]
     for c in state_cols:
         if c in sim_coefs.confounders.baseline.keys():
-            for b, w in sim_coefs.confounders.baseline[
-                c
-            ].items():
+            for b, w in sim_coefs.confounders.baseline[c].items():
                 v = confounders[b].loc[merged.fips.values].values
                 baseline += w * merged[c].values * v
 
         if c in sim_coefs.confounders.effectiveness.keys():
-            for e, w in sim_coefs.confounders.effectiveness[
-                c
-            ].items():
+            for e, w in sim_coefs.confounders.effectiveness[c].items():
                 v = confounders[e].loc[merged.fips.values].values
                 effectiveness += w * merged[c].values * v
 

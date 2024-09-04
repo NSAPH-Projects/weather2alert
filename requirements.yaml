@@ -7,20 +7,21 @@ channels:
 dependencies:
   - python=3.10
   # - pytorch-cuda=12.1  # uncomment if GPU/linux
-  - scipy
+  # - tensorboardX
   - pip
-  - tensorboardX
-  - ipykernel
-  - tqdm
-  - pyarrow
-  - tensordict
-  - seaborn
   - pip:
+    - scipy
+    - ipykernel
+    - tqdm
+    - pyarrow
+    # - tensordict
+    - seaborn
     - pytorch-lightning
     - torch-tb-profiler
-    - gym==0.17.2
+    # - gym==0.17.2
     - stable-baselines3>=0.10.0
     - sb3-contrib
     - graphviz
     - statsmodels
+    - scikit-learn
     

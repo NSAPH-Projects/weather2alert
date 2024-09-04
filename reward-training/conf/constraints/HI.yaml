@@ -1,0 +1,7 @@
+effectiveness:
+  heat_qi: positive # more heat more effective
+  excess_heat: positive # more excess heat more effective
+baseline:
+  heat_qi_above_25: positive # heat could have any slope at first
+  heat_qi_above_75: positive #    but should be increasingly worse
+  excess_heat: positive # more excess heat more hospitalizations

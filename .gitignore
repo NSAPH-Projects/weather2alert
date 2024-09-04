@@ -5,3 +5,8 @@
 **/.DS_Store
 **/logs
 **/outputs
+**/*egg-info
+weather2alert/data
+weather2alert/weights
+build/
+dist/

@@ -36,4 +36,4 @@ alerts:
     CM: "US/Central"
     e: "EST"
     MC: "US/Mountain"
-  sim_coefs: [0.5, 0.5]  # [temp, heat_index]
+
