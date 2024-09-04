@@ -6,4 +6,7 @@
 **/logs
 **/outputs
 **/*egg-info
-spacebench/package_data
+weather2alert/data
+weather2alert/weights
+build/
+dist/

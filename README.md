@@ -13,13 +13,12 @@ The mathematical model and a detailed description of the data sources and modeli
 
 ```bibtex
 @article{considine2023optimizing,
-  title={Optimizing Heat Alert Issuance for Public Health in the United States with Reinforcement Learning},
+  title={Optimizing Heat Alert Issuance with Reinforcement Learning},
   author={Considine, Ellen M and Nethery, Rachel C and Wellenius, Gregory A and Dominici, Francesca and Tec, Mauricio},
   journal={arXiv preprint arXiv:2312.14196},
   year={2023}
 }
 ```
-
 
 ### Getting Started
 
@@ -33,17 +32,16 @@ To create an environment, use the following code:
 
 ```python
 import weather2alert
-env = weather2alert.make(location='06037')
+env = weather2alert.HeatAlertEnv(seed=1234)
+obs, info = env.reset(location='06037', similar_climate_counties=False)
 ```
 
-The `location` parameter is a string that represents the FIPS code of the county where the environment is located. The default value is `'06037'`, which corresponds to Los Angeles County, California. When the `location` is not provided, it will be chosen randomly from the available locations.
-
-However, keep in mind that the data-generating mechanism is different for each location.
+The `location` parameter is a string that represents the FIPS code of the county where the environment is located. The default value is `'06037'`, which corresponds to Los Angeles County, California. When the `location` is not provided, it will be chosen randomly from the available locations. The keyword argument `similar_climate_counties` is a boolean that determines whether the environment will use climate data from similar counties to the reference to augment the available episodes. The default value is `False`. See the paper for details on the data augmentation process for climate transitions.
 
 Use the environment with the standard Gymnasium API. For example:
 
 ```python
-obs, info = env.reset()
+
 done = False
 while not done:
     action = env.action_space.sample()

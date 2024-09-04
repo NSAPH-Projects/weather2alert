@@ -23,4 +23,5 @@ dependencies:
     - sb3-contrib
     - graphviz
     - statsmodels
+    - scikit-learn
     
