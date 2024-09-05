@@ -20,7 +20,7 @@ class HeatAlertEnv(gym.Env):
     """Class to simulate the environment for the online RL agent."""
 
     def __init__(
-        self, weights: str = "nn_debug_medicare", valid_years: list | None = None
+        self, weights: str = "nn_full_medicare", valid_years: list | None = None
     ):
         """Initialize the environment."""
         super().__init__()
@@ -42,6 +42,13 @@ class HeatAlertEnv(gym.Env):
             exogenous_states, endogenous_states_actions, on=["fips", "date"]
         )
         merged["year"] = merged.date.str[:4].astype(int)
+
+        # make sure merged is order by fips date and remove dates outside of the range
+        # 152 days of the summer starting on May 1st to Sep 30th
+        month =  merged.date.str[5:7]
+        merged = merged[(month >= "05") & (month <= "09")].copy()
+        merged = merged.drop_duplicates(["fips", "date"])
+
         # merged.set_index(["fips", "date"], inplace=True)
         confounders = pd.read_parquet(
             resources.path("weather2alert.data.processed", "confounders.parquet")
@@ -116,7 +123,7 @@ class HeatAlertEnv(gym.Env):
     def reset(
         self,
         location: str | None = None,
-        similar_climate_counties: bool = True,
+        similar_climate_counties: bool = False,
         seed: int | None = None,
         sample_budget: bool = False,
         sample_budget_type: Literal["less_than", "centered"] = "less_than",
