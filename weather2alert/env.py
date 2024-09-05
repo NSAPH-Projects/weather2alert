@@ -9,7 +9,7 @@ import pandas as pd
 import torch
 import yaml
 
-from datautils import get_similar_counties
+from weather2alert.datautils import get_similar_counties
 
 
 with open(resources.path("weather2alert.weights", "master.yaml"), "r") as f:
@@ -20,15 +20,14 @@ class HeatAlertEnv(gym.Env):
     """Class to simulate the environment for the online RL agent."""
 
     def __init__(
-        self,
-        valid_weights: str = "nn_debug_medicare",
-        seed: int | None = None,
+        self, weights: str = "nn_debug_medicare", valid_years: list | None = None
     ):
         """Initialize the environment."""
         super().__init__()
+        self.valid_years = valid_years
         assert (
-            valid_weights in VALID_WEIGHTS
-        ), f"Invalid weights: {valid_weights}, valid weights are {VALID_WEIGHTS}"
+            weights in VALID_WEIGHTS
+        ), f"Invalid weights: {weights}, valid weights are {VALID_WEIGHTS}"
 
         # load state and confounders data
         path = resources.path(
@@ -52,7 +51,7 @@ class HeatAlertEnv(gym.Env):
         self.confounders = confounders
 
         # load posterior parameters and config
-        weights_dir = "weather2alert.weights." + valid_weights
+        weights_dir = "weather2alert.weights." + weights
         path = resources.path(weights_dir, "posterior_samples.pt")
         posterior_samples = torch.load(path, weights_only=True)
         self.fips_list = posterior_samples["fips_list"]
@@ -69,11 +68,8 @@ class HeatAlertEnv(gym.Env):
         # get num posterior samples
         self.n_samples = posterior_samples["baseline_bias"].shape[0]
 
-        # make rng
-        self.rng = np.random.default_rng(seed)
-
         # setup obs space
-        obs_dim = len(merged.columns) - 1  # don't include date
+        obs_dim = len(merged.columns) + 2  # don't include date
         self.observation_space = spaces.Box(
             low=-np.inf,
             high=np.inf,
@@ -94,7 +90,6 @@ class HeatAlertEnv(gym.Env):
         self,
         location: str,
         augment: bool = False,
-        valid_years: list | None = None,
     ):
         if augment:
             # get similar counties
@@ -107,7 +102,8 @@ class HeatAlertEnv(gym.Env):
             self.location_index = self.fips_list.index(location)
 
         # split by year and index by dos, drop data
-        if valid_years is None:
+        valid_years = self.valid_years
+        if self.valid_years is None:
             valid_years = self.merged.loc[self.location].index.unique()
 
         year = self.rng.choice(valid_years)
@@ -120,19 +116,22 @@ class HeatAlertEnv(gym.Env):
     def reset(
         self,
         location: str | None = None,
-        similar_climate_counties: bool = False,
-        valid_years: list | None = None,
+        similar_climate_counties: bool = True,
+        seed: int | None = None,
         sample_budget: bool = False,
         sample_budget_type: Literal["less_than", "centered"] = "less_than",
     ):
+        # make rng
+        if seed is None:
+            seed = np.random.randint(0, 10000)
+        self.rng = np.random.default_rng(seed)
+
         # if location is None, pick a random location
         if location is None:
             location = self.rng.choice(self.fips_list)
 
         # get potential episode
-        self.ep, year = self._get_episode(
-            location, similar_climate_counties, valid_years
-        )
+        self.ep, year = self._get_episode(location, similar_climate_counties)
         self.ep_index = location + "_" + str(year)
         self.n_days = self.ep.shape[0]
 
