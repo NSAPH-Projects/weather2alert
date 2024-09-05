@@ -17,6 +17,8 @@ class CustomInstall(install):
         source_files = [
             "weights/nn_debug_medicare/config.yaml",
             "weights/nn_debug_medicare/posterior_samples.pt",
+            "weights/nn_full_medicare/config.yaml",
+            "weights/nn_full_medicare/posterior_samples.pt",
             "weights/master.yaml",
             "data/processed/bspline_basis.parquet",
             "data/processed/endogenous_states_actions.parquet",
