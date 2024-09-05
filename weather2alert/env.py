@@ -25,9 +25,9 @@ class HeatAlertEnv(gym.Env):
         """Initialize the environment."""
         super().__init__()
         self.valid_years = valid_years
-        assert (
-            weights in VALID_WEIGHTS
-        ), f"Invalid weights: {weights}, valid weights are {VALID_WEIGHTS}"
+        # assert (
+        #     weights in VALID_WEIGHTS
+        # ), f"Invalid weights: {weights}, valid weights are {VALID_WEIGHTS}"
 
         # load state and confounders data
         path = resources.path(
