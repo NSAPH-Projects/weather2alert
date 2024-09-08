@@ -1,0 +1,26 @@
+data_dir: ../data
+arch:
+  num_hidden_layers: 1
+  hidden_dim: 32
+name: nn_full_medicare
+training:
+  batch_size: null
+  epochs: 150
+  gradient_clip_val: 1.0
+  lr: 0.0003
+  num_workers: 0
+  num_particles: 1
+  max_steps: -1
+  jit: true
+  accelerator: cpu
+num_samples: 100
+hospitalizations:
+  _target_: hospitalizations.load_hosps
+  data_path: ../data/hospitalizations/medicare.parquet
+constraints:
+  effectiveness:
+    heat_qi: positive
+    excess_heat: positive
+  baseline:
+    alert_lag1: negative
+    alerts_2wks: negative
