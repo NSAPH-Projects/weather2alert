@@ -31,14 +31,9 @@ dependencies = [
 dev = ["pytest"]
 
 [tool.setuptools]
-packages = ["src.weather2alert"]
+packages = ["weather2alert"]
+package-dir = {"" = "src"}
 include-package-data = true
 
 [tool.setuptools.package-data]
-weather2alert = [
-    "weights/nn_full_medicare/*",
-    "weights/nn_debug_medicare/*",
-    "weights/master.yaml",
-    "data/processed/*.parquet",
-    "data/raw/*",
-]
+weather2alert = []

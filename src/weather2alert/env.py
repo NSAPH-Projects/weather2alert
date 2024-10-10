@@ -34,7 +34,7 @@ class HeatAlertEnv(Env):
         # load state and confounders data
 
         # check if path data/processed exists, then we are working with local data
-        if False: # os.path.exists("data/processed"):
+        if os.path.exists("data/processed"):
             root = "./"
         else:
             root = find_spec("weather2alert").submodule_search_locations[0]

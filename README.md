@@ -25,14 +25,14 @@ The mathematical model and a detailed description of the data sources and modeli
 The package is still under development and is not yet available on PyPI. To install the package, run the following command:
 
 ```bash
-pip install git+https://github.com/NSAPH-Projects/weather2alert@dev
+pip install git+https://github.com/NSAPH-Projects/weather2alert
 ```
 
 To create an environment, use the following code:
 
 ```python
 import weather2alert
-env = weather2alert.HeatAlertEnv(seed=1234)
+env = weather2alert.env.HeatAlertEnv(seed=1234)
 obs, info = env.reset(location='06037', similar_climate_counties=False)
 ```
 
