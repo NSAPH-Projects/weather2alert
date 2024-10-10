@@ -1,9 +1,31 @@
-recursive-include weights *
-recursive-include data *
+include weather2alert/weights/nn_full_medicare/config.yaml
+include weather2alert/weights/nn_full_medicare/posterior_samples.pt
+include weather2alert/weights/nn_debug_medicare/config.yaml
+include weather2alert/weights/nn_debug_medicare/posterior_samples.pt
+include weather2alert/weights/master.yaml
+include weather2alert/data/processed/bspline_basis.parquet
+include weather2alert/data/processed/endogenous_states_actions.parquet
+include weather2alert/data/processed/exogenous_states.parquet
+include weather2alert/data/processed/heat_alerts.parquet
+include weather2alert/data/processed/confounders.parquet
+include weights/nn_full_medicare/config.yaml
+include weights/nn_full_medicare/posterior_samples.pt
+include weights/nn_debug_medicare/config.yaml
+include weights/nn_debug_medicare/posterior_samples.pt
+include weights/master.yaml
+include data/processed/bspline_basis.parquet
+include data/processed/endogenous_states_actions.parquet
+include data/processed/exogenous_states.parquet
+include data/processed/heat_alerts.parquet
+include data/processed/confounders.parquet
+include src/weather2alert/weights/nn_full_medicare/config.yaml
+include src/weather2alert/weights/nn_full_medicare/posterior_samples.pt
+include src/weather2alert/weights/nn_debug_medicare/config.yaml
+include src/weather2alert/weights/nn_debug_medicare/posterior_samples.pt
+include src/weather2alert/weights/master.yaml
+include src/weather2alert/data/processed/bspline_basis.parquet
+include src/weather2alert/data/processed/endogenous_states_actions.parquet
+include src/weather2alert/data/processed/exogenous_states.parquet
+include src/weather2alert/data/processed/heat_alerts.parquet
+include src/weather2alert/data/processed/confounders.parquet
 include requirements.txt
-recursive-include weather2alert/weights *
-recursive-include weather2alert/data *
-include weather2alert/requirements.txt
-recursive-include src/weather2alert/weights *
-recursive-include src/weather2alert/data *
-include src/weather2alert/requirements.txt
