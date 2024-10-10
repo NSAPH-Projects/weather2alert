@@ -17,7 +17,6 @@ setup(
         "Programming Language :: Python :: 3.11",
     ],
     python_requires=">=3.10",
-    setup_requires=["setuptools_scm"],
     install_requires=[
         "scipy",
         "tqdm",
@@ -29,11 +28,4 @@ setup(
     package_dir={"": "src"},
     packages=find_packages("src"),
     include_package_data=True,  # Include data files from MANIFEST.in
-    package_data={
-        "weather2alert": [
-            "weights/**/*",
-            "data/**/*",
-        ],
-        "": ["weights/**/*", "data/**/*"],
-    },
 )
