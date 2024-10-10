@@ -17,6 +17,7 @@ setup(
         "Programming Language :: Python :: 3.11",
     ],
     python_requires=">=3.10",
+    setup_requires=["setuptools_scm"],
     install_requires=[
         "scipy",
         "tqdm",
