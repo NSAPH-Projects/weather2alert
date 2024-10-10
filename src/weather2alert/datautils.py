@@ -1,9 +1,4 @@
 import pandas as pd
-from sklearn.preprocessing import StandardScaler
-import torch
-
-
-# import matplotlib.pyplot as plt
 
 WESTERN_STATES = [
     "AZ",
