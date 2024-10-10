@@ -31,7 +31,8 @@ dependencies = [
 dev = ["pytest"]
 
 [tool.setuptools]
-packages = ["src.weather2alert"]
+packages = ["weather2alert"]
+package-dir = {"" = "src"}
 include-package-data = true
 
 [tool.setuptools.package-data]
