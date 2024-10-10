@@ -28,10 +28,11 @@ setup(
     package_dir={"": "src"},
     packages=find_packages("src"),
     include_package_data=True,  # Include data files from MANIFEST.in
-    package_data={
-        "weather2alert": [
-            "weights/**/*",
-            "data/**/*",
-        ],
-    },
+    # package_data={
+    #     "weather2alert": [
+    #         "weights/**/*",
+    #         "data/**/*",
+    #     ],
+    #     "": ["weights/**/*", "data/**/*"],
+    # },
 )
