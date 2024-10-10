@@ -1,3 +1,9 @@
 recursive-include weights *
 recursive-include data *
 include requirements.txt
+recursive-include weather2alert/weights *
+recursive-include weather2alert/data *
+include weather2alert/requirements.txt
+recursive-include src/weather2alert/weights *
+recursive-include src/weather2alert/data *
+include src/weather2alert/requirements.txt
