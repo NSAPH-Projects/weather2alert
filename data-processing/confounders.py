@@ -208,9 +208,14 @@ def main(cfg):
 
     # Keep only those places with population > 65000 and complete data cases
     print(merged_df.shape)
-    merged_df = merged_df.loc[merged_df.total_pop > 65000]
+
+    if cfg.county_filter != "all":
+        merged_df = merged_df.loc[merged_df.total_pop > float(cfg.county_filter)]
+
     merged_df = merged_df.dropna()
-    merged_df.to_parquet(f"{cfg.data_dir}/processed/confounders.parquet", index=False)
+    merged_df.to_parquet(
+        f"{cfg.data_dir}/processed/confounders_{cfg.county_filter}.parquet", index=False
+    )
 
 
 if __name__ == "__main__":

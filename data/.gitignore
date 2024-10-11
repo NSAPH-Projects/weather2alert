@@ -1,5 +1,5 @@
 hospitalizations/*
 raw/nws-forecast-zones
 raw/heatmetrics.parquet
-shapefile
-!processed
+raw/shapefile
+processed/

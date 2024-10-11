@@ -10,7 +10,7 @@ conda: "requirements.yaml"  # Path: envs/conda.yaml
 
 
 envvars:
-    "CENSUS_API_KEY"
+    "CENSUS_API_KEY",
 
 
 # read hydra config from initialize API
@@ -21,75 +21,78 @@ with hydra.initialize(config_path="conf", version_base=None):
 
 # make sure data locations exist / user can set them to
 # symlinks separately if preferred
-os.makedirs(f"{processing_cfg.data_dir}/raw", exist_ok=True)
-os.makedirs(f"{processing_cfg.data_dir}/processed", exist_ok=True)
+data_dir = processing_cfg.data_dir
+os.makedirs(f"{data_dir}/raw", exist_ok=True)
+os.makedirs(f"{data_dir}/processed", exist_ok=True)
+
+filters = ["65000", "all"]
 
 
 rule all:
     input:
-        processing_cfg.data_dir + "/processed/endogenous_states_actions.parquet",
-        processing_cfg.data_dir + "/processed/exogenous_states.parquet",
-        processing_cfg.data_dir + "/processed/bspline_basis.parquet",
-        processing_cfg.data_dir + "/processed/confounders.parquet",
+        expand(
+            data_dir + "/processed/endogenous_states_actions_{filter}.parquet",
+            filter=filters,
+        ),
+        expand(
+            data_dir + "/processed/exogenous_states_{filter}.parquet",
+            filter=filters,
+        ),
+        expand(
+            data_dir + "/processed/bspline_basis_{filter}.parquet",
+            filter=filters,
+        ),
+        expand(
+            data_dir + "/processed/confounders_{filter}.parquet",
+            filter=filters,
+        ),
+
 
 rule merge_state_actions:
     input:
         expand(
-            processing_cfg.data_dir + "/processed/alerts/{state}.parquet",
+            data_dir + "/processed/alerts/{state}.parquet",
             state=config["states"],
         ),
-        processing_cfg.data_dir + "/processed/heatmetrics.parquet",
+        data_dir + "/processed/heatmetrics_{filter}.parquet",
     output:
-        processing_cfg.data_dir + "/processed/exogenous_states.parquet",
-        processing_cfg.data_dir + "/processed/endogenous_states_actions.parquet",
-        processing_cfg.data_dir + "/processed/budget.parquet",
+        data_dir + "/processed/exogenous_states_{filter}.parquet",
+        data_dir + "/processed/endogenous_states_actions_{filter}.parquet",
+        data_dir + "/processed/budget_{filter}.parquet",
+        data_dir + "/processed/bspline_basis_{filter}.parquet",
     log:
-        "logs/merge_state_actions.log",
+        "logs/merge_state_actions_{filter}.log",
     shell:
-        "python merge_state_actions.py &> {log}"
-
-
-# rule merge_hospitalizations:
-#     input:
-#         processing_cfg.data_dir + "/processed/exogenous_states.parquet",
-#         processing_cfg.data_dir + "/processed/endogenous_states_actions.parquet",
-#     output:
-#         processing_cfg.data_dir + "/processed/training_data.parquet",
-#     log:
-#         "logs/merge_hospitalizations.log",
-#     shell:
-#         f"""
-#         python merge_hospitalizations.py \
-#             hospitalizations.data_path={config['hosps_data_path']} 
-#             &> {{log}}
-#         """
+        "python merge_state_actions.py county_filter={wildcards.filter} &> {log}"
 
 
 rule confounders:
     output:
-        processing_cfg.data_dir + "/processed/confounders.parquet",
+        data_dir + "/processed/confounders_{filter}.parquet",
     log:
-        "logs/confounders.log",
+        "logs/confounders_{filter}.log",
     shell:
         f"""
         python confounders.py \
-            census_api_key={os.environ['CENSUS_API_KEY']} \
+            census_api_key={os.environ['CENSUS_API_KEY']} county_filter={{wildcards.filter}} \
             &> {{log}}
         """
 
 
 rule heatmetrics:
+    input:
+        data_dir + "/processed/confounders_{filter}.parquet",
     output:
-        processing_cfg.data_dir + "/processed/heatmetrics.parquet",
+        data_dir + "/processed/heatmetrics_{filter}.parquet",
     log:
-        "logs/heatmetrics.log",
+        "logs/heatmetrics_{filter}.log",
     shell:
-        "python heatmetrics.py &> {log}"
+        "python heatmetrics.py county_filter={wildcards.filter}  &> {log}"
 
 
 rule alerts:
     output:
-        processing_cfg.data_dir + "/processed/alerts/{state}.parquet",
+        data_dir + "/processed/alerts/{state}.parquet",
     log:
         "logs/alerts_{state}.log",
     shell:

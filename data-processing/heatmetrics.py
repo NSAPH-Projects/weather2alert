@@ -24,7 +24,6 @@ def transform_rds_to_parquet(rds_path, parquet_path):
 @hydra.main(config_path="conf", config_name="config", version_base=None)
 def main(cfg):
     # Download data if not already present
-    processed_path = f"{cfg.data_dir}/processed/heatmetrics.parquet"
     download_path = f"{cfg.data_dir}/raw/heatmetrics.rds"  # data is in R's native format
     url = cfg.heatmetrics.url
 
@@ -49,11 +48,12 @@ def main(cfg):
     df = df[["StCoFIPS", "Date"] + cfg.heatmetrics.cols]
     df.rename(columns={"StCoFIPS": "fips", "Date": "date"}, inplace=True)
 
-    # Keep only large fips
-    confounders = pd.read_parquet(f"{cfg.data_dir}/processed/confounders.parquet")
+    suffix = cfg.county_filter
+    confounders = pd.read_parquet(f"{cfg.data_dir}/processed/confounders_{suffix}.parquet")
     df = df[df.fips.isin(confounders.fips)]
 
     # Write to parquet
+    processed_path = f"{cfg.data_dir}/processed/heatmetrics_{suffix}.parquet"
     df.to_parquet(processed_path)
     LOGGER.info(f"Data written to {processed_path} with head\n: {df.head()}")
 

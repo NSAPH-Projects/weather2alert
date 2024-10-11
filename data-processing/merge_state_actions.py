@@ -18,8 +18,11 @@ def main(cfg):
     """This script merges data from the heatmetrics and heatalerts and computes
     the state space variables. The merged data is saved as a parquet file."""
 
+    # county filter suffix
+    suffix = cfg.county_filter
+
     # Load heatmetrics
-    hm = pd.read_parquet(f"{cfg.data_dir}/processed/heatmetrics.parquet")
+    hm = pd.read_parquet(f"{cfg.data_dir}/processed/heatmetrics_{suffix}.parquet")
     hm = hm.sort_values(["fips", "date"])
 
     # Load and post process heat alerts data
@@ -156,7 +159,7 @@ def main(cfg):
 
     # compute the rolling of alerts in the the entire summer
     df["rolling_alerts"] = df.groupby(["fips", "year"])["alert"].transform("cumsum")
-    df["remaiing_budget"] = df["budget"] - df["rolling_alerts"]
+    df["remaining_budget"] = df["budget"] - df["rolling_alerts"]
 
     # dos splines
     M = max(df.dos)
@@ -181,7 +184,7 @@ def main(cfg):
     # standardize and save
     bspline_basis = (bspline_basis - bspline_col_means) / bspline_col_stds
     bspline_basis.columns = [f"bspline_dos_{i}" for i in range(bspline_basis.shape[1])]
-    bspline_basis.to_parquet(f"{cfg.data_dir}/processed/bspline_basis.parquet")
+    bspline_basis.to_parquet(f"{cfg.data_dir}/processed/bspline_basis_{suffix}.parquet")
 
     # -------------------
     # save exogenous states, endogenous states, actions
@@ -200,7 +203,7 @@ def main(cfg):
         *[f"bspline_dos_{i}" for i in range(bspline_dos.shape[1])],
     ]
     exogenous_states = df[exogenous_state_vars + ["fips", "date"]]
-    exogenous_states.to_parquet(f"{cfg.data_dir}/processed/exogenous_states.parquet")
+    exogenous_states.to_parquet(f"{cfg.data_dir}/processed/exogenous_states_{suffix}.parquet")
 
     # actions and endogenous states
     action_vars = [
@@ -212,11 +215,11 @@ def main(cfg):
     ]
     action_states = df[action_vars + ["fips", "date"]]
     action_states.to_parquet(
-        f"{cfg.data_dir}/processed/endogenous_states_actions.parquet"
+        f"{cfg.data_dir}/processed/endogenous_states_actions_{suffix}.parquet"
     )
 
     # save budget
-    budget.to_parquet(f"{cfg.data_dir}/processed/budget.parquet")
+    budget.to_parquet(f"{cfg.data_dir}/processed/budget_{suffix}.parquet")
 
 
 if __name__ == "__main__":
