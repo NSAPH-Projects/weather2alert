@@ -75,8 +75,9 @@ class MLP(nn.Module):  # for learning a prior informed by the spatial variables
         return self.net(x)
 
 
-class HeatAlertModel(nn.Module):  
+class HeatAlertModel(nn.Module):
     """main model definition, uses Pytorch syntax / mechanics under the hood of Pyro"""
+
     def __init__(
         self,
         spatial_features: torch.Tensor | None = None,
@@ -168,7 +169,7 @@ class HeatAlertModel(nn.Module):
             "baseline_bias", Uniform(-10, 10).expand([self.S]).to_event(1)
         )
         baseline = sum(baseline_contribs) + baseline_bias[loc_ind]
-        
+
         # -----------------------------------------------------------------#
         # clamp & replace nans for stability, after training shouldnot be active
         baseline = torch.exp(baseline.clamp(-10, 10))
@@ -195,7 +196,7 @@ class HeatAlertModel(nn.Module):
         effectiveness = torch.where(
             torch.isnan(effectiveness), torch.zeros_like(effectiveness), effectiveness
         )
-        # =-----------------------------------------------------------------=   
+        # =-----------------------------------------------------------------=
 
         # sample the outcome
         outcome_mean = offset * baseline * (1 - alert * effectiveness)
@@ -212,7 +213,7 @@ class HeatAlertModel(nn.Module):
         # baseline = baseline[~nans]
         # # -----
 
-        with pyro.plate("data", self.N, subsample=index):            
+        with pyro.plate("data", self.N, subsample=index):
             obs = pyro.sample("hospitalizations", Poisson(outcome_mean + 1e-3), obs=y)
 
         if not return_outcomes:
@@ -242,6 +243,7 @@ class HeatAlertDataModule(pl.LightningDataModule):
         confounders: pd.DataFrame | None = None,
         hosps: pd.DataFrame | None = None,
         bspline_basis: pd.DataFrame | None = None,
+        # budget: pd.DataFrame | None = None,
         batch_size: int | None = None,
         num_workers: int = 8,
     ):
@@ -255,11 +257,13 @@ class HeatAlertDataModule(pl.LightningDataModule):
             on=["fips", "date"],
             how="inner",
         )
+        merged = merged.drop(columns=["significance"])
         confounders = confounders.copy()
         confounders["intercept"] = 1.0
 
         # TODO: clean data during preprocessing
         comb = pd.merge(merged, hosps, on=["fips", "date"], how="left")
+
         rows_with_nans = comb.isnull().any(axis=1)
         fipsdates = comb.fips + comb.date
         valid_fipsdates = fipsdates[~rows_with_nans].unique()
@@ -323,57 +327,62 @@ class HeatAlertDataModule(pl.LightningDataModule):
         alert = torch.FloatTensor(alert)
         year = torch.LongTensor(year)
         # budget = torch.LongTensor(budget.budget.values)
-        # hi_mean = torch.FloatTensor(X.HI_mean.values)  # for RL
 
         # compute budget as the total sum per summer-year
         merged["year"] = year
+
         budget = merged.groupby(["fips", "year"])["alert"].sum().reset_index()
         budget = budget.rename(columns={"alert": "budget"})
         budget = merged.merge(budget, on=["fips", "year"], how="left")
         budget = torch.LongTensor(budget.budget.values)
 
-        # prepare covariates
-        heat_qi = torch.FloatTensor(merged.heat_qi.values)
-        heat_qi_above_25 = torch.FloatTensor(merged.heat_qi_above_25.values)
-        heat_qi_above_75 = torch.FloatTensor(merged.heat_qi_above_75.values)
-        excess_heat = torch.FloatTensor(merged.excess_heat.values)
-        alert_lag1 = torch.FloatTensor(merged.alert_lag1.values)
-        alerts_2wks = torch.FloatTensor(merged.alerts_2wks.values)
-        weekend = torch.FloatTensor(merged.weekend.values)
+        # prepare state/action features
+        keys = [k for k in merged.columns if k not in ["date", "fips", "year"]]
+        tensors = {k: torch.FloatTensor(merged[k].values) for k in keys}
+        # heat_qi = torch.FloatTensor(merged.heat_qi.values)
+        # heat_qi_above_25 = torch.FloatTensor(merged.heat_qi_above_25.values)
+        # heat_qi_above_75 = torch.FloatTensor(merged.heat_qi_above_75.values)
+        # excess_heat = torch.FloatTensor(merged.excess_heat.values)
+        # alert_lag1 = torch.FloatTensor(merged.alert_lag1.values)
+        # alerts_2wks = torch.FloatTensor(merged.alerts_2wks.values)
+        # weekend = torch.FloatTensor(merged.weekend.values)
 
-        # get all cols that start with bsplines_dos in one tensor
-        bsplines_dos = torch.FloatTensor(
-            merged.filter(regex="bspline_dos", axis=1).values
-        )
-        n_basis = bsplines_dos.shape[1]
+        # get all cols that start with bspline_dos in one tensor
+        # bspline_dos = torch.FloatTensor(
+        #     merged.filter(regex="bspline_dos", axis=1).values
+        # )
+        # n_basis = bspline_dos.shape[1]
 
         # save dos spline basis for plots
         # # save day of summer splines as tensor
         self.bspline_basis = torch.FloatTensor(bspline_basis.values)
 
         # alert effectiveness features
-        effectiveness_features = {
-            "heat_qi": heat_qi,
-            "excess_heat": excess_heat,
-            "alert_lag1": alert_lag1,
-            "alerts_2wks": alerts_2wks,
-            "weekend": weekend,
-            **{f"bsplines_dos_{i}": bsplines_dos[:, i] for i in range(n_basis)},
-        }
+        # effectiveness_features = {
+        #     "heat_qi": heat_qi,
+        #     "excess_heat": excess_heat,
+        #     "alert_lag1": alert_lag1,
+        #     "alerts_2wks": alerts_2wks,
+        #     "weekend": weekend,
+        #     **{k: tensors[k] for k in tensors if k.startswith("bspline")},
+        #     **{f"bspline_dos_{i}": bspline_dos[:, i] for i in range(n_basis)},
+        # }
+        effectiveness_features = tensors
         self.effectiveness_feature_names = list(effectiveness_features.keys())
 
         # baseline rate features
         # for now just use a simple 3-step piecewise linear function
-        baseline_features = {
-            "heat_qi_base": heat_qi,
-            "heat_qi_above_25": heat_qi_above_25,
-            "heat_qi_above_75": heat_qi_above_75,
-            "excess_heat": excess_heat,
-            "alert_lag1": alert_lag1,
-            "alerts_2wks": alerts_2wks,
-            "weekend": weekend,
-            **{f"bsplines_dos_{i}": bsplines_dos[:, i] for i in range(n_basis)},
-        }
+        # baseline_features = {
+        #     "heat_qi_base": heat_qi,
+        #     "heat_qi_above_25": heat_qi_above_25,
+        #     "heat_qi_above_75": heat_qi_above_75,
+        #     "excess_heat": excess_heat,
+        #     "alert_lag1": alert_lag1,
+        #     "alerts_2wks": alerts_2wks,
+        #     "weekend": weekend,
+        #     **{f"bspline_dos_{i}": bspline_dos[:, i] for i in range(n_basis)},
+        # }
+        baseline_features = tensors
         self.baseline_feature_names = list(baseline_features.keys())
 
         baseline_features_tensor = torch.stack(
@@ -486,8 +495,8 @@ class HeatAlertLightning(pl.LightningModule):
 
                 # obtain quantiles
                 sample = self.guide(*batch)
-                keys0 = [k for k in sample.keys() if k.startswith("effectiveness_")]
-                keys1 = [k for k in sample.keys() if k.startswith("baseline_")]
+                keys0 = [k for k in sample.keys() if k.startswith("effectiveness_") and "_scale" not in k]
+                keys1 = [k for k in sample.keys() if k.startswith("baseline_") and "_scale" not in k]
                 medians_0 = np.array(
                     [torch.quantile(sample[k], 0.5).item() for k in keys0]
                 )
@@ -528,10 +537,10 @@ class HeatAlertLightning(pl.LightningModule):
                 n_basis = self.dos_spline_basis.shape[1]
                 basis = self.dos_spline_basis
                 eff_coefs = [
-                    sample[f"effectiveness_bsplines_dos_{i}"] for i in range(n_basis)
+                    sample[f"effectiveness_bspline_dos_{i}"] for i in range(n_basis)
                 ]
                 baseline_coefs = [
-                    sample[f"baseline_bsplines_dos_{i}"] for i in range(n_basis)
+                    sample[f"baseline_bspline_dos_{i}"] for i in range(n_basis)
                 ]
                 eff_contribs = [
                     basis[:, i] * eff_coefs[i][:, None] for i in range(n_basis)

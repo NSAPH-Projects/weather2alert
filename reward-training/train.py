@@ -1,53 +1,54 @@
 import logging
 import os
-import pandas as pd
+
 import hydra
+import pandas as pd
 import pyro
 import pytorch_lightning as pl
 import torch
-# import tensordict
+import yaml
+from modules import HeatAlertDataModule, HeatAlertLightning, HeatAlertModel
 from omegaconf import DictConfig, OmegaConf
-
-from modules import (
-    HeatAlertDataModule,
-    HeatAlertLightning,
-    HeatAlertModel,
-)
-
+from safetensors.torch import save_file
 
 LOGGER = logging.getLogger(__name__)
 
 
-def load_data(dir):
+def load_data(dir, conf="65k"):
+    D = {}  # data dictionary
+
     # Load data
-    path = f"{dir}/processed/exogenous_states.parquet"
-    exogenous_states = pd.read_parquet(path)
+    path = f"{dir}/processed/{conf}/exogenous_states.parquet"
+    D["exogenous_states"] = pd.read_parquet(path)
 
-    path = f"{dir}/processed/endogenous_states_actions.parquet"
-    endogenous_states_actions = pd.read_parquet(path)
+    path = f"{dir}/processed/{conf}/endogenous_states_actions.parquet"
+    D["endogenous_states_actions"] = pd.read_parquet(path)
 
-    path = f"{dir}/processed/confounders.parquet"
-    confounders = pd.read_parquet(path)
+    path = f"{dir}/processed/{conf}/confounders.parquet"
+    D["confounders"] = pd.read_parquet(path)
 
     path = f"{dir}/processed/bspline_basis.parquet"
-    bspline_basis = pd.read_parquet(path)
+    D["bspline_basis"] = pd.read_parquet(path)
 
-    return exogenous_states, endogenous_states_actions, confounders, bspline_basis
+    path = f"{dir}/processed/{conf}/budget.parquet"
+    D["budget"] = pd.read_parquet(path)
+
+    return D
 
 
 @hydra.main(config_path="conf", config_name="config", version_base=None)
 def main(cfg: DictConfig):
     # Load data
     LOGGER.info("Loading preprocessed data")
-    exo, endo, confounders, bspline_basis = load_data(cfg.data_dir)
+    data_dict = load_data(cfg.data_dir)
 
     # Load hospitalizations, it uses real, sim, or syntethic data
     LOGGER.info("Loading hospitalizations")
     hosps = hydra.utils.instantiate(
         cfg.hospitalizations,
-        confounders=confounders,
-        exogenous_states=exo,
-        endogenous_states_actions=endo,
+        confounders=data_dict["confounders"],
+        exogenous_states=data_dict["exogenous_states"],
+        endogenous_states_actions=data_dict["endogenous_states_actions"],
     )
 
     # Perform a last filter to remove nans from exo, endo if hosps has nans
@@ -56,11 +57,12 @@ def main(cfg: DictConfig):
     # Create data module
     LOGGER.info("Creating data module")
     dm = HeatAlertDataModule(
-        confounders=confounders,
-        exogenous_states=exo,
-        endogenous_states_actions=endo,
+        confounders=data_dict["confounders"],
+        exogenous_states=data_dict["exogenous_states"],
+        endogenous_states_actions=data_dict["endogenous_states_actions"],
         hosps=hosps,
-        bspline_basis=bspline_basis,
+        bspline_basis=data_dict["bspline_basis"],
+        # budget=data_dict["budget"],
         batch_size=cfg.training.batch_size,
         num_workers=cfg.training.num_workers,
     )
@@ -81,7 +83,7 @@ def main(cfg: DictConfig):
     )
 
     # use low-rank normal guide and initialize by calling it once
-    guide = pyro.infer.autoguide.AutoLowRankMultivariateNormal(model)
+    guide = pyro.infer.autoguide.AutoLowRankMultivariateNormal(model, rank=20)
     guide(*dm.dataset.tensors)  # always needed to initialize guide
 
     # create lightning module for training
@@ -121,17 +123,16 @@ def main(cfg: DictConfig):
     for e in dm.effectiveness_feature_names + ["bias"]:
         td[f"effectiveness_{e}"] = preds[f"effectiveness_{e}"]
 
-    td["fips_list"] = list(dm.fips_list)
     savedir = f"../weights/{cfg.name}"
     os.makedirs(savedir, exist_ok=True)
-    torch.save(td, f"{savedir}/posterior_samples.pt")
-    # preds = tensordict.TensorDict(td, batch_size=cfg.num_samples)
-    # torch.save(td, f"{savedir}/posterior_samples.pt")
+    save_file(td, f"{savedir}/posterior_samples.safetensors")
 
     # save the config in the folder for completeness
     # make sure to resolve the config with hydra/omegaconf
+    cfg_dict = OmegaConf.to_container(cfg, resolve=True)
+    cfg_dict["fips_list"] = dm.fips_list.tolist()
     with open(f"{savedir}/config.yaml", "w") as f:
-        f.write(OmegaConf.to_yaml(cfg, resolve=True))
+        yaml.dump(cfg_dict, f)
 
 
 if __name__ == "__main__":
