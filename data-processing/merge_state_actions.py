@@ -71,7 +71,7 @@ def main(cfg):
     dtcols = ["Issue", "Issuance", "Expire", "Initial Expire"]
     for col in dtcols:
         alerts[col] = pd.to_datetime(alerts[col])
-    C = 60 * 60 * 24
+    C = 60 * 60 * 24  # convert to days
     delta = (alerts["Issue"] - alerts["Issuance"]).dt.total_seconds() / C
     alerts["issued_in_advance"] = delta
     dur = (alerts["Initial Expire"] - alerts["Issue"]).dt.total_seconds() / C
@@ -138,7 +138,25 @@ def main(cfg):
         lambda x: x.rolling(14, min_periods=1).sum()
     )
     df["alert_lag1"] = df.groupby("fips")["alert"].shift(1).fillna(0).astype(int)
-    df["alert_streak"] = (df.duration - df.remaining).fillna(0).astype(int)
+
+    # comptue the streak as the number of consecutive true before the next false
+    # it should return to 0 after a false
+    def streak(x: np.ndarray) -> np.ndarray:
+        out = np.zeros(len(x), dtype=int)
+        streak = 0
+        for i, xi in enumerate(x):
+            if xi:
+                streak += 1
+            else:
+                streak = 0
+            out[i] = streak
+        return out
+
+    df["alert_streak"] = df.groupby("fips")["alert"].transform(streak)
+
+    # add issued in advance and signficance
+    df["issued_in_advance"] = df["issued_in_advance"].fillna(0)
+    df["significance"] = df["significance"].fillna("NA")
 
     # weekend indicator
     df["weekend"] = df.date.dt.weekday.isin([5, 6]).astype(int)
@@ -212,6 +230,8 @@ def main(cfg):
         "alert_lag1",
         "alert_streak",
         "remaining_budget",
+        "issued_in_advance",
+        "significance",
     ]
     action_states = df[action_vars + ["fips", "date"]]
     action_states.to_parquet(
