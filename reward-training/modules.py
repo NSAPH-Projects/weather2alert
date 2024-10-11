@@ -519,7 +519,7 @@ class HeatAlertLightning(pl.LightningModule):
                 l1, u1 = medians_1 - q25_1, q75_1 - medians_1
 
                 # make coefficient distribution plots for coefficients, error bars are iqr
-                fig, ax = plt.subplots(1, 2, figsize=(8, 4))
+                fig, ax = plt.subplots(1, 2, figsize=(10, 4))
                 ax[0].errorbar(x=keys0, y=medians_0, yerr=[l0, u0], fmt="o")
                 plt.setp(ax[0].get_xticklabels(), rotation=90)
                 ax[0].set_title("effectiveness coeff distribution")

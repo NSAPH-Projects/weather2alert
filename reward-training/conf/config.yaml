@@ -3,7 +3,7 @@ defaults:
   - arch: nn
   - training: fast
   - hospitalizations: sim
-  - constraints: mixed
+  - constraints: all
 
 data_dir: ../data
 
@@ -11,8 +11,7 @@ arch:
   num_hidden_layers: ???
   hidden_dim: ???
 
-name: ${hydra:runtime.choices.arch}
-# _${hydra:runtime.choices.training}_${hydra:runtime.choices.hospitalizations}_${hydra:runtime.choices.constraints}
+name: ${hydra:runtime.choices.arch}_${hydra:runtime.choices.training}_${hydra:runtime.choices.hospitalizations}_${hydra:runtime.choices.constraints}
 
 training:
   batch_size:   # leave empty it will be chose according to S and N
