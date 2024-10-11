@@ -25,27 +25,28 @@ data_dir = processing_cfg.data_dir
 os.makedirs(f"{data_dir}/raw", exist_ok=True)
 os.makedirs(f"{data_dir}/processed", exist_ok=True)
 
-filters = ["65000", "all"]
+splits = ["65k", "all"]
 
 
 rule all:
     input:
         expand(
-            data_dir + "/processed/endogenous_states_actions_{filter}.parquet",
-            filter=filters,
+            data_dir + "/processed/{split}/endogenous_states_actions.parquet",
+            split=splits,
         ),
         expand(
-            data_dir + "/processed/exogenous_states_{filter}.parquet",
-            filter=filters,
+            data_dir + "/processed/{split}/exogenous_states.parquet",
+            split=splits,
         ),
         expand(
-            data_dir + "/processed/bspline_basis_{filter}.parquet",
-            filter=filters,
+            data_dir + "/processed/{split}/budget.parquet",
+            split=splits,
         ),
         expand(
-            data_dir + "/processed/confounders_{filter}.parquet",
-            filter=filters,
+            data_dir + "/processed/{split}/confounders.parquet",
+            split=splits,
         ),
+        data_dir + "/processed/bspline_basis.parquet",
 
 
 rule merge_state_actions:
@@ -54,40 +55,59 @@ rule merge_state_actions:
             data_dir + "/processed/alerts/{state}.parquet",
             state=config["states"],
         ),
-        data_dir + "/processed/heatmetrics_{filter}.parquet",
+        expand(
+            data_dir + "/processed/{split}/heatmetrics.parquet",
+            split=splits,
+        ),
     output:
-        data_dir + "/processed/exogenous_states_{filter}.parquet",
-        data_dir + "/processed/endogenous_states_actions_{filter}.parquet",
-        data_dir + "/processed/budget_{filter}.parquet",
-        data_dir + "/processed/bspline_basis_{filter}.parquet",
+        expand(
+            data_dir + "/processed/{split}/endogenous_states_actions.parquet",
+            split=splits,
+        ),
+        expand(
+            data_dir + "/processed/{split}/exogenous_states.parquet",
+            split=splits,
+        ),
+        expand(
+            data_dir + "/processed/{split}/budget.parquet",
+            split=splits,
+        ),
+        data_dir + "/processed/bspline_basis.parquet",
     log:
-        "logs/merge_state_actions_{filter}.log",
+        "logs/merge_state_actions.log",
     shell:
-        "python merge_state_actions.py county_filter={wildcards.filter} &> {log}"
+        "python merge_state_actions.py &> {log}"
 
 
 rule confounders:
     output:
-        data_dir + "/processed/confounders_{filter}.parquet",
+        expand(
+            data_dir + "/processed/{split}/confounders.parquet",
+            split=splits,
+        ),
     log:
-        "logs/confounders_{filter}.log",
+        "logs/confounders.log",
     shell:
         f"""
-        python confounders.py \
-            census_api_key={os.environ['CENSUS_API_KEY']} county_filter={{wildcards.filter}} \
-            &> {{log}}
+        python confounders.py census_api_key={os.environ['CENSUS_API_KEY']} &> {{log}}
         """
 
 
 rule heatmetrics:
     input:
-        data_dir + "/processed/confounders_{filter}.parquet",
+        expand(
+            data_dir + "/processed/{split}/confounders.parquet",
+            split=splits,
+        ),
     output:
-        data_dir + "/processed/heatmetrics_{filter}.parquet",
+        expand(
+            data_dir + "/processed/{split}/heatmetrics.parquet",
+            split=splits,
+        ),
     log:
-        "logs/heatmetrics_{filter}.log",
+        "logs/heatmetrics.log",
     shell:
-        "python heatmetrics.py county_filter={wildcards.filter}  &> {log}"
+        "python heatmetrics.py &> {log}"
 
 
 rule alerts:

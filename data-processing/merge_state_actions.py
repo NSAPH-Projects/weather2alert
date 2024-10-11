@@ -18,11 +18,8 @@ def main(cfg):
     """This script merges data from the heatmetrics and heatalerts and computes
     the state space variables. The merged data is saved as a parquet file."""
 
-    # county filter suffix
-    suffix = cfg.county_filter
-
     # Load heatmetrics
-    hm = pd.read_parquet(f"{cfg.data_dir}/processed/heatmetrics_{suffix}.parquet")
+    hm = pd.read_parquet(f"{cfg.data_dir}/processed/all/heatmetrics.parquet")
     hm = hm.sort_values(["fips", "date"])
 
     # Load and post process heat alerts data
@@ -106,6 +103,9 @@ def main(cfg):
             remaining = max(0, remaining - 1)
     alerts = pd.DataFrame(expanded_alerts)
 
+    # important to remove duplicates here
+    alerts = alerts.drop_duplicates(["fips", "date"]).sort_values(["fips", "date"])
+
     valid_fips = set(alerts["fips"].unique())
     hm = hm[hm.fips.isin(valid_fips)]
 
@@ -117,17 +117,34 @@ def main(cfg):
     # compute state variables/auxiliary features
     # ---------
     # percentile transform by ranking and normalizing, grouping by fips
-    df["heat_qi"] = df.groupby("fips")["HImax_C"].rank(pct=True)
+    # make head index farenheit and divide my 100 for better scaling
+    df["hi_max"] = 0.01 * (df.HImax_C * 9 / 5 + 32)
+    df["heat_qi"] = df.groupby("fips")["hi_max"].rank(pct=True)
 
-    # compute the 3-day moving average of heat_qi, but make the rolling mean have no nans
+    # make spline components
+    df["heat_qi_above_25"] = (df["heat_qi"] > 0.25).astype(int) * df["heat_qi"]
+    df["heat_qi_above_75"] = (df["heat_qi"] > 0.75).astype(int) * df["heat_qi"]
+    df["hi_max_above_25"] = (df["hi_max"] > 25).astype(int) * df["hi_max"]
+    df["hi_max_above_75"] = (df["hi_max"] > 75).astype(int) * df["hi_max"]
+
+    # add interaction variables of hi variables with heat_qi by product
+    df["hi_max*heat_qi"] = df["heat_qi"] * df["hi_max"]
+    df["hi_max_above_25*heat_qi"] = df["heat_qi_above_25"] * df["hi_max"]
+    df["hi_max_above_75*heat_qi"] = df["heat_qi_above_75"] * df["hi_max"]
+
+    # compute the 3-day and 7-day moving average of heat_qi, but make the rolling mean have no nans
     df["heat_qi_3d"] = df.groupby("fips")["heat_qi"].transform(
         lambda x: x.rolling(3, min_periods=1).mean()
     )
-    df["heat_qi_above_25"] = (df["heat_qi"] > 0.25).astype(int)
-    df["heat_qi_above_75"] = (df["heat_qi"] > 0.75).astype(int)
+    df["heat_qi_7d"] = df.groupby("fips")["heat_qi"].transform(
+        lambda x: x.rolling(7, min_periods=1).mean()
+    )
 
-    # compute excess heat
-    df["excess_heat"] = (df["heat_qi"] - df["heat_qi_3d"]).clip(lower=0)
+    # # compute excess heat and and multiplicative interaction with heat_qi
+    df["excess_heat_3d"] = (df["heat_qi"] - df["heat_qi_3d"]).clip(lower=0)
+    df["excess_heat_7d"] = (df["heat_qi"] - df["heat_qi_7d"]).clip(lower=0)
+    df["excess_heat_3d*heat_qi"] = df["excess_heat_3d"] * df["heat_qi"]
+    df["excess_heat_7d*heat_qi"] = df["excess_heat_7d"] * df["heat_qi"]
 
     # compute day of summer as an integer from 0 to 152, by ranking date per year and fips
     df["year"] = df.date.dt.year
@@ -156,7 +173,6 @@ def main(cfg):
 
     # add issued in advance and signficance
     df["issued_in_advance"] = df["issued_in_advance"].fillna(0)
-    df["significance"] = df["significance"].fillna("NA")
 
     # weekend indicator
     df["weekend"] = df.date.dt.weekday.isin([5, 6]).astype(int)
@@ -202,7 +218,7 @@ def main(cfg):
     # standardize and save
     bspline_basis = (bspline_basis - bspline_col_means) / bspline_col_stds
     bspline_basis.columns = [f"bspline_dos_{i}" for i in range(bspline_basis.shape[1])]
-    bspline_basis.to_parquet(f"{cfg.data_dir}/processed/bspline_basis_{suffix}.parquet")
+    bspline_basis.to_parquet(f"{cfg.data_dir}/processed/bspline_basis.parquet")
 
     # -------------------
     # save exogenous states, endogenous states, actions
@@ -211,17 +227,38 @@ def main(cfg):
     # exogenous_states
     exogenous_state_vars = [
         "heat_qi",
-        "heat_qi_3d",
         "heat_qi_above_25",
         "heat_qi_above_75",
-        "excess_heat",
+        "hi_max",
+        "hi_max_above_25",
+        "hi_max_above_75",
+        "hi_max*heat_qi",
+        "hi_max_above_25*heat_qi",
+        "hi_max_above_75*heat_qi",
+        "heat_qi_3d",
+        "excess_heat_3d",
+        "excess_heat_3d*heat_qi",
+        "heat_qi_7d",
+        "excess_heat_7d",
+        "excess_heat_7d*heat_qi",
         "weekend",
         "holiday",
         "dos",
         *[f"bspline_dos_{i}" for i in range(bspline_dos.shape[1])],
     ]
     exogenous_states = df[exogenous_state_vars + ["fips", "date"]]
-    exogenous_states.to_parquet(f"{cfg.data_dir}/processed/exogenous_states_{suffix}.parquet")
+
+    # save in 'all' and 65k split
+    exogenous_states.to_parquet(
+        f"{cfg.data_dir}/processed/all/exogenous_states.parquet"
+    )
+
+    confounders_65k = pd.read_parquet(
+        f"{cfg.data_dir}/processed/65k/confounders.parquet"
+    )
+    exogenous_states[exogenous_states.fips.isin(confounders_65k.fips)].to_parquet(
+        f"{cfg.data_dir}/processed/65k/exogenous_states.parquet"
+    )
 
     # actions and endogenous states
     action_vars = [
@@ -233,13 +270,21 @@ def main(cfg):
         "issued_in_advance",
         "significance",
     ]
-    action_states = df[action_vars + ["fips", "date"]]
+    action_states = df[["fips", "date"] + action_vars]
+
+    # save in all and 65k
     action_states.to_parquet(
-        f"{cfg.data_dir}/processed/endogenous_states_actions_{suffix}.parquet"
+        f"{cfg.data_dir}/processed/all/endogenous_states_actions.parquet"
+    )
+    action_states[action_states.fips.isin(confounders_65k.fips)].to_parquet(
+        f"{cfg.data_dir}/processed/65k/endogenous_states_actions.parquet"
     )
 
     # save budget
-    budget.to_parquet(f"{cfg.data_dir}/processed/budget_{suffix}.parquet")
+    budget.to_parquet(f"{cfg.data_dir}/processed/all/budget.parquet")
+    budget[budget.fips.isin(confounders_65k.fips)].to_parquet(
+        f"{cfg.data_dir}/processed/65k/budget.parquet"
+    )
 
 
 if __name__ == "__main__":

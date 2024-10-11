@@ -24,7 +24,9 @@ def transform_rds_to_parquet(rds_path, parquet_path):
 @hydra.main(config_path="conf", config_name="config", version_base=None)
 def main(cfg):
     # Download data if not already present
-    download_path = f"{cfg.data_dir}/raw/heatmetrics.rds"  # data is in R's native format
+    download_path = (
+        f"{cfg.data_dir}/raw/heatmetrics.rds"  # data is in R's native format
+    )
     url = cfg.heatmetrics.url
 
     raw_parquet_path = download_path.replace(".rds", ".parquet")
@@ -48,14 +50,26 @@ def main(cfg):
     df = df[["StCoFIPS", "Date"] + cfg.heatmetrics.cols]
     df.rename(columns={"StCoFIPS": "fips", "Date": "date"}, inplace=True)
 
-    suffix = cfg.county_filter
-    confounders = pd.read_parquet(f"{cfg.data_dir}/processed/confounders_{suffix}.parquet")
-    df = df[df.fips.isin(confounders.fips)]
+    # Sort by fips and date
+    df = df.sort_values(["fips", "date"])
 
-    # Write to parquet
-    processed_path = f"{cfg.data_dir}/processed/heatmetrics_{suffix}.parquet"
-    df.to_parquet(processed_path)
-    LOGGER.info(f"Data written to {processed_path} with head\n: {df.head()}")
+    # Save the version for all fips
+    confounders_all = pd.read_parquet(
+        f"{cfg.data_dir}/processed/all/confounders.parquet"
+    )
+    processed_path = f"{cfg.data_dir}/processed/all/heatmetrics.parquet"
+    df_all = df[df.fips.isin(confounders_all.fips)]
+    df_all.to_parquet(processed_path)
+    LOGGER.info(f"Data written to {processed_path} with head\n: {df_all.head()}")
+
+    # Save the version for fips in 65k split
+    confounders_65k = pd.read_parquet(
+        f"{cfg.data_dir}/processed/65k/confounders.parquet"
+    )
+    processed_path = f"{cfg.data_dir}/processed/65k/heatmetrics.parquet"
+    df_65k = df[df.fips.isin(confounders_65k.fips)]
+    df_65k.to_parquet(processed_path)
+    LOGGER.info(f"Data written to {processed_path} with head\n: {df_65k.head()}")
 
 
 if __name__ == "__main__":

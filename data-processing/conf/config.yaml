@@ -2,8 +2,6 @@ census_api_key: ${oc.env:CENSUS_API_KEY}
 
 data_dir: ../data
 
-county_filter: 65000  # choose 'all' for no filter
-
 heatmetrics:
   min_month: 5
   max_month: 9
