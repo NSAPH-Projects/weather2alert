@@ -489,8 +489,10 @@ class HeatAlertLightning(pl.LightningModule):
                     "distribs", fig, global_step=self.global_step
                 )
                 mse = ((outcome_mean - batch[0]) ** 2).mean().item()
+                R2 = 1 - mse / (batch[0].var() + 1e-6)
                 poisson_loss = Poisson(outcome_mean).log_prob(batch[0]).mean().item()
                 self.log("mse", mse, on_epoch=True)
+                self.log("R2", R2, on_epoch=True)
                 self.log("poisson_loss", poisson_loss, on_epoch=True)
 
                 # obtain quantiles
