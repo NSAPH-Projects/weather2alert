@@ -92,6 +92,8 @@ def main(cfg: DictConfig):
         guide=guide,
         num_particles=cfg.training.num_particles,
         lr=cfg.training.lr,
+        lr_gamma=cfg.training.lr_gamma,
+        lr_step=cfg.training.lr_step,
         jit=cfg.training.jit,
         bspline_basis=dm.bspline_basis,
     )
@@ -130,7 +132,7 @@ def main(cfg: DictConfig):
     # save the config in the folder for completeness
     # make sure to resolve the config with hydra/omegaconf
     cfg_dict = OmegaConf.to_container(cfg, resolve=True)
-    cfg_dict["fips_list"] = dm.fips_list.tolist()
+    cfg_dict["fips_list"] = [f"{x:05d}" for x in dm.fips_list]
     with open(f"{savedir}/config.yaml", "w") as f:
         yaml.dump(cfg_dict, f)
 

@@ -19,6 +19,11 @@ from torch.distributions.utils import broadcast_all
 from sklearn.preprocessing import OneHotEncoder, StandardScaler
 
 
+#  y = sign(x) * log(1 + abs(x))
+def symlog(x, C=1):
+    return torch.sign(x) * torch.log1p(C * torch.abs(x)) / C
+
+
 class NegativeLogNormal(
     TorchDistribution
 ):  # helps us define constraints on certain coefficients to be only positive or negative
@@ -170,11 +175,17 @@ class HeatAlertModel(nn.Module):
         )
         baseline = sum(baseline_contribs) + baseline_bias[loc_ind]
 
+        # the following line means that the above tis the per/1000 prediction
+        # and the symloc is just for numerical stability
+        # baseline = symlog(baseline, C=1)
+        # baseline = torch.exp(torch.clamp(baseline / 1e3, max=10))
+        # baseline = torch.nn.functional.softplus(baseline / 1e3).clamp(max=1000)
+        baseline = baseline.sigmoid().clamp(1e-6, 1 - 1e-6)
+
         # -----------------------------------------------------------------#
         # clamp & replace nans for stability, after training shouldnot be active
-        baseline = torch.exp(baseline.clamp(-10, 10))
         baseline = torch.where(
-            torch.isnan(baseline), torch.zeros_like(baseline), baseline
+            torch.isnan(baseline), 1e-3 * torch.ones_like(baseline), baseline
         )
         # =-----------------------------------------------------------------=
 
@@ -193,28 +204,22 @@ class HeatAlertModel(nn.Module):
         # -----------------------------------------------------------------#
         # clamp & replace nans for stability, after training shouldnot be active
         effectiveness = effectiveness.clamp(1e-6, 1 - 1e-6)
+        # re place clamp with symlog function
+        
         effectiveness = torch.where(
-            torch.isnan(effectiveness), torch.zeros_like(effectiveness), effectiveness
+            torch.isnan(effectiveness),
+            1e-6 * torch.ones_like(effectiveness),
+            effectiveness
         )
         # =-----------------------------------------------------------------=
 
         # sample the outcome
-        outcome_mean = offset * baseline * (1 - alert * effectiveness)
-        outcome_mean = outcome_mean.clamp(1e-3, 1e3)
+        rate = baseline * (1 - alert * effectiveness)
+        outcome_mean = offset * (rate / 1000)   # offset = population, rate is per 1000
         y = hosps if condition else None
-        # subsample = index
-
-        # # TODO: this is a temp bug fix, there are nans during data loading
-        # nans = torch.isnan(offset)
-        # y = y[~nans] if condition else None
-        # outcome_mean = outcome_mean[~nans]
-        # index = index[~nans]
-        # effectiveness = effectiveness[~nans]
-        # baseline = baseline[~nans]
-        # # -----
 
         with pyro.plate("data", self.N, subsample=index):
-            obs = pyro.sample("hospitalizations", Poisson(outcome_mean + 1e-3), obs=y)
+            obs = pyro.sample("hospitalizations", Poisson(outcome_mean + 1e-4), obs=y)
 
         if not return_outcomes:
             return obs
@@ -431,12 +436,16 @@ class HeatAlertLightning(pl.LightningModule):
         jit: bool = False,
         num_particles: int = 1,
         lr: float = 1e-3,
+        lr_gamma: float = 0.9,
+        lr_step: int = 75,
     ):
         super().__init__()
         self.save_hyperparameters(ignore=["model", "guide"])
         elbo = JitTrace_ELBO if jit else Trace_ELBO
         self.loss_fn = elbo(num_particles=num_particles).differentiable_loss
         self.lr = lr
+        self.lr_gamma = lr_gamma
+        self.lr_step = lr_step
         self.register_module("model", model)
         self.register_module("guide", guide)
 
@@ -565,8 +574,18 @@ class HeatAlertLightning(pl.LightningModule):
                     "dos_effect", fig, global_step=self.global_step
                 )
 
+                # log from the optimizer
+                curr_lr = self.trainer.optimizers[0].param_groups[0]["lr"]
+                self.log("lr", curr_lr, on_epoch=True)
+
         self.log("train_loss", loss, on_step=True, on_epoch=True, prog_bar=True)
         return loss
 
     def configure_optimizers(self):
-        return torch.optim.Adam(self.parameters(), lr=self.lr)
+        # return torch.optim.Adam(self.parameters(), lr=self.lr)
+
+        # add a scheduler to reduce learning rate by 0.5 every 75 epochs
+        optimizer = torch.optim.Adam(self.parameters(), lr=self.lr)
+        scheduler = torch.optim.lr_scheduler.StepLR(optimizer, self.lr_step, gamma=self.lr_gamma)
+
+        return [optimizer], [scheduler]

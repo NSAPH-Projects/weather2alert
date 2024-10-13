@@ -18,6 +18,8 @@ training:
   epochs: ???
   gradient_clip_val: 1.0
   lr: 0.0003
+  lr_gamma: 0.9
+  lr_step: 0.75
   num_workers: 0
   num_particles: 1
   max_steps: -1  # no max steps

@@ -69,7 +69,7 @@ def sim_hosps(
 
     # unnormalized hosp_rate
     baseline = np.exp(np.clip(baseline, -10, 10))
-    effectiveness = expit(effectiveness)
+    effectiveness = expit(np.clip(effectiveness, -10, 10))
     alert = merged.alert.values
     rate = baseline * (1 - alert * effectiveness)
 

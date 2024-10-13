@@ -1,3 +1,4 @@
+name: sim
 _target_: hospitalizations.sim_hosps
 sim_coefs:
   # these are the key predictors equal for all locations
