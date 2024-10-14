@@ -1,3 +1,4 @@
+name: sim
 _target_: hospitalizations.sim_hosps
 sim_coefs:
   # these are the key predictors equal for all locations
@@ -6,7 +7,7 @@ sim_coefs:
       alerts_2wks: -0.1
       intercept: -5.0
     baseline:
-      excess_heat: 0.1
+      excess_heat_7d: 0.1
       weekend: 0.02
       intercept: -5.0
 

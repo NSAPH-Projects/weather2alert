@@ -7,6 +7,8 @@ import pandas as pd
 import torch
 import yaml
 from gymnasium import Env, spaces
+from huggingface_hub import hf_hub_download
+from safetensors import safe_open
 from scipy.special import expit as sigmoid
 
 from .datautils import get_similar_counties
@@ -17,11 +19,13 @@ class HeatAlertEnv(Env):
 
     def __init__(
         self,
-        weights: str = "nn_full_medicare",
+        weights: str = "nn_full_medicare_all",
         years: list | None = None,
         fips_list: list | None = None,
         similar_climate_counties: bool = False,
         budget: int | None = None,
+        data_dir: str | None = None,  # passed to hf_hub_download
+        split: str = "65k",
     ):
         """Initialize the environment."""
         super().__init__()
@@ -31,46 +35,44 @@ class HeatAlertEnv(Env):
         if years is None:
             years = list(range(2006, 2017))
 
-        # load state and confounders data
+        # load data
+        paths = {}
+        for file in ["confounders", "exogenous_states", "endogenous_states_actions"]:
+            paths[file] = hf_hub_download(
+                repo_id="mauriciogtec/HeatAlertsRL-Data",
+                repo_type="dataset",
+                subfolder="data/" + split,
+                filename=file + ".parquet",
+                local_dir=data_dir,
+            )
 
-        # check if path data/processed exists, then we are working with local data
-        if os.path.exists("data/processed"):
-            root = "./"
-        else:
-            root = find_spec("weather2alert").submodule_search_locations[0]
-
-        processed_path = os.path.join(root, "data/processed")
-        weights_path = os.path.join(root, "weights")
-
-        exogenous_states = pd.read_parquet(processed_path + "/exogenous_states.parquet")
-        endogenous_states_actions = pd.read_parquet(
-            processed_path + "/endogenous_states_actions.parquet"
-        )
         merged = pd.merge(
-            exogenous_states, endogenous_states_actions, on=["fips", "date"]
+            pd.read_parquet(paths["exogenous_states"]),
+            pd.read_parquet(paths["endogenous_states_actions"]),
+            on=["fips", "date"],
         )
         merged["year"] = merged.date.str[:4].astype(int)
 
-        # make sure merged is order by fips date and remove dates outside of the range
-        # 152 days of the summer starting on May 1st to Sep 30th
-        month = merged.date.str[5:7]
-        merged = merged[(month >= "05") & (month <= "09")].copy()
-        merged = merged.drop_duplicates(["fips", "date"])
-
-        # merged.set_index(["fips", "date"], inplace=True)
-        confounders = pd.read_parquet(processed_path + "/confounders.parquet")
-
         self.merged = merged.set_index(["fips", "year"])
-        self.confounders = confounders
+        self.confounders = pd.read_parquet(paths["confounders"])
 
         # load posterior parameters and config
-        posterior_samples = torch.load(
-            f"{weights_path}/{weights}/posterior_samples.pt", weights_only=True
-        )
+        for file in ["posterior_samples.safetensors", "config.yaml"]:
+            paths[file] = hf_hub_download(
+                repo_id="mauriciogtec/HeatAlertsRL-Models",
+                repo_type="model",
+                subfolder=weights,
+                filename=file,
+                local_dir=data_dir,
+            )
 
-        self.fips_list = fips_list
-        if fips_list is None:
-            self.fips_list = posterior_samples["fips_list"]
+        posterior_samples = {}
+        with safe_open(paths["posterior_samples.safetensors"], framework="pt") as f:
+            for k in f.keys():
+                posterior_samples[k] = f.get_tensor(k)
+
+        self.config = yaml.safe_load(open(paths["config.yaml"], "r"))
+        self.fips_list = [str(x) for x in self.config["fips_list"]]
 
         self.baseline_coefs = {
             k: v for k, v in posterior_samples.items() if k.startswith("baseline")
@@ -78,8 +80,6 @@ class HeatAlertEnv(Env):
         self.effectiveness_coefs = {
             k: v for k, v in posterior_samples.items() if k.startswith("effectiveness")
         }
-        with open(rf"{weights_path}/{weights}/config.yaml", "r") as f:
-            self.config = yaml.safe_load(f)
 
         # get num posterior samples
         self.n_samples = posterior_samples["baseline_bias"].shape[0]
@@ -96,10 +96,10 @@ class HeatAlertEnv(Env):
 
         # make additional features from merged to match names used during training
         # TODO: clean since should not be needed
-        self.merged["heat_qi_base"] = self.merged["heat_qi"]
-        for k in self.merged.columns:
-            if k.startswith("bspline_"):
-                self.merged[k.replace("bspline_", "bsplines_")] = self.merged[k]
+        # self.merged["heat_qi_base"] = self.merged["heat_qi"]
+        # for k in self.merged.columns:
+        #     if k.startswith("bspline_"):
+        #         self.merged[k.replace("bspline_", "bsplines_")] = self.merged[k]
 
         if self.valid_years is None:
             self.valid_years = list(self.merged.index.get_level_values("year").unique())
@@ -208,7 +208,7 @@ class HeatAlertEnv(Env):
             x = row[k.replace("baseline_", "")]
             v = v[self.coef_index, 0, li].item()
             baseline_contribs.append(x * v)
-        baseline = np.exp(np.clip(sum(baseline_contribs), -10, 10))
+        baseline = sigmoid(sum(baseline_contribs))
 
         effectiveness_contribs = []
         for k, v in self.effectiveness_coefs.items():
@@ -217,8 +217,8 @@ class HeatAlertEnv(Env):
             effectiveness_contribs.append(x * v)
         effectiveness = sigmoid(sum(effectiveness_contribs)) * (row["heat_qi"] > 0.5)
 
-        # reward is - normalized hospitalization rate / 10_000
-        reward = float(-10_000 * baseline * (1 - effectiveness * action))
+        # reward is - normalized at the per 1000 per day level
+        reward = float(-1000 / 152 * baseline * (1 - effectiveness * action))
 
         if action == 1 and self.at_budget:
             reward = -1

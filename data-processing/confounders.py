@@ -208,9 +208,19 @@ def main(cfg):
 
     # Keep only those places with population > 65000 and complete data cases
     print(merged_df.shape)
-    merged_df = merged_df.loc[merged_df.total_pop > 65000]
+
+    # Save two versions, one with all counties, and one with filter above 65k
     merged_df = merged_df.dropna()
-    merged_df.to_parquet(f"{cfg.data_dir}/processed/confounders.parquet", index=False)
+
+    os.makedirs(f"{cfg.data_dir}/processed/65k", exist_ok=True)
+    os.makedirs(f"{cfg.data_dir}/processed/all", exist_ok=True)
+
+    merged_df.to_parquet(
+        f"{cfg.data_dir}/processed/all/confounders.parquet", index=False
+    )
+    merged_df.loc[merged_df.total_pop > 65000].to_parquet(
+        f"{cfg.data_dir}/processed/65k/confounders.parquet", index=False
+    )
 
 
 if __name__ == "__main__":

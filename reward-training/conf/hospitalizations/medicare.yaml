@@ -1,2 +1,3 @@
+name: medicare
 _target_: hospitalizations.load_hosps
 data_path: ../data/hospitalizations/medicare.parquet  # only available in secure cluster since its sensitive

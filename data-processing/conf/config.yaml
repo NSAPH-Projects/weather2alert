@@ -1,7 +1,5 @@
 census_api_key: ${oc.env:CENSUS_API_KEY}
 
-# raw_dir: ../data/raw
-# processed_dir: ../data/processed
 data_dir: ../data
 
 heatmetrics:

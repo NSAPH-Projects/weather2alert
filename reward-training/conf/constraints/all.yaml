@@ -1,11 +1,18 @@
 effectiveness:
-  heat_qi: positive # more heat more effective
-  excess_heat: positive # more excess heat more effective
+  heat_qi_above_25: positive # heat could have any slope at first
+  heat_qi_above_75: positive #    but should be increasingly worse
+  hi_max_above_25: positive # more heat more effective
+  hi_max_above_75: positive # more heat more effective
+  excess_heat_3d: positive # more excess heat more effective
+  excess_heat_7d: positive # more excess heat more effective
   alert_lag1: negative # alert yesterday less effective
   alerts_2wks: negative # more alerts less effective
 baseline:
   heat_qi_above_25: positive # heat could have any slope at first
   heat_qi_above_75: positive #    but should be increasingly worse
-  excess_heat: positive # more excess heat more hospitalizations
+  hi_max_above_25: positive # more heat more hospitalizations
+  hi_max_above_75: positive # more heat more hospitalizations
+  excess_heat_3d: positive # more excess heat more hospitalizations
+  excess_heat_7d: positive # more excess heat more hospitalizations
   alert_lag1: negative # alert yesterday less hospitalizations
   alerts_2wks: negative # more trailing alerts less hospitalizations

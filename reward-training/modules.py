@@ -19,6 +19,11 @@ from torch.distributions.utils import broadcast_all
 from sklearn.preprocessing import OneHotEncoder, StandardScaler
 
 
+#  y = sign(x) * log(1 + abs(x))
+def symlog(x, C=1):
+    return torch.sign(x) * torch.log1p(C * torch.abs(x)) / C
+
+
 class NegativeLogNormal(
     TorchDistribution
 ):  # helps us define constraints on certain coefficients to be only positive or negative
@@ -75,8 +80,9 @@ class MLP(nn.Module):  # for learning a prior informed by the spatial variables
         return self.net(x)
 
 
-class HeatAlertModel(nn.Module):  
+class HeatAlertModel(nn.Module):
     """main model definition, uses Pytorch syntax / mechanics under the hood of Pyro"""
+
     def __init__(
         self,
         spatial_features: torch.Tensor | None = None,
@@ -168,12 +174,18 @@ class HeatAlertModel(nn.Module):
             "baseline_bias", Uniform(-10, 10).expand([self.S]).to_event(1)
         )
         baseline = sum(baseline_contribs) + baseline_bias[loc_ind]
-        
+
+        # the following line means that the above tis the per/1000 prediction
+        # and the symloc is just for numerical stability
+        # baseline = symlog(baseline, C=1)
+        # baseline = torch.exp(torch.clamp(baseline / 1e3, max=10))
+        # baseline = torch.nn.functional.softplus(baseline / 1e3).clamp(max=1000)
+        baseline = baseline.sigmoid().clamp(1e-6, 1 - 1e-6)
+
         # -----------------------------------------------------------------#
         # clamp & replace nans for stability, after training shouldnot be active
-        baseline = torch.exp(baseline.clamp(-10, 10))
         baseline = torch.where(
-            torch.isnan(baseline), torch.zeros_like(baseline), baseline
+            torch.isnan(baseline), 1e-3 * torch.ones_like(baseline), baseline
         )
         # =-----------------------------------------------------------------=
 
@@ -192,28 +204,22 @@ class HeatAlertModel(nn.Module):
         # -----------------------------------------------------------------#
         # clamp & replace nans for stability, after training shouldnot be active
         effectiveness = effectiveness.clamp(1e-6, 1 - 1e-6)
+        # re place clamp with symlog function
+        
         effectiveness = torch.where(
-            torch.isnan(effectiveness), torch.zeros_like(effectiveness), effectiveness
+            torch.isnan(effectiveness),
+            1e-6 * torch.ones_like(effectiveness),
+            effectiveness
         )
-        # =-----------------------------------------------------------------=   
+        # =-----------------------------------------------------------------=
 
         # sample the outcome
-        outcome_mean = offset * baseline * (1 - alert * effectiveness)
-        outcome_mean = outcome_mean.clamp(1e-3, 1e3)
+        rate = baseline * (1 - alert * effectiveness)
+        outcome_mean = offset * (rate / 1000)   # offset = population, rate is per 1000
         y = hosps if condition else None
-        # subsample = index
 
-        # # TODO: this is a temp bug fix, there are nans during data loading
-        # nans = torch.isnan(offset)
-        # y = y[~nans] if condition else None
-        # outcome_mean = outcome_mean[~nans]
-        # index = index[~nans]
-        # effectiveness = effectiveness[~nans]
-        # baseline = baseline[~nans]
-        # # -----
-
-        with pyro.plate("data", self.N, subsample=index):            
-            obs = pyro.sample("hospitalizations", Poisson(outcome_mean + 1e-3), obs=y)
+        with pyro.plate("data", self.N, subsample=index):
+            obs = pyro.sample("hospitalizations", Poisson(outcome_mean + 1e-4), obs=y)
 
         if not return_outcomes:
             return obs
@@ -242,6 +248,7 @@ class HeatAlertDataModule(pl.LightningDataModule):
         confounders: pd.DataFrame | None = None,
         hosps: pd.DataFrame | None = None,
         bspline_basis: pd.DataFrame | None = None,
+        # budget: pd.DataFrame | None = None,
         batch_size: int | None = None,
         num_workers: int = 8,
     ):
@@ -255,11 +262,13 @@ class HeatAlertDataModule(pl.LightningDataModule):
             on=["fips", "date"],
             how="inner",
         )
+        merged = merged.drop(columns=["significance"])
         confounders = confounders.copy()
         confounders["intercept"] = 1.0
 
         # TODO: clean data during preprocessing
         comb = pd.merge(merged, hosps, on=["fips", "date"], how="left")
+
         rows_with_nans = comb.isnull().any(axis=1)
         fipsdates = comb.fips + comb.date
         valid_fipsdates = fipsdates[~rows_with_nans].unique()
@@ -323,57 +332,62 @@ class HeatAlertDataModule(pl.LightningDataModule):
         alert = torch.FloatTensor(alert)
         year = torch.LongTensor(year)
         # budget = torch.LongTensor(budget.budget.values)
-        # hi_mean = torch.FloatTensor(X.HI_mean.values)  # for RL
 
         # compute budget as the total sum per summer-year
         merged["year"] = year
+
         budget = merged.groupby(["fips", "year"])["alert"].sum().reset_index()
         budget = budget.rename(columns={"alert": "budget"})
         budget = merged.merge(budget, on=["fips", "year"], how="left")
         budget = torch.LongTensor(budget.budget.values)
 
-        # prepare covariates
-        heat_qi = torch.FloatTensor(merged.heat_qi.values)
-        heat_qi_above_25 = torch.FloatTensor(merged.heat_qi_above_25.values)
-        heat_qi_above_75 = torch.FloatTensor(merged.heat_qi_above_75.values)
-        excess_heat = torch.FloatTensor(merged.excess_heat.values)
-        alert_lag1 = torch.FloatTensor(merged.alert_lag1.values)
-        alerts_2wks = torch.FloatTensor(merged.alerts_2wks.values)
-        weekend = torch.FloatTensor(merged.weekend.values)
+        # prepare state/action features
+        keys = [k for k in merged.columns if k not in ["date", "fips", "year"]]
+        tensors = {k: torch.FloatTensor(merged[k].values) for k in keys}
+        # heat_qi = torch.FloatTensor(merged.heat_qi.values)
+        # heat_qi_above_25 = torch.FloatTensor(merged.heat_qi_above_25.values)
+        # heat_qi_above_75 = torch.FloatTensor(merged.heat_qi_above_75.values)
+        # excess_heat = torch.FloatTensor(merged.excess_heat.values)
+        # alert_lag1 = torch.FloatTensor(merged.alert_lag1.values)
+        # alerts_2wks = torch.FloatTensor(merged.alerts_2wks.values)
+        # weekend = torch.FloatTensor(merged.weekend.values)
 
-        # get all cols that start with bsplines_dos in one tensor
-        bsplines_dos = torch.FloatTensor(
-            merged.filter(regex="bspline_dos", axis=1).values
-        )
-        n_basis = bsplines_dos.shape[1]
+        # get all cols that start with bspline_dos in one tensor
+        # bspline_dos = torch.FloatTensor(
+        #     merged.filter(regex="bspline_dos", axis=1).values
+        # )
+        # n_basis = bspline_dos.shape[1]
 
         # save dos spline basis for plots
         # # save day of summer splines as tensor
         self.bspline_basis = torch.FloatTensor(bspline_basis.values)
 
         # alert effectiveness features
-        effectiveness_features = {
-            "heat_qi": heat_qi,
-            "excess_heat": excess_heat,
-            "alert_lag1": alert_lag1,
-            "alerts_2wks": alerts_2wks,
-            "weekend": weekend,
-            **{f"bsplines_dos_{i}": bsplines_dos[:, i] for i in range(n_basis)},
-        }
+        # effectiveness_features = {
+        #     "heat_qi": heat_qi,
+        #     "excess_heat": excess_heat,
+        #     "alert_lag1": alert_lag1,
+        #     "alerts_2wks": alerts_2wks,
+        #     "weekend": weekend,
+        #     **{k: tensors[k] for k in tensors if k.startswith("bspline")},
+        #     **{f"bspline_dos_{i}": bspline_dos[:, i] for i in range(n_basis)},
+        # }
+        effectiveness_features = tensors
         self.effectiveness_feature_names = list(effectiveness_features.keys())
 
         # baseline rate features
         # for now just use a simple 3-step piecewise linear function
-        baseline_features = {
-            "heat_qi_base": heat_qi,
-            "heat_qi_above_25": heat_qi_above_25,
-            "heat_qi_above_75": heat_qi_above_75,
-            "excess_heat": excess_heat,
-            "alert_lag1": alert_lag1,
-            "alerts_2wks": alerts_2wks,
-            "weekend": weekend,
-            **{f"bsplines_dos_{i}": bsplines_dos[:, i] for i in range(n_basis)},
-        }
+        # baseline_features = {
+        #     "heat_qi_base": heat_qi,
+        #     "heat_qi_above_25": heat_qi_above_25,
+        #     "heat_qi_above_75": heat_qi_above_75,
+        #     "excess_heat": excess_heat,
+        #     "alert_lag1": alert_lag1,
+        #     "alerts_2wks": alerts_2wks,
+        #     "weekend": weekend,
+        #     **{f"bspline_dos_{i}": bspline_dos[:, i] for i in range(n_basis)},
+        # }
+        baseline_features = tensors
         self.baseline_feature_names = list(baseline_features.keys())
 
         baseline_features_tensor = torch.stack(
@@ -422,12 +436,16 @@ class HeatAlertLightning(pl.LightningModule):
         jit: bool = False,
         num_particles: int = 1,
         lr: float = 1e-3,
+        lr_gamma: float = 0.9,
+        lr_step: int = 75,
     ):
         super().__init__()
         self.save_hyperparameters(ignore=["model", "guide"])
         elbo = JitTrace_ELBO if jit else Trace_ELBO
         self.loss_fn = elbo(num_particles=num_particles).differentiable_loss
         self.lr = lr
+        self.lr_gamma = lr_gamma
+        self.lr_step = lr_step
         self.register_module("model", model)
         self.register_module("guide", guide)
 
@@ -480,14 +498,16 @@ class HeatAlertLightning(pl.LightningModule):
                     "distribs", fig, global_step=self.global_step
                 )
                 mse = ((outcome_mean - batch[0]) ** 2).mean().item()
+                R2 = 1 - mse / (batch[0].var() + 1e-6)
                 poisson_loss = Poisson(outcome_mean).log_prob(batch[0]).mean().item()
                 self.log("mse", mse, on_epoch=True)
+                self.log("R2", R2, on_epoch=True)
                 self.log("poisson_loss", poisson_loss, on_epoch=True)
 
                 # obtain quantiles
                 sample = self.guide(*batch)
-                keys0 = [k for k in sample.keys() if k.startswith("effectiveness_")]
-                keys1 = [k for k in sample.keys() if k.startswith("baseline_")]
+                keys0 = [k for k in sample.keys() if k.startswith("effectiveness_") and "_scale" not in k]
+                keys1 = [k for k in sample.keys() if k.startswith("baseline_") and "_scale" not in k]
                 medians_0 = np.array(
                     [torch.quantile(sample[k], 0.5).item() for k in keys0]
                 )
@@ -510,7 +530,7 @@ class HeatAlertLightning(pl.LightningModule):
                 l1, u1 = medians_1 - q25_1, q75_1 - medians_1
 
                 # make coefficient distribution plots for coefficients, error bars are iqr
-                fig, ax = plt.subplots(1, 2, figsize=(8, 4))
+                fig, ax = plt.subplots(1, 2, figsize=(10, 4))
                 ax[0].errorbar(x=keys0, y=medians_0, yerr=[l0, u0], fmt="o")
                 plt.setp(ax[0].get_xticklabels(), rotation=90)
                 ax[0].set_title("effectiveness coeff distribution")
@@ -528,10 +548,10 @@ class HeatAlertLightning(pl.LightningModule):
                 n_basis = self.dos_spline_basis.shape[1]
                 basis = self.dos_spline_basis
                 eff_coefs = [
-                    sample[f"effectiveness_bsplines_dos_{i}"] for i in range(n_basis)
+                    sample[f"effectiveness_bspline_dos_{i}"] for i in range(n_basis)
                 ]
                 baseline_coefs = [
-                    sample[f"baseline_bsplines_dos_{i}"] for i in range(n_basis)
+                    sample[f"baseline_bspline_dos_{i}"] for i in range(n_basis)
                 ]
                 eff_contribs = [
                     basis[:, i] * eff_coefs[i][:, None] for i in range(n_basis)
@@ -554,8 +574,18 @@ class HeatAlertLightning(pl.LightningModule):
                     "dos_effect", fig, global_step=self.global_step
                 )
 
+                # log from the optimizer
+                curr_lr = self.trainer.optimizers[0].param_groups[0]["lr"]
+                self.log("lr", curr_lr, on_epoch=True)
+
         self.log("train_loss", loss, on_step=True, on_epoch=True, prog_bar=True)
         return loss
 
     def configure_optimizers(self):
-        return torch.optim.Adam(self.parameters(), lr=self.lr)
+        # return torch.optim.Adam(self.parameters(), lr=self.lr)
+
+        # add a scheduler to reduce learning rate by 0.5 every 75 epochs
+        optimizer = torch.optim.Adam(self.parameters(), lr=self.lr)
+        scheduler = torch.optim.lr_scheduler.StepLR(optimizer, self.lr_step, gamma=self.lr_gamma)
+
+        return [optimizer], [scheduler]

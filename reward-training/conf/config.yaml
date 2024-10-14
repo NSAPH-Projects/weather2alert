@@ -3,7 +3,7 @@ defaults:
   - arch: nn
   - training: fast
   - hospitalizations: sim
-  - constraints: mixed
+  - constraints: all
 
 data_dir: ../data
 
@@ -11,13 +11,15 @@ arch:
   num_hidden_layers: ???
   hidden_dim: ???
 
-name: ${hydra:runtime.choices.arch}_${hydra:runtime.choices.training}_${hydra:runtime.choices.hospitalizations}
+name: ${hydra:runtime.choices.arch}_${hydra:runtime.choices.training}_${hydra:runtime.choices.hospitalizations}_${hydra:runtime.choices.constraints}
 
 training:
   batch_size:   # leave empty it will be chose according to S and N
   epochs: ???
   gradient_clip_val: 1.0
   lr: 0.0003
+  lr_gamma: 0.9
+  lr_step: 0.75
   num_workers: 0
   num_particles: 1
   max_steps: -1  # no max steps
