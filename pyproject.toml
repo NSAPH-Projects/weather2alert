@@ -24,6 +24,8 @@ dependencies = [
     "pandas",
     "torch",
     "gymnasium",
+    "huggingface-hub",
+    "datasets"
 ]
 
 # Optional dependencies go here under 'optional-dependencies'
