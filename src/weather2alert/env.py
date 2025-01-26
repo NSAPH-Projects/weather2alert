@@ -1,10 +1,7 @@
-import os
-from importlib.util import find_spec
 from typing import Literal
 
 import numpy as np
 import pandas as pd
-import torch
 import yaml
 from gymnasium import Env, spaces
 from huggingface_hub import hf_hub_download
@@ -26,12 +23,29 @@ class HeatAlertEnv(Env):
         budget: int | None = None,
         data_dir: str | None = None,  # passed to hf_hub_download
         split: str = "65k",
+        random_starts: bool = False,
+        sample_budget: bool = False,
+        sample_budget_type: Literal["less_than", "centered"] = "less_than",
+        min_duration: int = 65,
+        min_effectiveness: float = 0.1,
+        max_effectiveness: float = 0.9,
+        min_heat_qi: float = 0.7,
+        min_start: int = 7,
     ):
         """Initialize the environment."""
         super().__init__()
         self.valid_years = years
         self.similar_climate_counties = similar_climate_counties
         self.budget = budget
+        self.sample_budget_type = sample_budget_type
+        self.sample_budget = sample_budget
+        self.random_starts = random_starts
+        self.min_start = min_start
+        self.min_duration = min_duration
+        self.min_effectiveness = min_effectiveness
+        self.max_effectiveness = max_effectiveness
+        self.min_heat_qi = min_heat_qi
+
         if years is None:
             years = list(range(2006, 2017))
 
@@ -53,7 +67,7 @@ class HeatAlertEnv(Env):
         )
         merged["year"] = merged.date.str[:4].astype(int)
 
-        self.merged = merged.set_index(["fips", "year"])
+        self.merged = merged.set_index(["fips", "year"]).drop(columns=["significance"])
         self.confounders = pd.read_parquet(paths["confounders"])
 
         # load posterior parameters and config
@@ -73,6 +87,10 @@ class HeatAlertEnv(Env):
 
         self.config = yaml.safe_load(open(paths["config.yaml"], "r"))
         self.fips_list = [str(x) for x in self.config["fips_list"]]
+        if fips_list is not None:
+            self.fips_list = [x for x in self.fips_list if x in fips_list]
+            if len(self.fips_list) == 0:
+                raise ValueError("No valid FIPS codes in fips_list")
 
         self.baseline_coefs = {
             k: v for k, v in posterior_samples.items() if k.startswith("baseline")
@@ -85,11 +103,11 @@ class HeatAlertEnv(Env):
         self.n_samples = posterior_samples["baseline_bias"].shape[0]
 
         # setup obs space
-        obs_dim = len(merged.columns) + 2  # don't include date
+        self.obs_dim = len(merged.columns) - 3  # don't include date
         self.observation_space = spaces.Box(
             low=-np.inf,
             high=np.inf,
-            shape=(obs_dim,),
+            shape=(self.obs_dim,),
             dtype=np.float32,
         )
         self.action_space = spaces.Discrete(2)  # alert or no alert
@@ -114,7 +132,7 @@ class HeatAlertEnv(Env):
             # get similar counties
             locations = get_similar_counties(location, self.confounders)
             locations = [x for x in locations if x in self.fips_list]
-            self.location_index = self.rng.choice(range(len(locations)))
+            self.location_index = self.np_random.choice(range(len(locations)))
             self.location = locations[self.location_index]
         else:
             self.location = location
@@ -122,7 +140,7 @@ class HeatAlertEnv(Env):
 
         # split by year and index by dos, drop data
         if year is None:
-            year = self.rng.choice(self.valid_years)
+            year = self.np_random.choice(self.valid_years)
 
         year_data = self.merged.loc[(location, year)]
         year_data = (
@@ -132,24 +150,25 @@ class HeatAlertEnv(Env):
 
     def reset(
         self,
-        location: str | None = None,
-        similar_climate_counties: bool | None = None,
         seed: int | None = None,
-        budget: int | None = None,
-        sample_budget: bool = False,
-        sample_budget_type: Literal["less_than", "centered"] = "less_than",
+        options: dict | None = None,
     ):
-        # make rng
-        if seed is None:
-            seed = np.random.randint(0, 10000)
-        self.rng = np.random.default_rng(seed)
+        #
+        super().reset(seed=seed)
+        if options is None:
+            options = {}
 
-        if similar_climate_counties is None:
-            similar_climate_counties = self.similar_climate_counties
+        location = options.get("locations", None)
+        similar_climate_counties = options.get(
+            "similar_climate_counties", self.similar_climate_counties
+        )
+        budget = options.get("budget", self.budget)
+        sample_budget = options.get("sample_budget", self.sample_budget)
+        sample_budget_type = options.get("sample_budget_type", self.sample_budget_type)
 
         # if location is None, pick a random location
         if location is None:
-            location = self.rng.choice(self.fips_list)
+            location = self.np_random.choice(self.fips_list)
 
         # get potential episode
         self.ep, year = self._get_episode(location, similar_climate_counties)
@@ -157,25 +176,32 @@ class HeatAlertEnv(Env):
         self.n_days = self.ep.shape[0]
 
         # sample coef index for episode
-        self.coef_index = self.rng.integers(0, self.n_samples)
+        self.coef_index = self.np_random.integers(0, self.n_samples)
 
         self.attempted_alert_buffer = []
         self.actual_alert_buffer = []
         self.alert_streak = 0
-        self.t = 0  # day of summer indicator
 
-        if self.budget is None:
-            self.budget = (
-                self.ep["remaining_budget"].iloc[0] if budget is None else budget
+        if self.random_starts:
+            self.t = self.np_random.integers(
+                self.min_start, self.n_days - self.min_duration - 14
             )
+            self._step_counter = 0
+        else:
+            self.t = self.min_start
+
+        self._step_counter = 0
+
+        if budget is None:
+            budget = self.ep["remaining_budget"].iloc[0] if budget is None else budget
 
         if sample_budget:
-            b = self.budget
+            b = budget
             if sample_budget_type == "less_than":
-                self.budget = self.rng.integers(0, b + 1)
+                budget = self.np_random.integers(0, b + 1)
             elif sample_budget_type == "centered":
-                self.budget = self.rng.integers(0.5 * b, 1.5 * b + 1)
-        self.remaining_budget = self.budget
+                budget = self.np_random.integers(0.5 * b, 1.5 * b + 1)
+        self.remaining_budget = b
 
         self.at_budget = False
         self.observation = self._get_obs()
@@ -184,10 +210,13 @@ class HeatAlertEnv(Env):
         return self.observation.values, self._get_info()
 
     def _get_obs(self):
-        row = self.ep.iloc[self.t].copy()
+        row = self.ep.iloc[self.t].copy().astype(np.float32)
+        row = row.fillna(0)
 
         # replace endogeous states with the actual agent behavior
-        row["alert_lag1"] = self.actual_alert_buffer[-1] if self.t > 0 else 0
+        row["alert_lag1"] = (
+            self.actual_alert_buffer[-1] if self._step_counter > 0 else 0
+        )
         row["alert_2wks"] = sum(self.actual_alert_buffer[-14:])
         row["alert_streak"] = self.alert_streak
         row["remaining_budget"] = self.budget - sum(self.actual_alert_buffer)
@@ -215,13 +244,14 @@ class HeatAlertEnv(Env):
             x = row[k.replace("effectiveness_", "")]
             v = v[self.coef_index, 0, li].item()
             effectiveness_contribs.append(x * v)
-        effectiveness = sigmoid(sum(effectiveness_contribs)) * (row["heat_qi"] > 0.5)
+        effectiveness = sigmoid(sum(effectiveness_contribs))
+        if row["heat_qi"] > self.min_heat_qi:
+            effectiveness = np.clip(
+                effectiveness, self.min_effectiveness, self.max_effectiveness
+            )
 
         # reward is - normalized at the per 1000 per day level
         reward = float(-1000 / 152 * baseline * (1 - effectiveness * action))
-
-        if action == 1 and self.at_budget:
-            reward = -1
 
         return reward
 
@@ -240,6 +270,8 @@ class HeatAlertEnv(Env):
 
         # Enforcing the alert budget:
         self.at_budget = sum(self.actual_alert_buffer) == self.budget
+        self._needs_truncation = True
+
         if action == 1 and self.at_budget:
             actual_action = 0
         else:
@@ -257,7 +289,12 @@ class HeatAlertEnv(Env):
         if not done:
             self.observation = self._get_obs()
             self.t += 1
+            self._step_counter += 1
             self.alert_streak = self.alert_streak + 1 if actual_action else 0
+
+        # penalize if action is taken and at budget
+        if action == 1 and self.at_budget:
+            reward -= 1
 
         return self.observation.values, reward, done, False, self._get_info()
 
