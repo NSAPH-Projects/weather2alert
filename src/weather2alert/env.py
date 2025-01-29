@@ -31,6 +31,7 @@ class HeatAlertEnv(Env):
         max_effectiveness: float = 0.9,
         min_heat_qi: float = 0.7,
         min_start: int = 7,
+        top_k_fips: int | None = None,
     ):
         """Initialize the environment."""
         super().__init__()
@@ -69,6 +70,11 @@ class HeatAlertEnv(Env):
 
         self.merged = merged.set_index(["fips", "year"]).drop(columns=["significance"])
         self.confounders = pd.read_parquet(paths["confounders"])
+
+        # average fips by temperature
+        if top_k_fips is not None and fips_list is None:
+            gmeans = self.merged.groupby("fips")["hi_max"].mean()
+            fips_list = gmeans.sort_values(ascending=False).index[:top_k_fips]
 
         # load posterior parameters and config
         for file in ["posterior_samples.safetensors", "config.yaml"]:
