@@ -27,11 +27,12 @@ class HeatAlertEnv(Env):
         sample_budget: bool = False,
         sample_budget_type: Literal["less_than", "centered"] = "less_than",
         min_duration: int = 65,
-        min_effectiveness: float = 0.1,
-        max_effectiveness: float = 0.9,
-        min_heat_qi: float = 0.7,
+        min_effectiveness: float = 0.05,
+        max_effectiveness: float = 0.95,
+        min_heat_qi: float = 0.75,
         min_start: int = 7,
         top_k_fips: int | None = None,
+        reward_type: Literal["hospitalizations", "saved"] = "saved",
     ):
         """Initialize the environment."""
         super().__init__()
@@ -46,6 +47,7 @@ class HeatAlertEnv(Env):
         self.min_effectiveness = min_effectiveness
         self.max_effectiveness = max_effectiveness
         self.min_heat_qi = min_heat_qi
+        self.reward_type = reward_type
 
         if years is None:
             years = list(range(2006, 2017))
@@ -207,7 +209,7 @@ class HeatAlertEnv(Env):
                 budget = self.np_random.integers(0, b + 1)
             elif sample_budget_type == "centered":
                 budget = self.np_random.integers(0.5 * b, 1.5 * b + 1)
-        self.remaining_budget = b
+        self.remaining_budget = budget
 
         self.at_budget = False
         self.observation = self._get_obs()
@@ -245,19 +247,30 @@ class HeatAlertEnv(Env):
             baseline_contribs.append(x * v)
         baseline = sigmoid(sum(baseline_contribs))
 
-        effectiveness_contribs = []
-        for k, v in self.effectiveness_coefs.items():
-            x = row[k.replace("effectiveness_", "")]
-            v = v[self.coef_index, 0, li].item()
-            effectiveness_contribs.append(x * v)
-        effectiveness = sigmoid(sum(effectiveness_contribs))
+        # effectiveness = sigmoid(5 + sum(effectiveness_contribs))
         if row["heat_qi"] > self.min_heat_qi:
-            effectiveness = np.clip(
-                effectiveness, self.min_effectiveness, self.max_effectiveness
+            # effectiveness_contribs = []
+            # for k, v in self.effectiveness_coefs.items():
+            #     x = row[k.replace("effectiveness_", "")]
+            #     v = v[self.coef_index, 0, li].item()
+            #     effectiveness_contribs.append(x * v)
+            # subtract for alert streak and last alerts
+            effectiveness = (
+                max(0, row["heat_qi"] - 0.8)
+                - 0.05 * self.alert_streak
+                - 0.01 * (sum(self.actual_alert_buffer[-7:]) - 1)
             )
+            effectiveness = np.clip(
+                self.min_effectiveness + effectiveness, 0, self.max_effectiveness
+            )
+        else:
+            effectiveness = 0
 
-        # reward is - normalized at the per 1000 per day level
-        reward = float(-1000 / 152 * baseline * (1 - effectiveness * action))
+        # reward is - normalized at the per 100 per day level
+        if self.reward_type == "hospitalizations":
+            reward = float(-1000 * baseline * (1 - effectiveness * action))
+        elif self.reward_type == "saved":
+            reward = float(1000 * baseline * effectiveness * action)
 
         return reward
 
