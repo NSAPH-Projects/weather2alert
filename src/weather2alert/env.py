@@ -32,7 +32,10 @@ class HeatAlertEnv(Env):
         min_heat_qi: float = 0.75,
         min_start: int = 7,
         top_k_fips: int | None = None,
+        effectiveness_type: Literal["data", "synthetic"] = "data",
         reward_type: Literal["hospitalizations", "saved"] = "saved",
+        penalty: float = 1.0,
+        min_temperature_threshold: float = 0.0,
     ):
         """Initialize the environment."""
         super().__init__()
@@ -48,6 +51,9 @@ class HeatAlertEnv(Env):
         self.max_effectiveness = max_effectiveness
         self.min_heat_qi = min_heat_qi
         self.reward_type = reward_type
+        self.effectiveness_type = effectiveness_type
+        self.penalty = penalty
+        self.min_temperature_threshold = min_temperature_threshold
 
         if years is None:
             years = list(range(2006, 2017))
@@ -249,20 +255,24 @@ class HeatAlertEnv(Env):
 
         # effectiveness = sigmoid(5 + sum(effectiveness_contribs))
         if row["heat_qi"] > self.min_heat_qi:
-            # effectiveness_contribs = []
-            # for k, v in self.effectiveness_coefs.items():
-            #     x = row[k.replace("effectiveness_", "")]
-            #     v = v[self.coef_index, 0, li].item()
-            #     effectiveness_contribs.append(x * v)
-            # subtract for alert streak and last alerts
-            effectiveness = (
-                max(0, row["heat_qi"] - 0.8) # benefit when above heat factor
-                - 0.02 * (sum(self.actual_alert_buffer[-7:]) - 1) # fatigue factor
-                + 0.05 * self.actual_alert_buffer[-1] # yesterday is still effective
-            )
-            effectiveness = np.clip(
-                self.min_effectiveness + effectiveness, 0, self.max_effectiveness
-            )
+            if self.effectiveness_type == "data":
+                effectiveness_contribs = []
+                for k, v in self.effectiveness_coefs.items():
+                    x = row[k.replace("effectiveness_", "")]
+                    v = v[self.coef_index, 0, li].item()
+                    effectiveness_contribs.append(x * v)
+                    effectiveness = sigmoid(sum(effectiveness_contribs))
+            else:
+                # subtract for alert streak and last alerts
+                effectiveness = (
+                    max(0, row["heat_qi"] - 0.8)  # benefit when above heat factor
+                    - 0.02 * (sum(self.actual_alert_buffer[-7:]) - 1)  # fatigue factor
+                    + 0.05
+                    * self.actual_alert_buffer[-1]  # yesterday is still effective
+                )
+            # effectiveness = np.clip(
+            #     self.min_effectiveness + effectiveness, 0, self.max_effectiveness
+            # )
         else:
             effectiveness = 0
 
@@ -285,13 +295,19 @@ class HeatAlertEnv(Env):
         }
 
     def step(self, action: int):
+        action = int(action)
+
         self.attempted_alert_buffer.append(action)
 
         # Enforcing the alert budget:
         self.at_budget = sum(self.actual_alert_buffer) == self.budget
         self._needs_truncation = True
 
-        if action == 1 and self.at_budget:
+        # Get temperature
+        temperature = self.ep["heat_qi"].iloc[self.t]
+        below_thresh = temperature <= self.min_temperature_threshold
+
+        if action == 1 and (self.at_budget or below_thresh):
             actual_action = 0
         else:
             actual_action = action
@@ -312,8 +328,8 @@ class HeatAlertEnv(Env):
             self.alert_streak = self.alert_streak + 1 if actual_action else 0
 
         # penalize if action is taken and at budget
-        if action == 1 and self.at_budget:
-            reward -= 1
+        if action == 1 and (self.at_budget or below_thresh):
+            reward -= self.penalty
 
         return self.observation.values, reward, done, False, self._get_info()
 
