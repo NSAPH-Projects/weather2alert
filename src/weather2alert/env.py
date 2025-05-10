@@ -27,7 +27,7 @@ class HeatAlertEnv(Env):
         sample_budget: bool = False,
         sample_budget_type: Literal["less_than", "centered"] = "less_than",
         min_duration: int = 65,
-        min_effectiveness: float = 0.025,
+        min_effectiveness: float = 0.0,
         max_effectiveness: float = 0.5,
         min_heat_qi: float = 0.75,
         min_start: int = 7,
@@ -264,15 +264,13 @@ class HeatAlertEnv(Env):
                     effectiveness = sigmoid(sum(effectiveness_contribs))
             else:
                 # subtract for alert streak and last alerts
-                effectiveness = (
-                    max(0, row["heat_qi"] - 0.8)  # benefit when above heat factor
-                    - 0.02 * (sum(self.actual_alert_buffer[-7:]) - 1)  # fatigue factor
-                    + 0.05
-                    * self.actual_alert_buffer[-1]  # yesterday is still effective
-                )
-            # effectiveness = np.clip(
-            #     self.min_effectiveness + effectiveness, 0, self.max_effectiveness
-            # )
+                excess = max(0, row["heat_qi"] - 0.8)
+                alert_yesterday = self.actual_alert_buffer[-1]
+                fatigue = sum(self.actual_alert_buffer[-7:]) - 1
+                effectiveness = excess * (1 + alert_yesterday) - 0.01 * fatigue
+            effectiveness = np.clip(
+                effectiveness, self.min_effectiveness, self.max_effectiveness
+            )
         else:
             effectiveness = 0
 
