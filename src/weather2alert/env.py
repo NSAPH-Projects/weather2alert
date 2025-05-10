@@ -77,6 +77,14 @@ class HeatAlertEnv(Env):
         merged["year"] = merged.date.str[:4].astype(int)
 
         self.merged = merged.set_index(["fips", "year"]).drop(columns=["significance"])
+        self.merged["hi_max_above_25"] = (self.merged["hi_max"] > 0.25).astype(np.float32)
+        self.merged["hi_max_above_25"] = (self.merged["hi_max"] > 0.75).astype(np.float32)
+        self.merged["heat_qi_above_25"] = (
+            self.merged["heat_qi"] > 0.25
+        ).astype(np.float32)
+        self.merged["heat_qi_above_75"] = (
+            self.merged["heat_qi"] > 0.75
+        ).astype(np.float32)
         self.confounders = pd.read_parquet(paths["confounders"])
 
         # average fips by temperature
@@ -278,9 +286,9 @@ class HeatAlertEnv(Env):
 
         # reward is - normalized at the per 100 per day level
         if self.reward_type == "hospitalizations":
-            reward = float(-1000 * baseline * (1 - effectiveness * action))
+            reward = float(-100 * baseline * (1 - effectiveness * action))
         elif self.reward_type == "saved":
-            reward = float(1000 * baseline * effectiveness * action)
+            reward = float(100 * baseline * effectiveness * action)
 
         return reward
 
