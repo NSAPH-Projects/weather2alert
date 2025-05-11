@@ -11,6 +11,9 @@ from scipy.special import expit as sigmoid
 from .datautils import get_similar_counties
 
 
+INVALID_ACTION_PENALTY = 50.0
+
+
 class HeatAlertEnv(Env):
     """Class to simulate the environment for the online RL agent."""
 
@@ -36,6 +39,7 @@ class HeatAlertEnv(Env):
         reward_type: Literal["hospitalizations", "saved"] = "saved",
         penalty: float = 1.0,
         min_temperature_threshold: float = 0.0,
+        termination_invalid_action: bool = False,
     ):
         """Initialize the environment."""
         super().__init__()
@@ -54,6 +58,7 @@ class HeatAlertEnv(Env):
         self.effectiveness_type = effectiveness_type
         self.penalty = penalty
         self.min_temperature_threshold = min_temperature_threshold
+        self.termination_invalid_action = termination_invalid_action
 
         if years is None:
             years = list(range(2006, 2017))
@@ -335,7 +340,11 @@ class HeatAlertEnv(Env):
 
         # penalize if action is taken and at budget
         if action == 1 and (self.at_budget or below_thresh):
-            reward -= self.penalty
+            if self.termination_invalid_action:
+                done = True
+                reward -= INVALID_ACTION_PENALTY
+            else:
+                reward -= self.penalty
 
         return self.observation.values, reward, done, False, self._get_info()
 
