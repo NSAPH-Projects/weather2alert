@@ -11,7 +11,7 @@ from scipy.special import expit as sigmoid
 from .datautils import get_similar_counties
 
 
-INVALID_ACTION_PENALTY = 50.0
+INVALID_ACTION_PENALTY = 10.0
 
 
 class HeatAlertEnv(Env):
