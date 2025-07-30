@@ -32,6 +32,14 @@ try:
 except ImportError:
     MOCK_ENV_AVAILABLE = False
 
+# Import numeric environments integration
+try:
+    from numeric_envs import create_numeric_environment, get_environment_baselines, ALL_NUMERIC_BASELINES
+    NUMERIC_ENVS_AVAILABLE = True
+except ImportError:
+    NUMERIC_ENVS_AVAILABLE = False
+    ALL_NUMERIC_BASELINES = {}
+
 
 class DDTSBaseline:
     """Base class for DDTS baseline policies."""
@@ -159,13 +167,14 @@ class RandomBaseline(DDTSBaseline):
         return 0
 
 
-# DDTS baseline registry
+# DDTS baseline registry (includes both general and environment-specific baselines)
 DDTS_BASELINES = {
     'threshold': ThresholdBaseline,
     'conservative': ConservativeBaseline,
     'aggressive': AggressiveBaseline,
     'budget_aware': BudgetAwareBaseline,
     'random': RandomBaseline,
+    **ALL_NUMERIC_BASELINES,  # Add environment-specific baselines
 }
 
 
@@ -253,22 +262,18 @@ def create_environment(env_name: str, **kwargs) -> gym.Env:
         else:
             raise ImportError("Neither real nor mock HeatAlertEnv available")
     
-    elif env_name.lower() in ['uganda', 'uganda_env']:
-        # Placeholder for Uganda environment
-        # This would import from user's codebase when available
-        print("Warning: Uganda environment not implemented yet")
-        return None
-    
-    elif env_name.lower() in ['mimic', 'mimic_env']:
-        # Placeholder for Mimic environment
-        # This would import from user's codebase when available
-        print("Warning: Mimic environment not implemented yet")
-        return None
-    
-    elif env_name.lower() in ['binpacking', 'bin_packing']:
-        # Placeholder for Bin Packing environment
-        # This would import from user's codebase when available
-        print("Warning: Bin Packing environment not implemented yet")
+    elif NUMERIC_ENVS_AVAILABLE:
+        # Try to create using numeric environments integration
+        env = create_numeric_environment(env_name, **kwargs)
+        if env is not None:
+            return env
+        
+        # If not found, show available options
+        from numeric_envs import list_available_environments
+        available = list_available_environments()
+        print(f"Environment '{env_name}' not found.")
+        print(f"Available numeric environments: {available}")
+        print("To add support for a new environment, see numeric_envs/ folder")
         return None
     
     else:
