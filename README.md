@@ -53,3 +53,76 @@ The available actions are always `0` (do not send an alert) and `1` (send an ale
 The simulations contain real climate data from 2006 to 2016, and the environment is designed to be episodic. The episode ends when the simulation reaches the end of the data set. A year is chosen randomly from the data set every time the environment is reset.
 
 The rewards represent the (scaled) negative rate of hospitalizations due to heat-related illnesses. The goal is to minimize the number of hospitalizations by sending alerts when the heat index is above a certain threshold.
+
+## Running DDTS Baselines
+
+This package includes several Decision-Theoretic Time Series (DDTS) baseline policies that can serve as benchmarks for evaluating reinforcement learning agents. These baselines originated from decision-theoretic approaches to sequential decision making under uncertainty and provide simple heuristic policies for comparison.
+
+### Available DDTS Baselines
+
+The following baseline policies are available:
+
+- **Threshold**: Issues alerts when heat index exceeds a fixed threshold (default: 0.75)
+- **Conservative**: Issues alerts only for very high heat index values (threshold: 0.9)
+- **Aggressive**: Issues alerts for moderate heat index values (threshold: 0.5)
+- **Budget Aware**: Adjusts threshold based on season progress to conserve budget
+- **Random**: Issues alerts randomly with a fixed probability
+
+### Running DDTS Baselines
+
+Use the `gym_runner.py` script to run DDTS baselines:
+
+```bash
+# Run threshold baseline on heat alert environment
+python gym_runner.py --env heat --baseline threshold --episodes 10
+
+# Run conservative baseline with verbose output
+python gym_runner.py --env heat --baseline conservative --episodes 5 --verbose
+
+# Run budget-aware baseline with different seed
+python gym_runner.py --env heat --baseline budget_aware --episodes 10 --seed 123
+```
+
+### Baseline Options
+
+- `--env`: Environment to run (heat, uganda, mimic, binpacking)
+- `--baseline`: Baseline policy (threshold, conservative, aggressive, budget_aware, random)
+- `--episodes`: Number of episodes to run (default: 10)
+- `--seed`: Random seed for reproducibility (default: 42)
+- `--verbose`: Enable detailed output
+- `--render`: Render environment during execution
+
+### Example Output
+
+```
+Running DDTS baseline 'threshold' on environment 'heat'
+Episodes: 10, Seed: 42
+--------------------------------------------------
+
+Results for threshold baseline:
+Mean reward: -7165.73 ± 361.08
+Mean episode length: 153.0
+Mean alerts per episode: 19.7
+```
+
+### Numeric Environment Support
+
+The `gym_runner.py` script is designed to import and run numeric environments from the user's codebase, including:
+
+- **Heat Alerts**: Weather-based alert optimization (prioritized implementation)
+- **Uganda**: Placeholder for Uganda-specific environment
+- **Mimic**: Placeholder for medical decision-making environment  
+- **Bin Packing**: Placeholder for resource allocation environment
+
+To add support for additional numeric environments, modify the `create_environment()` function in `gym_runner.py` to import your custom Gymnasium environments.
+
+### Origin of DDTS Baselines
+
+The DDTS (Decision-Theoretic Time Series) baselines implemented here are derived from classical decision theory principles applied to sequential decision making problems. They provide simple, interpretable policies that:
+
+1. Use domain knowledge (e.g., heat index thresholds for heat alerts)
+2. Consider resource constraints (e.g., alert budgets)
+3. Account for temporal dependencies (e.g., alert fatigue, seasonal patterns)
+4. Provide deterministic or simple stochastic policies for reproducible benchmarking
+
+These baselines serve as important benchmarks for evaluating the performance of more sophisticated reinforcement learning agents, helping to establish whether the complexity of RL methods provides meaningful improvements over simpler heuristic approaches.
